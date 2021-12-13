@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+
 import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -18,12 +20,14 @@ function App() {
     <div className="App">
       <Header />
       <Navigation />
-      <Main />
-      <Movies />
-      <SavedMovies />
-      <Register />
-      <Login />
-      <Profile />
+      <Routes>
+        <Route path='/' element={<Main />}/>
+        <Route path='/movies'  element={<Movies />}/>
+        <Route pash='/saved-movies'  element={<SavedMovies />}/>
+        <Route path='/signup'  element={<Register />}/>
+        <Route path='/signin'  element={<Login />}/>
+        <Route path='/profile'  element={<Profile />}/>
+      </Routes>
       <Footer />
     </div>
   );
