@@ -15,7 +15,7 @@ function Header() {
                     Регистрация
                 </Link>
                 
-                    <Link to='signin' className='header__link-signin'>
+                    <Link to='/signin' className='header__link-signin'>
                         Войти
                     </Link>
                 
