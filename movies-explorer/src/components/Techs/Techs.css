@@ -1,0 +1,76 @@
+.techs {
+    background-color: #F5F5F5;
+    padding: 100px 70px;
+}
+.techs__title {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    max-width: 600px;
+    text-align: left;
+    letter-spacing: -0.04em;
+    margin: 0 0 23px 0;
+}
+.techs__line {
+    border-bottom: 1px black solid;
+    max-width: 1140px;
+    margin: 0 0 90px 0;
+}
+.decription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.decription__title {
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 0 26px 0;
+}
+.decription__subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    max-width: 460px;
+    margin: 0 0 100px 0;
+}
+.stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+.stack__item {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    margin: 0 10px 0 0;
+}
+.stack__item_html {
+    padding: 21px 26px 22px;
+}
+.stack__item_css {
+    padding: 21px 31px 22px 32px;
+}
+.stack__item_js {
+    padding: 21px 37px 22px;
+}
+.stack__item_react {
+    padding: 21px 27px 22px;
+}
+.stack__item_git {
+    padding: 21px 35px 22px 36px;
+}
+.stack__item_express {
+    padding: 21px 14px 22px;
+}
