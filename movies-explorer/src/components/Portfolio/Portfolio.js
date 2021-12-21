@@ -1,6 +1,6 @@
 import React from 'react';
 import './Portfolio.css';
-import Site from "../Site/Site";
+
 
 function Portfolio() {
     return(
@@ -8,9 +8,21 @@ function Portfolio() {
             <h6 className='portfolio__title'>
                 Портфолио
             </h6>
-            <Site title=' Статичный сайт ' link='https://vk.com'/>
-            <Site title=' Адаптивный сайт ' link="https://milenium666.github.io/russian-travel/index.html" />
-            <Site title= 'Одностраничное приложение' link='http://milenium666.nomoredomains.monster/'/>
+            <ul className='list-site'>
+                <li className className='list-site__title'>
+                    Статичный сайт
+                    <a className='list-site__link' href='https://vk.com' target='_blank'>&#8599;</a>
+                </li>
+                
+                <li className className='list-site__title'>
+                    Адаптивный сайт
+                    <a className='list-site__link' href='https://milenium666.github.io/russian-travel/index.html' target='_blank'>&#8599;</a>
+                </li>
+                <li className className='list-site__title list-site__title_not-line'>
+                    Одностраничное приложение
+                    <a className='list-site__link' href='http://milenium666.nomoredomains.monster' target='_blank'>&#8599;</a>
+                </li>
+            </ul>
         </section>
 
     )
