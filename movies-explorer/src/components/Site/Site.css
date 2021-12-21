@@ -1,0 +1,27 @@
+.site__section {
+    display: flex;
+    justify-content: space-between;
+    
+}
+.site__title {
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+    text-align: left;
+    max-width: 880px;
+    margin: 0 0 19px 0;
+}
+.site__link {
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+    line-height: 60px;
+    letter-spacing: -0.04em;
+    max-width: 29px;
+    margin: 0 0 9px 0;
+}
+.site__line {
+    border-bottom: 1px #E8E8E8 solid;
+    max-width: 1140px;
+}

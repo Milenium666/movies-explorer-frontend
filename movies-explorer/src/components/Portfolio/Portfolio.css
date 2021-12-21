@@ -1,0 +1,13 @@
+.portfolio {
+    margin-top: 100px;
+}
+.portfolio__title {
+    font-size: 18px;
+    line-height: 20px;
+    color: #A0A0A0;
+    mix-blend-mode: normal;
+    font-weight: 400;
+    max-width: 250px;
+    margin:  0 0 50px 0;
+    text-align: left;
+}

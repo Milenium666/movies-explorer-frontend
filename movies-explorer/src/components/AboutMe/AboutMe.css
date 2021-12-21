@@ -53,6 +53,7 @@
     margin: 0;
     display: flex;
 }
+
 .link__item {
     text-decoration: none;
     color: black;
@@ -63,8 +64,8 @@
     text-align: left;
     margin-right: 20px;
 }
+
 .about-me__photo {
     object-fit: cover;
     border-radius: 10px;
-    
 }
