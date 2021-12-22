@@ -14,11 +14,9 @@ function Header() {
                 <Link to='/signup' className='header__link-signup'>
                     Регистрация
                 </Link>
-                
-                    <Link to='/signin' className='header__link-signin'>
-                        Войти
-                    </Link>
-                
+                <Link to='/signin' className='header__link-signin'>
+                    Войти
+                </Link>
             </div>
         </header>
     )
