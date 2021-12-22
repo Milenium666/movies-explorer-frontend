@@ -2,24 +2,11 @@
     background-color: #F5F5F5;
     padding: 100px 70px;
 }
-.techs__title {
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 27px;
-    max-width: 600px;
-    text-align: left;
-    letter-spacing: -0.04em;
-    margin: 0 0 23px 0;
-}
-.techs__line {
-    border-bottom: 1px black solid;
-    max-width: 1140px;
-    margin: 0 0 90px 0;
-}
 .decription {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 90px;
 }
 .decription__title {
     font-size: 50px;

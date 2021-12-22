@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function Promo() {
     return(
-        <div className='promo'>
+        <section className='promo'>
             <div className='promo__text-container'>
                 <h1 className='promo__title'>
                     Учебный проект студента факультета Веб-разработки.
@@ -19,7 +19,7 @@ function Promo() {
                 </Link>
             </div>
             <img className='promo__img' alt='Промо логотип' src={promo}/>
-        </div>
+        </section>
     )
 }
 

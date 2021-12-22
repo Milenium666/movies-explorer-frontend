@@ -1,13 +1,13 @@
 import React from 'react';
 import './Techs.css';
+import TitleLine from '../TitleLine/TitleLine'
 
 function Techs() {
     return(
         <section className='techs'>
-            <h2 className='techs__title'>
-                Технологии
-            </h2>
-            <div className='techs__line'></div>
+           <TitleLine
+           title='Технологии'
+            />
             <div className='decription'>
                 <h4 className='decription__title'>
                     7 технологий

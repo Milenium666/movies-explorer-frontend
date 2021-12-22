@@ -1,0 +1,13 @@
+.title-line__title {
+    font-size: 22px;
+    line-height: 27px;
+    font-weight: 400;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 0 23px 0;
+    letter-spacing: -0.04em;
+}
+.title-line__line {
+    border-bottom: 1px black solid;
+    max-width: 1140px;
+}

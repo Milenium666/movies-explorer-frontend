@@ -1,13 +1,13 @@
 import React from 'react';
 import './AboutProject.css';
+import TitleLine from '../TitleLine/TitleLine';
 
 function AboutProject() {
     return(
-        <div className='about-project' id='about-project'>
-            <h2 className='about-project__title-project'>
-                О проекте
-            </h2>
-            <div className='about-project__line'></div>
+        <section className='about-project' id='about-project'>
+            <TitleLine
+            title='О проекте'
+            />
             <div className='about-project__description-project'>
                 <div className='diplom'>
                     <h2 className='diplom__title'>
@@ -44,7 +44,7 @@ function AboutProject() {
                     </h3>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

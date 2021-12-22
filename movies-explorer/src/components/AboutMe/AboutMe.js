@@ -2,14 +2,14 @@ import React from 'react';
 import './AboutMe.css';
 import Portfolio from '../Portfolio/Portfolio';
 import photo from '../../images/photo.png';
+import TitleLine from '../TitleLine/TitleLine';
 
 function AboutMe() {
     return(
         <section className='about-me'>
-            <h5 className='about-me__title'>
-                Студент
-            </h5>
-            <div className='about-me__line'></div>
+           <TitleLine
+           title='Студент'
+           />
             <div className='about-me__discription'>
                 <div className='student'>
                     <h6 className='student__name'>

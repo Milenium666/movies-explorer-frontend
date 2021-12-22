@@ -1,26 +1,13 @@
 .about-me {
     padding: 110px 70px 125px;
 }
-.about-me__title {
-    font-size: 22px;
-    line-height: 27px;
-    font-weight: 400;
-    text-align: left;
-    max-width: 600px;
-    margin: 0 0 23px 0;
-}
-.about-me__line {
-    margin: 0 0 66px 0;
-    border-bottom: 1px black solid;
-    max-width: 1140px;
-}
+
 .about-me__discription {
     display: flex;
     justify-content: space-between;
+    margin-top: 66px;
 }
-.student {
-    
-}
+
 .student__name {
     font-size: 50px;
     line-height: 58px;

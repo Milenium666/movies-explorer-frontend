@@ -2,23 +2,9 @@
     padding: 110px 70px;
 }
 
-.about-project__title-project {
-    font-size: 22px;
-    line-height: 27px;
-    font-weight: 400;
-    text-align: left;
-    max-width: 600px;
-    margin: 0 0 23px 0;
-}
-.about-project__line {
-    margin: 0 0 70px 0;
-    border-bottom: 1px black solid;
-    max-width: 1140px;
-}
-
 .about-project__description-project {
     display: flex;
-    margin: 0 0 110px 0;
+    margin: 70px 0 110px 0;
 }
 
 .diplom__title {
