@@ -25,9 +25,9 @@
     line-height: 16px;
     font-weight: 400;
     text-align: left;
-    margin: 0 0 146px 0;
+    margin-bottom: 146px;
     opacity: .5;
-    
+
 }
 
 .promo__link {
@@ -47,4 +47,26 @@
     width: 310px;
     height: 304px;
     object-fit: cover;
+}
+@media screen and (max-width: 768px) {
+    .promo{
+        padding: 140px 44px 76px 44px;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .promo__text-container {
+        align-items: center;
+    }
+    .promo__title {
+        max-width: 680px;
+        font-size: 40px;
+        line-height: 50px;
+        text-align: center;
+        margin: 48px 0 22px 0;
+    }
+    .promo__subtitle {
+        text-align: center;
+        margin-bottom: 92px;
+    }
 }
