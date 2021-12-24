@@ -5,7 +5,7 @@
 .about-me__discription {
     display: flex;
     justify-content: space-between;
-    margin-top: 66px;
+    margin: 66px 0 101px 0;
 }
 
 .student__name {
@@ -55,4 +55,36 @@
 .about-me__photo {
     object-fit: cover;
     border-radius: 10px;
+}
+@media screen and (max-width: 768px) {
+    .about-me {
+        padding: 90px 50px;
+    }
+    .about-me__discription {
+        margin: 66px 0 91px 0;
+    }
+    .student__name {
+        max-width: 348px;
+        font-size: 40px;
+        line-height: 40px;
+        margin: 0 0 16px 0;
+    }
+    .student__profession {
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 348px;
+        margin: 0 0 20px 0;
+        
+    }
+    .student__descrition {
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 364px;
+        margin: 0 0 99px 0;
+
+    }
+    .about-me__photo {
+        width: 255px;
+        height: 307px;
+    }
 }
