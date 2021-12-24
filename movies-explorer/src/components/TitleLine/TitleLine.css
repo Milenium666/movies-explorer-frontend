@@ -11,3 +11,9 @@
     border-bottom: 1px black solid;
     max-width: 1140px;
 }
+
+@media screen and (max-width: 768px) {
+    .title-line__line {
+        max-width: 668px;
+    }
+}

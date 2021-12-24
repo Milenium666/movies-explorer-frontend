@@ -17,17 +17,17 @@ function AboutProject() {
                         Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.
                     </p>
                 </div>
-                <div className='diplom'>
-                    <h2 className='diplom__title diplom__title_week'>
+                <div className='diplom indent'>
+                    <h2 className='diplom__title'>
                         На выполнение диплома ушло 5 недель
                     </h2>
-                    <p className='diplom__subtitle diplom__subtitle_week'>
+                    <p className='diplom__subtitle'>
                         У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.
                     </p>
                 </div>
             </div >
             <div className='progress-bar'>
-                <div className='progress-bar__point'>
+                <div className='progress-bar__week'>
                     <p className='progress-bar__subtitle'>
                         1 неделя
                     </p>
@@ -35,11 +35,12 @@ function AboutProject() {
                         Back-end
                     </h3>
                 </div>
-                <div className='progress-bar__point progress-bar__point_front'>
-                    <p className='progress-bar__subtitle  progress-bar__subtitle_front'>
+                <div className='progress-bar__specialization'>
+                   
+                    <p className='progress-bar__subtitle progress-bar__subtitle_front'>
                         4 недели
                     </p>
-                    <h3 className='progress-bar__title progress-bar__title_margin'>
+                    <h3 className='progress-bar__title progress-bar__title_indent'>
                         Front-end
                     </h3>
                 </div>
