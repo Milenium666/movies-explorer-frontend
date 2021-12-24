@@ -1,6 +1,4 @@
-.portfolio {
-    margin-top: 100px;
-}
+
 .portfolio__title {
     font-size: 18px;
     line-height: 20px;
@@ -41,4 +39,16 @@
     letter-spacing: -0.04em;
     max-width: 29px;
     margin: 0 0 9px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .list-site__title {
+        font-size: 28px;
+
+    }
+    .list-site__link {
+        font-size: 28px;
+        max-width: 27px;
+
+    }
 }
