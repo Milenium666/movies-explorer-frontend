@@ -18,6 +18,7 @@
     font-weight: 400;
     text-align: left;
     margin: 0 0 36px 0;
+    letter-spacing: -0.04em;
 }
 .promo__subtitle {
     max-width: 310px;
@@ -69,4 +70,25 @@
         text-align: center;
         margin-bottom: 92px;
     }
+}
+
+@media screen and (max-width: 320px) {
+    .promo { 
+        padding: 70px 10px 30px 10px;
+    }
+    .promo__title {
+        max-width: 300px;
+        font-size: 30px;
+        line-height: 38px;
+        margin: 44px 0 24px 0;
+    }
+    .promo__subtitle {
+        max-width: 260px;
+        margin: 0 0 80px 0;
+    }
+    .promo__img {
+        width: 210px;
+        height: 206px;
+    }
+
 }
