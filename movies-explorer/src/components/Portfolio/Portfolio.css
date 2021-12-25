@@ -22,7 +22,7 @@
     letter-spacing: -0.04em;
     font-weight: 400;
     text-align: left;
-    padding: 20px 0 19px 0;
+    padding: 20px 0 10px 0;
     border-bottom: 1px #E8E8E8 solid;
     display: flex;
     justify-content: space-between;
@@ -49,6 +49,24 @@
     .list-site__link {
         font-size: 28px;
         max-width: 27px;
+
+    }
+}
+@media screen and (max-width: 320px) {
+    .portfolio__title {
+        font-size: 14px;
+        max-width: 292px;
+        margin:  0 0 20px 0;
+    }
+    .list-site__title {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .list-site__link {
+        font-size: 18px;
+        line-height: 28px;
+        max-width: 18px;
+        margin: 0;
 
     }
 }
