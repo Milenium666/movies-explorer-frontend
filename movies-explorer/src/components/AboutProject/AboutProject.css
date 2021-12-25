@@ -13,7 +13,6 @@
     font-weight: 400;
     text-align: left;
     max-width: 550px;
-    margin-bottom: 26px;
     letter-spacing: -0.04em;
     margin: 0 0 26px 0;
 }
@@ -85,7 +84,7 @@
     }
     .diplom__title {
         max-width: 319px;
-        margin-bottom: 22px;
+        margin: 0 0 22px 0;
     }
     .diplom__subtitle {
         font-size: 12px;
@@ -98,15 +97,50 @@
 
     .progress-bar__subtitle {
         padding: 9px 10px;
-        
-
     }
     .progress-bar__subtitle_front {
         padding: 9px 206px;
     }
     .progress-bar__title {
         font-weight: 400;
+    }
+}
 
+@media screen and (max-width: 320px) {
+    .about-project {
+        padding: 70px 18px;
+    }
+    .about-project__description-project {
+        margin: 60px 0;
+        flex-direction: column;
+    }
+    .diplom__title {
+        max-width: 284px;
+        font-size: 18px;
+        line-height: 22px;
+        margin: 0 0 16px 0;
+    }
+    .indent {
+        margin-left: 0;
+        margin-top: 56px;
+    }
+    .diplom__subtitle {
+        font-size: 11px;
+        line-height: 16px;
+        max-width: 284px;
+    }
+    .progress-bar__subtitle {
+        padding: 11px 10px;
+        font-size: 11px;
+        line-height: 13px;
+    }
+    .progress-bar__subtitle_front {
+        padding: 11px 52px;
+    }
+    .progress-bar__title {
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 13px;
     }
 }
 
