@@ -32,8 +32,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    column-gap: 10px;
-    width: calc(100% - 225px * 2);
+    gap: 10px;
 
 }
 .stack__item {
@@ -79,7 +78,6 @@
         line-height: 18px;
     }
     .stack {
-        width: calc(100% - 10px * 2);
         grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
 
 
@@ -125,10 +123,5 @@
         max-width: 292px;
         font-size: 11px;
         line-height: 16px;
-    }
-    .stack {
-        width: calc(100% - 53px * 2);
-        column-gap: 10px;
-        row-gap: 10px;
     }
 }
