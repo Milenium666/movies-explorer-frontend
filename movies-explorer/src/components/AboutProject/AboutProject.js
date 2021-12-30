@@ -27,22 +27,21 @@ function AboutProject() {
                 </div>
             </div >
             <div className='progress-bar'>
-                <div className='progress-bar__week'>
-                    <p className='progress-bar__subtitle'>
+                <div className='progress-bar__week progress-bar__week_active'>
+                    <div className='progress-bar__subtitle'>
                         1 неделя
-                    </p>
-                    <h3 className='progress-bar__title'>
+                    </div>
+                    <div className='progress-bar__title'>
                         Back-end
-                    </h3>
+                    </div>
                 </div>
-                <div className='progress-bar__specialization'>
-                   
-                    <p className='progress-bar__subtitle progress-bar__subtitle_front'>
+                <div className='progress-bar__week'>
+                    <div className='progress-bar__subtitle progress-bar__subtitle_front'>
                         4 недели
-                    </p>
-                    <h3 className='progress-bar__title progress-bar__title_indent'>
+                    </div>
+                    <div className='progress-bar__title progress-bar__title_indent'>
                         Front-end
-                    </h3>
+                    </div>
                 </div>
             </div>
         </section>
