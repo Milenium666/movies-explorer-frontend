@@ -33,6 +33,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     gap: 10px;
+    max-width: 700px;
 
 }
 .stack__item {
@@ -79,8 +80,6 @@
     }
     .stack {
         grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
-
-
     }
     .stack__item {
         font-size: 12px;
