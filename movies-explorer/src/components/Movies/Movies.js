@@ -10,13 +10,12 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 function Movies() {
     return(
-        <div>
-            Movies — компонент страницы с поиском по фильмам. В нём пригодятся эти компоненты:
+        <section className='movies'>
             <SearchForm />
             <Preloader />
             <MoviesCardList />
             <MoviesCard />
-            </div>
+        </section>
     )
 }
 
