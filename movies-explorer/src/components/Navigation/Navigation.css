@@ -1,0 +1,196 @@
+.navigation__links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation__link-signup {
+    text-decoration: none;
+    color: #000000;
+    max-width: 77px;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    font-weight: 500;
+    margin: 11px 30px 11px 0;
+}
+
+.navigation__link-signin {
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: black;
+    max-width: 76px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    padding: 8px 20px;
+    margin: 3px 0;
+}
+.navigation__button-account {
+    background-color: #FFFFFF;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 40px;
+    width: 100px;   
+    height: 32px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+}
+.navigation__name {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 12px;
+    margin: 9px 7px 9px 11px;
+    color: #000000;
+}
+.navigation__account-logo {
+    width: 12px;
+    height: 12px;
+    padding: 7px;
+    background: #F9F9F9;
+    border-radius: 50px;
+}
+.navigation__pages {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 212px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    min-height: 18px;
+  }
+  
+  .navigation__pages_view_mobile {
+    display: none;
+  }
+  .navigation__page:first-of-type {
+    display: none;
+  }
+  
+  .navigation__page {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  
+  .navigation__page:hover {
+    opacity: 0.7;
+    transition: opacity .5s ease-in-out;
+  }
+
+  .navigation__burger {
+    margin: 0;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 12px;
+    right: 50px;
+  }
+  
+  .navigation__burger:hover {
+    opacity: 0.7;
+    transition: opacity .5s ease-in-out;
+    cursor: pointer;
+  }
+  .navigation__button-account_view_mobile {
+    display: flex;
+    align-self: center;
+  }
+
+@media screen and (max-width: 768px) {
+
+    .navigation__pages {
+        display: none;
+      }
+      .navigation__pages_view_mobile {
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: -12px;
+        right: -50px;
+        background-color: #fff;
+        z-index: 3;
+        max-width: 520px;
+        justify-self: flex-start;
+      }
+      .navigation__pages_view_mobile-active {
+        box-shadow: 0px 0px 400px 400px rgba(143, 140, 140, 0.418);
+        transition: box-shadow .3s linear;
+      }
+      .navigation__page_view_mobile:first-of-type {
+        display: flex;
+      }
+      .navigation__page_view_mobile {
+        margin: 0 90px;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+      }
+      .navigation__page_view_mobile:nth-of-type(1) {
+        margin-top: 159px;
+      }
+    
+      .navigation__page_view_mobile:nth-of-type(2) {
+        margin: 28px;
+      }
+      .navigation__button-account {
+          display: none;
+      }
+      .navigation__button-account_view_mobile {
+        margin: 300px 0 90px;
+        padding: 9px 12px;
+        width: 100px;
+        height: 32px;
+        border: 2px solid #E8E8E8;
+        box-sizing: border-box;
+        border-radius: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+      }
+    
+      .navigation__button-account_view_mobile:hover {
+        box-shadow: 5px 5px 20px rgba(230, 100, 150, 0.96);
+        transition: box-shadow .5s linear;
+      }
+}
+
+@media screen and (max-width:320px) {
+    .navigation__link-signup {
+        font-size: 10px;
+        margin: 11px 14px 11px 0;
+        max-width: 64px;
+    }
+    .navigation__link-signin {
+        max-width: 54px;
+        font-size: 10px;
+        padding: 5px 12px;
+        margin: 6px 0;
+    }
+    .navigation__pages_view_mobile {
+        right: -10px;
+      }
+       .navigation__page_view_mobile {
+    margin: 0 100px;
+  }
+  .navigation__burger {
+    right: 8px;
+  }
+}
