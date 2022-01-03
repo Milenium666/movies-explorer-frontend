@@ -3,9 +3,10 @@ import './FilterCheckbox.css';
 
 function FilterCheckbox() {
     return(
-        <div>
-            Для него можно воспользоваться отдельным управляемым компонентом FilterCheckbox
-            </div>
+        <div className="checkbox">
+            <label className="checkbox__name" htmlFor="checkbox">Короткометражки</label>
+            <input type="checkbox" id="checkbox" className="checkbox__image" />
+        </div>
     )
 }
 
