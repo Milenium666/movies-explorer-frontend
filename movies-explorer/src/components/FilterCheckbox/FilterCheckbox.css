@@ -1,8 +1,6 @@
 .checkbox {
-    margin: 0;
     padding: 0;
     margin: 0 29px 0 30px;
-    
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -11,7 +9,7 @@
   .checkbox__image {
     width: 34px;
     height: 14px;
-    margin-right: 12px;
+    margin-right: 14px;
     -webkit-appearance: none;
     outline: none;
     background-color: #A0A0A0;
@@ -46,13 +44,16 @@
     margin: 0;
     padding: 0;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 18px;
     color: #000000;
   }
   
-  @media (max-width: 690px) {
-    .checkbox__name {
-      font-size: 11px;
+  @media screen and (max-width: 768px) {
+    .checkbox {
+        margin: 0 19px 0 20px;
+    }
+    .checkbox__image {
+        margin-right: 16px;
     }
   }
