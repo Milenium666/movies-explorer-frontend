@@ -3,13 +3,14 @@
     display: flex;
     justify-content: space-between;
     padding: 6px 6px 6px 22px;
+
 }
 .card__title {
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
     margin: 16px 0 13px 0;
-    min-width: 400px;
+    max-width: 400px;
 
     
 }
@@ -49,22 +50,32 @@
     .card {
         flex-direction: column-reverse;
         padding: 0;
-
+        width: 100%;
     }
-    .card__title{ 
-        min-width: 228px;
+    .card__discription {
+        display: flex;
+        flex-direction: row;
+        
+    }
+    .card__list {
+        width: 100%;
+        position: relative;
+    }
+    .card__title{
+        max-width: 228px;
         margin: 14px 0 8px 0;
     }
 
     .card__image {
         height: 168px;
+        width: 100%;
     }
 
     .card__like_active {
-        margin: 0;
+        margin: 16px 16px 0 0;
     }
     .card__like{
-        margin: 0;
+        margin: 16px 16px 0 0;
     }
 
 }
