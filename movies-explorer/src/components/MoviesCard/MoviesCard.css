@@ -8,10 +8,10 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-    margin: 0;
-    margin-bottom: 13px;
+    margin: 16px 0 13px 0;
     min-width: 400px;
-    margin-top: calc(22px - 8px);
+
+    
 }
 .card__duration {
     font-weight: 400;
@@ -20,7 +20,7 @@
     color: #a0a0a0;
     max-width: 37px;
     margin: 0;
-    margin-bottom: 30px;
+
 }
 .card__like {
     width: 14px;
@@ -30,7 +30,8 @@
     border: none;
     cursor: pointer;
     outline-style: none;
-    margin-bottom: 22px;
+    margin: 30px 0 16px 0;
+
 }
 .card__like_active {
     width: 14px;
@@ -39,8 +40,31 @@
     border: none;
     cursor: pointer;
     outline-style: none;
-    margin-bottom: 22px;
+    margin: 30px 0 16px 0;
 }
 .card__image {
     height: 122px;
+}
+@media screen and (max-width:320px) {
+    .card {
+        flex-direction: column-reverse;
+        padding: 0;
+
+    }
+    .card__title{ 
+        min-width: 228px;
+        margin: 14px 0 8px 0;
+    }
+
+    .card__image {
+        height: 168px;
+    }
+
+    .card__like_active {
+        margin: 0;
+    }
+    .card__like{
+        margin: 0;
+    }
+
 }

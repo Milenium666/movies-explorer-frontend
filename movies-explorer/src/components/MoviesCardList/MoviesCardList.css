@@ -5,3 +5,9 @@
     display: grid;
     gap: 40px;
 }
+
+@media screen and (max-width: 320px) {
+    .cards {
+        gap: 20px;
+    }
+}
