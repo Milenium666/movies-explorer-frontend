@@ -3,9 +3,9 @@ import './Preloader.css';
 
 function Preloader() {
     return(
-        <div>
-            Preloader — отвечает за работу прелоадера.
-            </div>
+        <div className='preloader'>
+            <button className='preloader__button' type='button'>Еще</button>
+        </div>
     )
 }
 
