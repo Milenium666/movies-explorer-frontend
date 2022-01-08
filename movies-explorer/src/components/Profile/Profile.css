@@ -1,5 +1,5 @@
 .profile {
-    margin: 74px 0 73px 0;
+    padding: 74px 0 73px 0;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -66,4 +66,16 @@
     line-height: 16px;
     text-align: center;
     margin-top: 16px;
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        padding: 236px 0 269px 0;
+    }
+    .profile__welcome {
+        margin-bottom: 96px;
+    }
+    .profile__label_not-line {
+        margin-bottom: 210px;
+    }
 }
