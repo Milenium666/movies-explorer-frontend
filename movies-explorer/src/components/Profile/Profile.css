@@ -79,3 +79,27 @@
         margin-bottom: 210px;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .profile {
+        padding: 70px 30px 40px 30px;
+    }
+    .profile__welcome {
+        margin-bottom: 80px;
+    }
+    .profile__label {
+        width: 260px;
+    }
+    .profile__label_not-line {
+        margin-bottom: 379px;
+    }
+    .profile__submit {
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .profile__link-signin {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+}
