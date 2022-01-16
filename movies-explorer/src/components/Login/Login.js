@@ -1,11 +1,20 @@
 import React from 'react';
 import './Login.css';
 
+import Auth from '../Auth/Auth';
+
 function Login() {
     return(
-        <div>
-            Login — компонент страницы авторизации.
-            </div>
+        <>
+            <Auth
+            title='Рады видеть!'
+            email='pochta@yandex.ru'
+            button='Войти'
+            text='Ещё не зарегистрированы?'
+            auth='Регистрация'
+            >
+            </Auth>
+        </>
     )
 }
 
