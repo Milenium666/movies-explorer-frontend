@@ -28,19 +28,20 @@ function App () {
         }/>
         <Route path='/movies'  element={
           <>
-            <Header type="loggedIn"/>
+            <Header type="loggedIn" />
             <Movies />
             <Footer />
           </>
         }/>
-
-        <Route pash='/saved-movies'  element={
+        <Route path='/saved-movies' element={
           <>
-            <Header type="loggedIn"/>
+            <Header type='loggedIn' />
             <SavedMovies />
             <Footer />
+
           </>
-        }/>
+        }
+        />
 
         <Route path='/profile'  element={
           <>

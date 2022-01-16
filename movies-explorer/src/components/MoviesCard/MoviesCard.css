@@ -43,6 +43,16 @@
     outline-style: none;
     margin: 30px 0 16px 0;
 }
+.card__delete-saved-film {
+    width: 14px;
+    height: 12px;
+    background: transparent url('../../images/button_del_saved-movies.svg') center no-repeat;
+    background-size: 14px 12px;
+    border: none;
+    cursor: pointer;
+    outline-style: none;
+    margin: 30px 0 16px 0;
+}
 .card__image {
     height: 122px;
 }
@@ -75,6 +85,10 @@
         margin: 16px 16px 0 0;
     }
     .card__like{
+        margin: 16px 16px 0 0;
+    }
+
+    .card__delete-saved-filmn {
         margin: 16px 16px 0 0;
     }
 
