@@ -5,7 +5,7 @@
 .about-me__discription {
     display: flex;
     justify-content: space-between;
-    margin: 66px 0 101px 0;
+    margin: 66px 0 100px 0;
 }
 
 .student__name {
@@ -49,8 +49,12 @@
     font-size: 14px;
     line-height: 17px;
     text-align: left;
+    
+}
+.indent-right {
     margin-right: 20px;
 }
+
 
 .about-me__photo {
     object-fit: cover;

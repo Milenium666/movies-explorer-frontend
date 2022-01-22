@@ -22,7 +22,7 @@
     letter-spacing: -0.04em;
     font-weight: 400;
     text-align: left;
-    padding: 20px 0 10px 0;
+    padding-top: 20px;
     border-bottom: 1px #E8E8E8 solid;
     display: flex;
     justify-content: space-between;
@@ -39,6 +39,9 @@
     letter-spacing: -0.04em;
     max-width: 29px;
     margin: 0 0 9px 0;
+}
+.list-site__link:last-of-type{
+    margin: 0;
 }
 
 @media screen and (max-width: 768px) {

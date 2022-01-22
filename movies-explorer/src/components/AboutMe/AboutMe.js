@@ -24,7 +24,7 @@ function AboutMe() {
                     </p>
                     <ul className='link'>
                         <li >
-                            <a className='link__item' href='https://www.facebook.com' target="_blank">
+                            <a className='link__item indent-right' href='https://www.facebook.com' target="_blank">
                                 Facebook
                             </a>
                         </li>
