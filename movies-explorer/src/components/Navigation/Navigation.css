@@ -121,16 +121,19 @@
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: -10px;
-        right: 3px;
+        top: 0px;
+        right: 23px;
         background-color: #fff;
         z-index: 3;
-        max-width: 520px;
+        width: 520px;
+        margin: 0;
         justify-self: flex-start;
+
       }
       .navigation__pages_view_mobile-active {
         box-shadow: 0px 0px 600px 600px rgb(0, 0, 0, .3);
         transition: box-shadow .3s linear;
+        height: 1024px;
       }
       .navigation__page_view_mobile:first-of-type {
         display: flex;
@@ -152,15 +155,17 @@
           display: none;
       }
       .navigation__button-account_view_mobile {
-        margin: 300px 0 90px;
-        padding: 9px 12px;
+        margin: 500px 0 90px;
+        padding: 9px 0 9px 11px;
         width: 100px;
         height: 32px;
-        border: 2px solid #E8E8E8;
         box-sizing: border-box;
-        border-radius: 50px;
+        background: #FFFFFF;
+        box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+        border-radius: 40px;
         display: flex;
         justify-content: space-between;
+        flex-direction: row-reverse;
         align-items: center;
         text-decoration: none;
       }
@@ -172,6 +177,7 @@
 }
 
 @media screen and (max-width:320px) {
+
     .navigation__link-signup {
         font-size: 10px;
         margin: 11px 14px 11px 0;
@@ -184,7 +190,9 @@
         margin: 6px 0;
     }
     .navigation__pages_view_mobile {
-        right: -10px;
+      right: 0px;
+      top: 0px;
+      width: 320px;
       }
        .navigation__page_view_mobile {
     margin: 0 100px;
