@@ -151,6 +151,11 @@
       .navigation__page_view_mobile:nth-of-type(2) {
         margin: 28px;
       }
+      .navigation__page_view_mobile:active {
+        padding-bottom: 7px;
+        border-bottom: 2px solid black;
+      }
+
       .navigation__button-account {
           display: none;
       }

@@ -97,7 +97,7 @@
     
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
     .auth {
         padding: 56px 30px 30px;
         align-items: inherit;

@@ -13,3 +13,33 @@
         padding: 80px 10px;
     }
 }
+
+.movies__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+   }
+   
+   .movies__button {
+       width: 320px;
+       height: 36px;
+       border: none;
+       cursor: pointer;
+       outline-style: none;
+       background: #F9F9F9;
+       border-radius: 6px;
+       font-weight: 500;
+       font-size: 12px;
+       line-height: 15px;
+       padding: 0;
+   }
+   @media screen and (max-width: 320px) {
+       .movies__container {
+           margin-top: 70px;
+       }
+   
+       .movies__button {
+           width: 240px;
+       }
+   }

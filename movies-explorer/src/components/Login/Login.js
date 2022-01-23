@@ -11,6 +11,7 @@ function Login() {
             email='pochta@yandex.ru'
             button='Войти'
             text='Ещё не зарегистрированы?'
+            link='/signup'
             auth='Регистрация'
             >
             </Auth>

@@ -14,6 +14,7 @@ function Register() {
             email='pochta@yandex.ru'
             button='Зарегистрироваться'
             text='Уже зарегистрированы?'
+            link='/signin'
             auth='Войти'
             >
                 <label for='name' className='auth__label'>Имя</label>

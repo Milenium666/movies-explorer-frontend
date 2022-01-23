@@ -5,7 +5,7 @@ import './Auth.css';
 
 import logo from '../../images/logo.svg'
 
-function Auth ({title, children, email, button, text, auth}) {
+function Auth ({title, children, email, button, text, link, auth}) {
     
     return(
         <section className='auth'>
@@ -26,7 +26,7 @@ function Auth ({title, children, email, button, text, auth}) {
 
                     <button className='auth__button'>{button}</button>
                 </form>
-                <p className='auth__text'>{text} <Link to='/signin' className='auth__link' target='_blank'>{auth}</Link></p>
+                <p className='auth__text'>{text} <Link to={link} className='auth__link'>{auth}</Link></p>
             </div>
         </section>
     )

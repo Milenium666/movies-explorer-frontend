@@ -20,6 +20,9 @@ import card7 from '../../images/card-7.png';
 
 
 function Movies() {
+    const [loading, setLoading] = React.useState(false)
+    
+    const handleLoadClick = () => setLoading(!loading);
     return(
         <section className='movies'>
             <SearchForm />
@@ -32,7 +35,11 @@ function Movies() {
                 <MoviesCard title='Книготорговцы' durationFilm='1ч 42м' classIcon='card__like' img={card6}/>
                 <MoviesCard title='Когда я думаю о Германии ночью' durationFilm='1ч 42м' classIcon='card__like' img={card7}/>
             </MoviesCardList>
-            <Preloader />
+            <div className='movies__container'>
+                <button className='movies__button' type='button' onClick={handleLoadClick}>Еще</button>
+            </div>
+            { loading && <Preloader /> }
+
         </section>
     )
 }
