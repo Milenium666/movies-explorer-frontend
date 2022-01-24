@@ -56,7 +56,7 @@
 .card__image {
     height: 122px;
 }
-@media screen and (max-width:320px) {
+@media screen and (max-width:500px) {
     .card {
         flex-direction: column-reverse;
         padding: 0;

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import './Profile.css';
 
 function Profile() {
-    const [userName, setUserName] = React.useState('Виталий');
+    const [userName, setUserName] = React.useState('Елена');
     const [email, setEmail] = React.useState('pochta@yandex.ru');
     return(
         <section className='profile'>
-            <h1 className='profile__welcome'>Привет, Виталий!</h1>
+            <h1 className='profile__welcome'>Привет, Елена!</h1>
             <form className='profile__form' type='submit'>
                 <label className='profile__label' for='name'>
                     Имя

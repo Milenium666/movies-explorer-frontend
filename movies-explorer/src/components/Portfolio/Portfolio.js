@@ -11,7 +11,7 @@ function Portfolio() {
             <ul className='list-site'>
                 <li className className='list-site__title'>
                     Статичный сайт
-                    <a className='list-site__link' href='https://vk.com' target='_blank'>&#8599;</a>
+                    <a className='list-site__link' href='https://milenium666.github.io/how-to-learn/index.html' target='_blank'>&#8599;</a>
                 </li>
                 
                 <li className className='list-site__title'>

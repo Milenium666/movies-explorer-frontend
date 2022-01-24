@@ -1,7 +1,7 @@
 import React from 'react';
 import './AboutMe.css';
 import Portfolio from '../Portfolio/Portfolio';
-import photo from '../../images/photo.png';
+import photo from '../../images/photo1.png';
 import TitleLine from '../TitleLine/TitleLine';
 
 function AboutMe() {
@@ -13,14 +13,13 @@ function AboutMe() {
             <div className='about-me__discription'>
                 <div className='student'>
                     <h6 className='student__name'>
-                        Виталий
+                        Елена
                     </h6>
                     <h6 className='student__profession'>
-                        Фронтенд-разработчик, 30 лет
+                        Фронтенд-разработчик, 27 лет
                     </h6>
                     <p className='student__descrition'>
-                    Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена 
-    и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
+                    Я родилась в Саратове, в 2015 году переехала в Москву. У меня есть собака. Я люблю слушать музыку, а ещё увлекаюсь фитнесом. Недавно начала кодить. Поняла, что хочу чтобы разработка стала моей профессией.
                     </p>
                     <ul className='link'>
                         <li >
@@ -29,7 +28,7 @@ function AboutMe() {
                             </a>
                         </li>
                         <li>
-                            <a className='link__item' href='https://github.com' target="_blank">
+                            <a className='link__item' href='https://github.com/Milenium666' target="_blank">
                                 Github
                             </a>
                         </li>

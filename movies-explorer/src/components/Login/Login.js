@@ -8,7 +8,7 @@ function Login() {
         <>
             <Auth
             title='Рады видеть!'
-            email='pochta@yandex.ru'
+            // email='pochta@yandex.ru'
             button='Войти'
             text='Ещё не зарегистрированы?'
             link='/signup'
