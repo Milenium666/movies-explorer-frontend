@@ -34,7 +34,7 @@
     margin: 30px 0 16px 0;
 
 }
-.card__like_active {
+.card__like-active {
     width: 14px;
     height: 12px;
     background: transparent url('../../images/like-active.svg') center no-repeat;

@@ -7,7 +7,7 @@ import searchIcon from '../../images/search_icon.svg'
 function SearchForm() {
     return(
         <>
-        <div className='search-form__content'>
+        <div className='search-form'>
             <form className='search-form__form'>
                 <img src={searchIcon} alt='иконка поиска фильма' className='search-form__icon'/>
                 <input placeholder='Фильм' className='search-form__field-input-movie' id='fieldInputMovie'/>
@@ -17,7 +17,7 @@ function SearchForm() {
                 <div className='search-form__form-line'></div>
                 <FilterCheckbox />
             </div>
-            <div className='search-form__line'></div>
+            <div className='line'></div>
         </>
     )
 }
