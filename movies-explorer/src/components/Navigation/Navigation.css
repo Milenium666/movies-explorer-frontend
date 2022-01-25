@@ -1,4 +1,4 @@
-.navigation__links {
+.links {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -8,7 +8,7 @@
     margin: 0;
 }
 
-.navigation__link-signup {
+.links__signup {
     text-decoration: none;
     color: #000000;
     max-width: 77px;
@@ -19,7 +19,7 @@
     margin: 11px 30px 11px 0;
 }
 
-.navigation__link-signin {
+.links__signin {
     text-decoration: none;
     color: #FFFFFF;
     background-color: black;
@@ -183,12 +183,12 @@
 
 @media screen and (max-width:500px) {
 
-    .navigation__link-signup {
+    .links__signup {
         font-size: 10px;
         margin: 11px 14px 11px 0;
         max-width: 64px;
     }
-    .navigation__link-signin {
+    .links__signin {
         max-width: 54px;
         font-size: 10px;
         padding: 5px 12px;

@@ -12,11 +12,11 @@ function Navigation ({ type }) {
     return(
         <>
         { type !== 'loggedIn' &&
-        <li className='navigation__links'>
-                <Link to='/signup' className='navigation__link-signup'>
+        <li className='links'>
+                <Link to='/signup' className='links__signup'>
                     Регистрация
                 </Link>
-                <Link to='/signin' className='navigation__link-signin'>
+                <Link to='/signin' className='links__signin'>
                     Войти
                 </Link>
             </li>

@@ -3,7 +3,7 @@ import './TitleLine.css';
 
 function TitleLine ({title}) {
     return(
-        <div>
+        <div className="title-line">
             <h2 className='title-line__title'>
                 {title}
             </h2>
