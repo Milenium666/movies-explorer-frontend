@@ -1,0 +1,127 @@
+.techs {
+    background-color: #F5F5F5;
+    padding: 100px 70px;
+}
+.decription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 90px 0 100px 0;
+}
+.decription__title {
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 0 26px 0;
+}
+.decription__subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    max-width: 460px;
+    margin: 0;
+}
+.stack {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 10px;
+    max-width: 700px;
+
+}
+.stack__item {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+}
+.stack__item_html {
+    padding: 21px 26px 22px;
+}
+.stack__item_css {
+    padding: 21px 31px 22px 32px;
+}
+.stack__item_js {
+    padding: 21px 37px 22px;
+}
+.stack__item_react {
+    padding: 21px 27px 22px;
+}
+.stack__item_git {
+    padding: 21px 35px 22px 36px;
+}
+.stack__item_express {
+    padding: 21px 14px 22px;
+}
+
+@media screen and (max-width: 768px) {
+    .techs {
+        padding: 90px 50px;
+    }
+    .decription {
+        margin: 80px 0 83px 0;
+    }
+    .decription__title {
+        margin: 0 0 22px 0;
+    }
+    .decription__subtitle {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .stack {
+        grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+    }
+    .stack__item {
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .stack__item_html {
+        padding: 21px 26px 21px 25px;
+    }
+    .stack__item_css {
+        padding: 21px 30px;
+    }
+    .stack__item_js {
+        padding: 21px 35px;
+    }
+    .stack__item_react {
+        padding: 21px 27px 21px 26px;
+    }
+    .stack__item_git {
+        padding: 21px 34px;
+    }
+    .stack__item_express {
+        padding: 21px 16px 21px 15px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .techs {
+        padding: 70px 18px;
+        background-color: white;
+    }
+    .decription {
+        margin: 60px 0 50px 0;
+    }
+    .decription__title {
+        margin: 0 0 24px 0;
+        max-width: 292px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .decription__subtitle {
+        max-width: 292px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

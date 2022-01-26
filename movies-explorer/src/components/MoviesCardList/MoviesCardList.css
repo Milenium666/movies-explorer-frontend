@@ -1,0 +1,13 @@
+.cards{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 40px;
+}
+
+@media screen and (max-width: 320px) {
+    .cards {
+        gap: 20px;
+    }
+}

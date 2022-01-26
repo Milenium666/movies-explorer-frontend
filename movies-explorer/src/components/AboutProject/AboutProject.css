@@ -1,0 +1,134 @@
+.about-project {
+    padding: 110px 70px;
+}
+
+.about-project__description-project {
+    display: flex;
+    margin: 70px 0 110px 0;
+}
+
+.diplom__title {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    max-width: 550px;
+    letter-spacing: -0.04em;
+    margin: 0 0 26px 0;
+}
+
+.diplom__subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: left;
+    max-width: 550px;
+    margin: 0;
+}
+.indent {
+    margin-left: 40px;
+}
+
+.progress-bar {
+    display: flex;
+    width: 100%;
+}
+
+.progress-bar__week {
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+}
+
+.progress-bar__week_active{
+    flex-grow: 0.2;
+    display: flex;
+   flex-direction: column;
+}
+
+.progress-bar__subtitle {
+    margin: 0 0 14px 0;
+    color: white;
+    background-color: #000000;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    text-align: center;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar__title {
+    color: #A0A0A0;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+}
+
+.progress-bar__subtitle_front {
+    background-color: #F2F2F2;
+    color: black;
+
+}
+@media screen and (max-width: 768px) {
+    .about-project {
+        padding: 90px 50px;
+    }
+    .about-project__description-project {
+        margin: 70px 0 93px 0;
+    }
+    .diplom__title {
+        max-width: 319px;
+        margin: 0 0 22px 0;
+    }
+    .diplom__subtitle {
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 319px;
+    }
+    .indent {
+        margin-left: 30px;
+    }
+    .progress-bar__title {
+        font-weight: 400;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .about-project {
+        padding: 70px 18px;
+    }
+    .about-project__description-project {
+        margin: 60px 0;
+        flex-direction: column;
+    }
+    .diplom__title {
+        max-width: 284px;
+        font-size: 18px;
+        line-height: 22px;
+        margin: 0 0 16px 0;
+    }
+    .indent {
+        margin-left: 0;
+        margin-top: 56px;
+    }
+    .diplom__subtitle {
+        font-size: 11px;
+        line-height: 16px;
+        max-width: 284px;
+    }
+    .progress-bar__subtitle {
+        font-size: 11px;
+        line-height: 13px;
+    }
+    .progress-bar__title {
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
+
