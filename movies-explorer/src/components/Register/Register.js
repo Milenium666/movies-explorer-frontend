@@ -4,21 +4,43 @@ import Auth from '../Auth/Auth';
 
 
 
-function Register() {
-    // const [name, setName] = React.useState('Виталий');
+function Register({onRegister}) {
+    const [data, setData] = React.useState({
+        email: '',
+        password:'',
+        name: ''
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData({
+            ...data,
+            [name]: value
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { email, password, name } = data;
+
+        onRegister({ email, password, name })
+    }
+
+
     
     return(
         <>
             <Auth
             title='Добро пожаловать!'
-            // email='pochta@yandex.ru'
             button='Зарегистрироваться'
             text='Уже зарегистрированы?'
             link='/signin'
             auth='Войти'
+            onSubmit={handleSubmit}
+            onChange={handleChange}
             >
-                <label for='name' className='auth__label'>Имя</label>
-                <input id='name' type='text' className='auth__input' required/>
+                <label htmlFor='name' className='auth__label'>Имя</label>
+                <input id='name' name='name' type='text' className='auth__input' required onChange={handleChange}/>
                 <span className='error' id='name-error'></span>
 
             </Auth>

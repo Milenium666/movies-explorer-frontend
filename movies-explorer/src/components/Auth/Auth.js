@@ -5,7 +5,7 @@ import './Auth.css';
 
 import logo from '../../images/logo.svg'
 
-function Auth ({title, children, email, button, text, link, auth}) {
+function Auth ({title, children, email, button, text, link, auth, onSubmit, onChange}) {
     
     return(
         <section className='auth'>
@@ -14,14 +14,14 @@ function Auth ({title, children, email, button, text, link, auth}) {
                     <img className='auth__logo' alt='иконка сайта' src={logo}/>
                 </Link>
                 <h1 className='auth__welcome'>{title}</h1>
-                <form className='auth__form' type='submit'>
+                <form className='auth__form' type='submit' onSubmit={onSubmit}>
                     {children}
-                    <label for='email' className='auth__label'>E-mail</label>
-                    <input id='email' type='email' className='auth__input' value={email} required/>
+                    <label htmlFor='email' className='auth__label'>E-mail</label>
+                    <input id='email' type='email' name='email' className='auth__input' value={email} required onChange={onChange} autoComplete="email"/>
                     <span className='error' id='email-error'></span>
 
-                    <label for='password' className='auth__label'>Пароль</label>
-                    <input id='password' type='password' className='auth__input' required />
+                    <label htmlFor='password' className='auth__label'>Пароль</label>
+                    <input id='password' type='password' name='password' className='auth__input' required onChange={onChange} autoComplete="current-password"/>
                     <span className='error' id='password-error'></span>
 
                     <button className='auth__button'>{button}</button>
