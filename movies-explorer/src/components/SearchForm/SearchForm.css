@@ -41,7 +41,9 @@
     margin: 0 19px 0 21px;
     border: none;
     outline: none;
+    cursor: pointer;
 }
+
 .search-form__form-line {
     background-color: #CBCBCB;
     height: 40px;

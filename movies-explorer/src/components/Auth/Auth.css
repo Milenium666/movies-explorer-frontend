@@ -71,6 +71,9 @@
     padding: 0;
     border-radius: 3px;
 }
+.button-disabled {
+    background-color: grey;
+}
 
 .auth__text {
     font-weight: 400;

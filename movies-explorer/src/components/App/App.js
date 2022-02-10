@@ -11,10 +11,16 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound';
+import ProtectedRoute from '../ProtectedRoute';
+
 import CurrentUserContext from '../../context/CurrentUserContext';
+
 import api from '../../utils/MainApi';
 import * as MainApiAuth from '../../utils/MainApiAuth';
-import ProtectedRoute from '../ProtectedRoute';
+
+
+
+
 
 
 
@@ -31,19 +37,23 @@ React.useEffect(() => {
 
 
 
-const handleRegister = ({name, email, password}) => {
-    MainApiAuth.register({name, email, password})
+const handleRegister = (data) => {
+  console.log(data)
+    MainApiAuth.register(data)
       .then(() => {
+        console.log(data)
         console.log('Регистрация выполнена')
-        handleLogin({ email, password })
+        handleLogin({ email: data.email,
+        password: data.password
+        })
       })
       .catch(() => {
         console.log('Ошибка регистрации')
       })
 }
 
-const handleLogin = ({ email, password }) => {
-  MainApiAuth.login({ email, password })
+const handleLogin = (data) => {
+  MainApiAuth.login( data )
     .then( (data) => {
       const { token } = data;
       localStorage.setItem('jwt', token)
@@ -66,9 +76,7 @@ const getUserInfo = () => {
   if (token) {
     MainApiAuth.checkToken(token)
       .then(data => {
-        console.log(data)
         const { email, _id, name } = data
-        console.log(email, _id)
         setCurrentUser({
           email, _id, name
         })
@@ -114,13 +122,13 @@ const getUserInfo = () => {
           <ProtectedRoute loggedIn={loggedIn}>
           <>
             <Header loggedIn={loggedIn} />
-            <Profile onSignOut={onSignOut}/>
+            <Profile onSignOut={onSignOut} />
           </>
           </ProtectedRoute>
 
         }/>
-        <Route path='/signup'  element={<Register onRegister={handleRegister}/>} />
-        <Route path='/signin'  element={<Login onLogin={handleLogin}/>} />
+        <Route path='/signup'  element={<Register onRegister={handleRegister} />} />
+        <Route path='/signin'  element={<Login onLogin={handleLogin} />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       

@@ -1,29 +1,21 @@
 import React from 'react';
 
 import Auth from '../Auth/Auth';
+import Input from '../Input/Input';
+import FormValidation from '../../utils/FormValidation';
 
 
 
 function Register({onRegister}) {
-    const [data, setData] = React.useState({
-        email: '',
-        password:'',
-        name: ''
-    })
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setData({
-            ...data,
-            [name]: value
-        })
-    }
+    const { values, handleChange, errors, isValid } = FormValidation();
+  const isDisabled = values.email === '' || values.password === '' || !isValid || values.name === '';
+  const registerButton = !isDisabled ? '' : ' button-disabled';
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { email, password, name } = data;
+        // console.log(values.email, values.password, values.name)
+        !isDisabled && onRegister(values);
 
-        onRegister({ email, password, name })
     }
 
 
@@ -38,10 +30,47 @@ function Register({onRegister}) {
             auth='Войти'
             onSubmit={handleSubmit}
             onChange={handleChange}
+            classNameButton={registerButton}
             >
-                <label htmlFor='name' className='auth__label'>Имя</label>
-                <input id='name' name='name' type='text' className='auth__input' required onChange={handleChange}/>
-                <span className='error' id='name-error'></span>
+            <Input 
+            labelFor='name' 
+            labelName='Имя' 
+            idInput='name' 
+            inputName='name'
+            typeInput='text'
+            onChange={handleChange}
+            autoComplete='name'
+            value={values.name || ''}
+            spanText={errors.name}
+            minLength={2}
+            maxLength={30}
+            pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$"
+            />
+
+            <Input 
+            labelFor='email' 
+            labelName='Email' 
+            idInput='email' 
+            inputName='email'
+            typeInput='email'
+            onChange={handleChange}
+            autoComplete='email'
+            value={values.email || ''}
+            spanText={errors.email}
+            />
+
+            <Input 
+            labelFor='password' 
+            labelName='Пароль' 
+            idInput='password' 
+            inputName='password'
+            typeInput='password'
+            onChange={handleChange}
+            autoComplete='current-password'
+            value={values.password || ''}
+            spanText={errors.password}
+            minLength={8}
+            />
 
             </Auth>
         </>
