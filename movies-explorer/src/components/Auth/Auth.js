@@ -6,6 +6,8 @@ import './Auth.css';
 import logo from '../../images/logo.svg'
 
 function Auth ({title, children, button, text, link, auth, onSubmit, classNameButton}) {
+
+    
     
     return(
         <section className='auth'>
@@ -14,7 +16,7 @@ function Auth ({title, children, button, text, link, auth, onSubmit, classNameBu
                     <img className='auth__logo' alt='иконка сайта' src={logo}/>
                 </Link>
                 <h1 className='auth__welcome'>{title}</h1>
-                <form className='auth__form' type='submit' onSubmit={onSubmit}>
+                <form className='auth__form' type='submit' onSubmit={onSubmit} noValidate>
                     {children}
 
                     <button className={`auth__button ${classNameButton}`}>{button}</button>

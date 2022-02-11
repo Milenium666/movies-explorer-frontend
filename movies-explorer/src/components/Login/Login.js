@@ -4,11 +4,20 @@ import './Login.css';
 import Auth from '../Auth/Auth';
 import Input from '../Input/Input';
 import FormValidation from '../../utils/FormValidation';
+import {
+  // customErrorMessages,
+  PATTERN_EMAIL
+} from '../../constants';
 
-function Login({onLogin}) {
+function Login({onLogin, resetFormErrorMessage}) {
     const { values, handleChange, errors, isValid } = FormValidation();
   const isDisabled = values.email === '' || values.password === '' || !isValid || values.name === '';
   const loginButton = !isDisabled ? '' : ' button-disabled';
+
+  React.useEffect(() => {
+    resetFormErrorMessage()
+}, [values])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -36,6 +45,7 @@ function Login({onLogin}) {
             autoComplete='email'
             value={values.email || ''}
             spanText={errors.email}
+            pattern={PATTERN_EMAIL}
             />
 
             <Input 

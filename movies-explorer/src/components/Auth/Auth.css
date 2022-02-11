@@ -73,6 +73,7 @@
 }
 .button-disabled {
     background-color: grey;
+    cursor: not-allowed;
 }
 
 .auth__text {

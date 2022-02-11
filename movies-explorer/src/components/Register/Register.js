@@ -3,13 +3,22 @@ import React from 'react';
 import Auth from '../Auth/Auth';
 import Input from '../Input/Input';
 import FormValidation from '../../utils/FormValidation';
+import {
+    // customErrorMessages,
+    PATTERN_NAME,
+    PATTERN_EMAIL
+} from '../../constants';
 
 
 
-function Register({onRegister}) {
+function Register({onRegister, resetFormErrorMessage}) {
     const { values, handleChange, errors, isValid } = FormValidation();
   const isDisabled = values.email === '' || values.password === '' || !isValid || values.name === '';
   const registerButton = !isDisabled ? '' : ' button-disabled';
+
+    React.useEffect(() => {
+        resetFormErrorMessage()
+    }, [values])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,7 +53,7 @@ function Register({onRegister}) {
             spanText={errors.name}
             minLength={2}
             maxLength={30}
-            pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$"
+            pattern={PATTERN_NAME}
             />
 
             <Input 
@@ -57,6 +66,7 @@ function Register({onRegister}) {
             autoComplete='email'
             value={values.email || ''}
             spanText={errors.email}
+            pattern={PATTERN_EMAIL}
             />
 
             <Input 

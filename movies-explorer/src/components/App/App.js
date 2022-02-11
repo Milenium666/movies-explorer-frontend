@@ -28,6 +28,7 @@ import * as MainApiAuth from '../../utils/MainApiAuth';
 function App () {
 const [currentUser, setCurrentUser] = React.useState({});
 const [loggedIn, setLoggedIn] = React.useState(false);
+const [formErrorMessage, setFormErrorMessage] = React.useState('')
 
 const navigate = useNavigate()
 
@@ -86,6 +87,10 @@ const getUserInfo = () => {
   }
 }
 
+const resetAllFormMessage = () => {
+  setFormErrorMessage('');
+};
+
   return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="App">
@@ -127,8 +132,8 @@ const getUserInfo = () => {
           </ProtectedRoute>
 
         }/>
-        <Route path='/signup'  element={<Register onRegister={handleRegister} />} />
-        <Route path='/signin'  element={<Login onLogin={handleLogin} />} />
+        <Route path='/signup'  element={<Register onRegister={handleRegister} resetFormErrorMessage={resetAllFormMessage}/>} />
+        <Route path='/signin'  element={<Login onLogin={handleLogin} resetFormErrorMessage={resetAllFormMessage}/>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       
