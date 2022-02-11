@@ -7,4 +7,5 @@ export const customErrorMessages = {
     EMAIL: 'Используйте email формата elena@example.ru',
   };
 
+  export const MAIN_API = 'https://movies-explorer.elena.nomoredomains.rocks/api';
 

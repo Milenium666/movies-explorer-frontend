@@ -15,8 +15,7 @@ import ProtectedRoute from '../ProtectedRoute';
 
 import CurrentUserContext from '../../context/CurrentUserContext';
 
-import api from '../../utils/MainApi';
-import * as MainApiAuth from '../../utils/MainApiAuth';
+import mainApi from '../../utils/MainApi';
 
 
 
@@ -40,7 +39,7 @@ React.useEffect(() => {
 
 const handleRegister = (data) => {
   console.log(data)
-    MainApiAuth.register(data)
+    mainApi.register(data)
       .then(() => {
         console.log(data)
         console.log('Регистрация выполнена')
@@ -54,7 +53,7 @@ const handleRegister = (data) => {
 }
 
 const handleLogin = (data) => {
-  MainApiAuth.login( data )
+  mainApi.login( data )
     .then( (data) => {
       const { token } = data;
       localStorage.setItem('jwt', token)
@@ -75,7 +74,7 @@ const getUserInfo = () => {
   const token = localStorage.getItem('jwt')
 
   if (token) {
-    MainApiAuth.checkToken(token)
+    mainApi.checkToken(token)
       .then(data => {
         const { email, _id, name } = data
         setCurrentUser({

@@ -1,7 +1,8 @@
+import { MAIN_API } from "../constants";
 
 class Api {
     constructor({address}) {
-        this._address = address;
+        this.address = address;
     }
 
     _checkResponse(res) {
@@ -9,11 +10,56 @@ class Api {
             return res.json();
         }
         return Promise.reject(`Ошибка ${res.status}`);
-    
+
     }
+
+//post /signup (name, email, password )
+register({name, email, password}) {
+    return fetch(`${this.address}/signup`, {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({name, email, password})
+
+    })
+    .then(this._checkResponse)
+};
+
+  //post /signin(email, password)
+login({email, password}) {
+
+    return fetch(`${this.address}/signin`, {
+      // credentials: 'include',
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({email, password})
+    })
+    .then(this._checkResponse)
+};
+
+
+checkToken (token) {
+    return fetch(`${this.address}/users/me`, {
+      // credentials: 'include',
+    method: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    }
+    })
+    .then(this._checkResponse)
+
+};
+
     //!!get /users/me
     getUserData(token) {
-        return fetch(`${this._address}/users/me`, {
+        return fetch(`${this.address}/users/me`, {
             // credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +70,7 @@ class Api {
     }
     //!!patch /users/me ({ name, email })
     editProfile({ name, email }, token) {
-        return fetch(`${this._address}/users/me`, {
+        return fetch(`${this.address}/users/me`, {
             // credentials: 'include',
             method: 'PATCH',
             headers: {
@@ -38,7 +84,7 @@ class Api {
 
     //!!get /movies
     getMovies(token) {
-        return fetch(`${this._address}/movies`, {
+        return fetch(`${this.address}/movies`, {
             // credentials: 'include'
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +97,7 @@ class Api {
   //!!при лайке на фильм идет запрос на добавление фильма 
     addSavedMovies(country,
         director, duration, year, description, image, trailer, thumbnail, movieId, nameRU, nameEN, token) {
-        return fetch(`${this._address}/movies`, {
+        return fetch(`${this.address}/movies`, {
             // credentials: 'include',
             method: 'POST',
             headers: {
@@ -67,7 +113,7 @@ class Api {
 
     //!!delete /movies/:movieId ({ movieId })
     deleteSavedMovies(movieId, token) {
-        return fetch(`${this._address}/movies/${movieId}`, {
+        return fetch(`${this.address}/movies/${movieId}`, {
             // credentials: 'include',
             method: 'DELETE',
             headers: {
@@ -82,8 +128,8 @@ class Api {
 
 }
 
-    const api = new Api( {
-        address: 'https://movies-explorer.elena.nomoredomains.rocks/api/',
+    const mainApi = new Api( {
+        address: MAIN_API,
     });
-
-export default api;
+console.log(MAIN_API)
+export default mainApi;
