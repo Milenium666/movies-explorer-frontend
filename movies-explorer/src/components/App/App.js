@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import './App.css';
+
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -16,6 +16,7 @@ import ProtectedRoute from '../ProtectedRoute';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 import mainApi from '../../utils/MainApi';
+import Preloader from '../Preloader/Preloader';
 
 
 
@@ -26,14 +27,61 @@ import mainApi from '../../utils/MainApi';
 
 function App () {
 const [currentUser, setCurrentUser] = React.useState({});
-const [loggedIn, setLoggedIn] = React.useState(false);
-const [formErrorMessage, setFormErrorMessage] = React.useState('')
+const [loggedIn, setLoggedIn] = React.useState(false); 
+const [formErrorMessage, setFormErrorMessage] = React.useState('');
+const [isLoading, setIsLoading] = React.useState(true);
+const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 
 const navigate = useNavigate()
 
+
+
+
 React.useEffect(() => {
-  getUserInfo()
-}, [loggedIn]);
+  handleTokenCheck();
+}, [loggedIn])
+
+// React.useEffect(() => {
+//   if(loggedIn){
+//     const localUserData = localStorage.getItem('currentUser');
+//   }
+//   if(!localUserData) {
+//     const token = localStorage.getItem('jwt')
+//     mainApi.checkToken(token)
+//       .then((res) => {
+//         localStorage.setItem('currentUser', JSON.stringify(res.data));
+//         setCurrentUser(res.data);
+//       })
+//       .catch((err) => {
+//         console.log('Не удалось получить информацию о пользователе с сервера', err);
+//       })
+//   } else {
+//     setCurrentUser(JSON.parse(localUserData));
+//   }
+// })
+
+
+const handleTokenCheck = () => {
+  const token = localStorage.getItem('jwt')
+
+  if (token) {
+    mainApi.checkToken(token)
+      .then(data => {
+        setLoggedIn(true)
+        const { email, _id, name } = data
+        
+        setCurrentUser({
+          email, _id, name
+        })
+        
+      })
+      .catch(err => console.log(err))
+      .finally(() => {
+        setIsLoading(false);
+      })
+
+  }
+}
 
 
 
@@ -66,33 +114,46 @@ const handleLogin = (data) => {
 }
 
 const onSignOut = () => {
-  localStorage.removeItem('jwt');
   setLoggedIn(false);
+  localStorage.clear();
+  navigate('/');
+
 }
 
-const getUserInfo = () => {
+const handleUpdateDataUser = ({name, email}) => {
   const token = localStorage.getItem('jwt')
 
-  if (token) {
-    mainApi.checkToken(token)
-      .then(data => {
-        const { email, _id, name } = data
+  mainApi.setUserInfo({name, email}, token)
+    .then(() => {
+      // localStorage.setItem('currentUser', JSON.stringify(res.data));
+      // console.log(setCurrentUser)
         setCurrentUser({
-          email, _id, name
-        })
-        setLoggedIn(true)
-      })
-      .catch(err => console.log(err))
-  }
+          name, email
+        });
+    })
+    // .then(() => {
+    //   setProfileIsBeingEdited(false);
+    //   //!!popap
+    // })
+    .catch((err) => {
+      console.log(err)
+    })
+
 }
+
+
 
 const resetAllFormMessage = () => {
   setFormErrorMessage('');
 };
+const handleEditProfile = () => {
+  setProfileIsBeingEdited(true);
+}
 
   return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="App">
+      {isLoading ? <Preloader /> :
       <Routes>
         <Route path='/' element={
           <>
@@ -126,7 +187,12 @@ const resetAllFormMessage = () => {
           <ProtectedRoute loggedIn={loggedIn}>
           <>
             <Header loggedIn={loggedIn} />
-            <Profile onSignOut={onSignOut} />
+            <Profile
+            onSignOut={onSignOut}
+            // onEditProfile={handleEditProfile}
+            onUpdateProfile={handleUpdateDataUser}
+            // onBeingEdited={profileIsBeingEdited}
+            />
           </>
           </ProtectedRoute>
 
@@ -135,7 +201,7 @@ const resetAllFormMessage = () => {
         <Route path='/signin'  element={<Login onLogin={handleLogin} resetFormErrorMessage={resetAllFormMessage}/>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-      
+      }
     </div>
     </CurrentUserContext.Provider>
   );

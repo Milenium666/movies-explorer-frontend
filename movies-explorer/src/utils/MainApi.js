@@ -55,21 +55,10 @@ checkToken (token) {
     })
     .then(this._checkResponse)
 
-};
+}
 
-    //!!get /users/me
-    getUserData(token) {
-        return fetch(`${this.address}/users/me`, {
-            // credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            }
-        })
-        .then(this._checkResponse)
-    }
     //!!patch /users/me ({ name, email })
-    editProfile({ name, email }, token) {
+    setUserInfo({ name, email }, token) {
         return fetch(`${this.address}/users/me`, {
             // credentials: 'include',
             method: 'PATCH',
@@ -131,5 +120,4 @@ checkToken (token) {
     const mainApi = new Api( {
         address: MAIN_API,
     });
-console.log(MAIN_API)
 export default mainApi;

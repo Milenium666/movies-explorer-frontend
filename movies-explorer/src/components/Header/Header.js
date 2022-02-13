@@ -8,7 +8,7 @@ import Navigation from '../Navigation/Navigation';
 
 
 function Header ({ type, loggedIn}) {
-    console.log(loggedIn)
+    // console.log(loggedIn)
     const headerModificator = loggedIn ?  'header header_type_loggedIn'  :   'header';
     return (
         <header className={`header header_type_${headerModificator}`}>
@@ -16,8 +16,9 @@ function Header ({ type, loggedIn}) {
                 <Link to='/' className='header__logo-link'>
                     <img className='header__logo' alt='Логотип сайта' src={logo}/>
                 </Link>
-                {  !loggedIn && <Navigation />}
                 {  loggedIn  && <Navigation type='loggedIn' /> }
+                {  !loggedIn && <Navigation />}
+               
             </nav>
         </header>
     )

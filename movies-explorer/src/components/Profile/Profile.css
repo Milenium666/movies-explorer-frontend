@@ -59,13 +59,17 @@
     cursor: pointer;
 }
 .profile__link-signin {
-    text-decoration: none;
+    /* text-decoration: none; */
     color: #FF4062;
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
     text-align: center;
     margin-top: 16px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: white;
 }
 
 @media screen and (max-width: 768px) {
