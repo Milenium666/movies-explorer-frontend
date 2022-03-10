@@ -12,6 +12,7 @@ import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound';
 import ProtectedRoute from '../ProtectedRoute';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 import CurrentUserContext from '../../context/CurrentUserContext';
 
@@ -31,6 +32,8 @@ const [loggedIn, setLoggedIn] = React.useState(false);
 const [formErrorMessage, setFormErrorMessage] = React.useState('');
 // const [isLoading, setIsLoading] = React.useState(true);
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
+const [openPopup, setOpenPopup] = React.useState(false);
+
 
 const navigate = useNavigate()
 
@@ -91,11 +94,14 @@ const onSignOut = () => {
 
 }
 
+
+
 const handleUpdateDataUser = ({name, email}) => {
   const token = localStorage.getItem('jwt')
 
   MainApi.setUserInfo({name, email}, token)
     .then(() => {
+      handleUpdateDataProfile()
         setCurrentUser({
           name, email
         });
@@ -105,7 +111,13 @@ const handleUpdateDataUser = ({name, email}) => {
     })
 
 }
+const handleUpdateDataProfile = () => {
+  setOpenPopup(true);
+}
 
+const handleClosePopup = () => {
+  setOpenPopup(false);
+}
 
 
 const resetAllFormMessage = () => {
@@ -167,6 +179,10 @@ const handleEditProfile = () => {
         <Route path='*' element={<NotFound />} />
       </Routes>
        {/* } */}
+        <InfoTooltip
+        isOpen={openPopup}
+        onClose={handleClosePopup}
+        />
     </div>
     </CurrentUserContext.Provider>
   );
