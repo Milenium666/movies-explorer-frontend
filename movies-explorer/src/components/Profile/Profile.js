@@ -3,54 +3,74 @@ import './Profile.css';
 
 import CurrentUserContext from '../../context/CurrentUserContext';
 import FormValidation from '../../utils/FormValidation';
+import { PATTERN_NAME, PATTERN_EMAIL} from '../../constants';
 
 
-function Profile({onSignOut,  onEditProfile, onUpdateProfile, onBeingEdited}) {
+function Profile({ onSignOut, onEditProfile, onUpdateProfile, onBeingEdited }) {
     const currentUser = React.useContext(CurrentUserContext);
     const currentUserName = currentUser.name
-    const [userName, setUserName] = React.useState('');
-    const [ userEmail, setUserEmail] = React.useState('');
+    const { values, setValues, handleChange, errors, isValid } = FormValidation();
+    const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
 
+    const checkStatusSubmit = React.useCallback(() => {
+        return !isValid || values.name === currentUser.name && values.email === currentUser.email;
+
+    }, [isValid, values, currentUser]);
 
     React.useEffect(() => {
-        setUserName(currentUser.name)
-        setUserEmail(currentUser.email)
-    }, [currentUser])
+        setValues({ 'name': currentUser.name, 'email': currentUser.email });
+    }, [setValues, currentUser]);
+
+    React.useEffect(() => {
+        setIsSubmitDisabled(checkStatusSubmit());
+    }, [checkStatusSubmit]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onUpdateProfile({
-            name: userName,
-            email: userEmail
-        })
-        setUserName()
-        setUserEmail()
-    }
-
-    const handleChangeName = (e) => {
-        setUserName(e.target.value)
-    }
-    const handleChangeEmail = (e) => {
-        setUserEmail(e.target.value)
+        setIsSubmitDisabled(true);
+        onUpdateProfile(values);
+        checkStatusSubmit();
     }
 
 
- 
-    return(
+
+    return (
         <section className='profile'>
             <h1 className='profile__welcome'>Привет, {currentUserName}!</h1>
-            <form className='profile__form' type='submit' onSubmit={handleSubmit}>
+            <form className='profile__form' type='submit'
+                onSubmit={handleSubmit}
+            >
                 <label className='profile__label' htmlFor='name'>
                     Имя
-                    <input className='profile__input' placeholder='Имя' value={userName || ''} id='name' required onChange={handleChangeName} type='text' minLength={2} maxLength={30}/>
+                    <input className='profile__input' placeholder='Имя' value={values.name || ''} id='name' required
+                        onChange={handleChange}
+                        type='text'
+                        name='name'
+                        pattern={PATTERN_NAME}
+                    />
+
                 </label>
+                <span className='error'>
+
+                    {errors.name || ''}
+                </span>
                 <label htmlFor='email' className='profile__label profile__label_not-line'>
                     E-mail
-                    <input className='profile__input' placeholder='name@email.ru' value={userEmail || ''} id='email' required onChange={handleChangeEmail} type='email'/>
+                    <input className='profile__input' placeholder='name@email.ru' value={values.email || ''} id='email' required
+                        onChange={handleChange}
+                        type='email'
+                        name='email'
+                        pattern={PATTERN_EMAIL}
+                    />
+
                 </label>
-                <button className='profile__submit'>Редактировать</button>
+                <span className='error'>
+
+                    {errors.email || ''}
+                </span>
+                <button className='profile__submit' disabled={isSubmitDisabled}>Редактировать</button>
             </form>
-            <button className='profile__link-signin' onClick={onSignOut}>Выйти из аккаунта</button>
+            <button className='profile__link-signin' onClick={onSignOut}  >Выйти из аккаунта</button>
         </section>
     )
 }
