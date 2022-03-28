@@ -17,6 +17,7 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 import MainApi from '../../utils/MainApi';
+import * as MovieApi from '../../utils/MovieApi';
 import Preloader from '../Preloader/Preloader';
 
 
@@ -33,6 +34,8 @@ const [formErrorMessage, setFormErrorMessage] = React.useState('');
 // const [isLoading, setIsLoading] = React.useState(true);
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 const [openPopup, setOpenPopup] = React.useState(false);
+const [cards, setCards] = React.useState([]);
+
 
 
 const navigate = useNavigate()
@@ -41,7 +44,23 @@ React.useEffect(() => {
   handleTokenCheck()
 }, [loggedIn])
 
-
+React.useEffect(() => {
+  const jwt = localStorage.getItem("jwt");
+  if(loggedIn)
+{    MovieApi.getMoviesFromSecondApi(jwt)
+    .then((data) => {
+      setCards(
+        data.map((item) => ({
+          id: item.id,
+          nameRU: item.nameRU,
+          duration: item.duration,
+          trailerLink: item.trailerLink,
+          image: item.image.url,
+        }))
+      )
+    })
+    .catch(err => console.log(err))
+}  }, [loggedIn]);
 
 const handleRegister = (data) => {
   console.log(data)
@@ -143,7 +162,7 @@ const handleEditProfile = () => {
           <ProtectedRoute loggedIn={loggedIn}>
           <>
             <Header type="loggedIn" loggedIn={loggedIn}/>
-            <Movies />
+            <Movies cards={cards}/>
             <Footer />
           </>
           </ProtectedRoute>

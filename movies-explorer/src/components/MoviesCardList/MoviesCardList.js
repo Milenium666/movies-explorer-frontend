@@ -1,11 +1,22 @@
 import React from 'react';
 import './MoviesCardList.css';
 
+import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({children}) {
+
+function MoviesCardList({
+    // children,
+     cards}) {
     return(
         <ul className='cards'>
-           {children}
+           {/* {children} */}
+            {cards.map((card) => (
+                <MoviesCard 
+                card={card}
+                key={card.id}
+                />
+            ))}
+
         </ul>
     )
 }

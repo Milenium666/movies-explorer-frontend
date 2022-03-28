@@ -8,4 +8,8 @@ export const customErrorMessages = {
   };
 
   export const MAIN_API = 'https://movies-explorer.elena.nomoredomains.rocks/api';
+  
+  export const MOVIE_API = 'https://api.nomoreparties.co'
+
+
 
