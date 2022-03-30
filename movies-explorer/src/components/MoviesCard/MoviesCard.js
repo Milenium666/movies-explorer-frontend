@@ -3,6 +3,7 @@ import React from 'react';
 import './MoviesCard.css';
 
 import getFullImageUrl from '../../utils/getFullImageUrl';
+import convertDuration from '../../utils/convertDuration';
 
 
 
@@ -17,7 +18,7 @@ function MoviesCard({ card}) {
                     </h1>
                     <p className='card__duration'>
                         {/* {durationFilm} */}
-                    {card.duration}
+                    {convertDuration(card.duration)}
                     </p>
                 </div>
                 <button type='button' 
