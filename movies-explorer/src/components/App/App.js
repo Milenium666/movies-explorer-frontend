@@ -40,27 +40,13 @@ const [cards, setCards] = React.useState([]);
 
 const navigate = useNavigate()
 
+
+//!!!проверки токена уже зарегистрированых пользаветелей
 React.useEffect(() => {
   handleTokenCheck()
 }, [loggedIn])
 
-React.useEffect(() => {
-  const jwt = localStorage.getItem("jwt");
-  if(loggedIn)
-{    MovieApi.getMoviesFromSecondApi(jwt)
-    .then((data) => {
-      setCards(
-        data.map((item) => ({
-          id: item.id,
-          nameRU: item.nameRU,
-          duration: item.duration,
-          trailerLink: item.trailerLink,
-          image: item.image.url,
-        }))
-      )
-    })
-    .catch(err => console.log(err))
-}  }, [loggedIn]);
+
 
 const handleRegister = (data) => {
   console.log(data)
@@ -105,6 +91,25 @@ const handleTokenCheck = () => {
         .catch((err) => console.log(err))
     }
 }
+
+
+React.useEffect(() => {
+  const jwt = localStorage.getItem("jwt");
+  if(loggedIn)
+{    MovieApi.getMoviesFromSecondApi(jwt)
+    .then((data) => {
+      setCards(
+        data.map((item) => ({
+          id: item.id,
+          nameRU: item.nameRU,
+          duration: item.duration,
+          trailerLink: item.trailerLink,
+          image: item.image,
+        }))
+      )
+    })
+    .catch(err => console.log(err))
+}  }, [loggedIn]);
 
 const onSignOut = () => {
   setLoggedIn(false);

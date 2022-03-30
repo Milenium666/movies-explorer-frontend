@@ -1,18 +1,12 @@
 import React from 'react';
+
 import './MoviesCard.css';
-/*
-Изображения приходят с сервера с относительным, а не абсолютным URL. Не забудьте добавить к ним URL сервера — https://api.nomoreparties.co/.
- */
+
+import getFullImageUrl from '../../utils/getFullImageUrl';
 
 
 
-
-
-
-function MoviesCard({ 
-    // title, durationFilm, classIcon, img
-card
-}) {
+function MoviesCard({ card}) {
     return(
         <li className='card'>
             <div className='card__discription'>
@@ -35,10 +29,13 @@ card
             // href='https://www.youtube.com/' 
             target='_blank'
             href={card.trailerLink}
+            className="card__link-image"
+
             >
                 <img className='card__image' 
                 // src={img}
-                src={card.image.url}
+                src={getFullImageUrl(card.image)}
+                // src={card.image.url}
                 alt={card.nameRU}
                 // alt='картинка фильма'
                 />

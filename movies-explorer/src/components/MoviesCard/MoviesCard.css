@@ -55,7 +55,9 @@
 }
 .card__image {
     height: 122px;
+    width: 220px;
 }
+
 @media screen and (max-width:500px) {
     .card {
         flex-direction: column-reverse;
@@ -79,9 +81,18 @@
         margin: 0 0 8px 0;
     }
 
+    .card__link-image{
+        width: 100%;
+    }
+
     .card__image {
         height: 168px;
-        width: 100%;
+        width: 300px;
+        object-fit: cover;
+
+
+
+
     }
 
     .card__like-active {
@@ -96,3 +107,4 @@
     }
 
 }
+
