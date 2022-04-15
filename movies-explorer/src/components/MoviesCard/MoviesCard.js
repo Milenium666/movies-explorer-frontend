@@ -13,32 +13,23 @@ function MoviesCard({ card}) {
             <div className='card__discription'>
                 <div className='card__list'>
                     <h1 className='card__title'>
-                        {/* {title} */}
                     {card.nameRU}
                     </h1>
                     <p className='card__duration'>
-                        {/* {durationFilm} */}
                     {convertDuration(card.duration)}
                     </p>
                 </div>
                 <button type='button' 
-                // className={classIcon}
-                className='card__like'
+                className='card__like-active'
                 ></button>
             </div>
             <a 
-            // href='https://www.youtube.com/' 
             target='_blank'
             href={card.trailerLink}
-            className="card__link-image"
-
-            >
+            className="card__link-image">
                 <img className='card__image' 
-                // src={img}
                 src={getFullImageUrl(card.image)}
-                // src={card.image.url}
                 alt={card.nameRU}
-                // alt='картинка фильма'
                 />
              </a>
         </li>
