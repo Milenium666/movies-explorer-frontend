@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 
@@ -18,7 +18,7 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 
 import MainApi from '../../utils/MainApi';
 import * as MovieApi from '../../utils/MovieApi';
-import Preloader from '../Preloader/Preloader';
+// import Preloader from '../Preloader/Preloader';
 
 
 

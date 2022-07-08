@@ -26,7 +26,7 @@ function MoviesCard({ card}) {
             <a 
             target='_blank'
             href={card.trailerLink}
-            className="card__link-image">
+            className="card__link-image" rel="noreferrer">
                 <img className='card__image' 
                 src={getFullImageUrl(card.image)}
                 alt={card.nameRU}
