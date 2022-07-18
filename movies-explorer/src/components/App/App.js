@@ -41,63 +41,25 @@ const [cards, setCards] = React.useState([]);
 const navigate = useNavigate()
 
 
-//!!!проверки токена уже зарегистрированых пользаветелей
+// !!!проверки токена уже зарегистрированых пользаветелей
 React.useEffect(() => {
-  handleTokenCheck()
-}, [loggedIn])
+  handleTokenCheck();
+}, [loggedIn]);
 
 
 
-const handleRegister = (data) => {
-  console.log(data)
-    MainApi.register(data)
-      .then(() => {
-        console.log(data)
-        console.log('Регистрация выполнена')
-        handleLogin({ email: data.email,
-        password: data.password
-        })
-      })
-      .catch(() => {
-        console.log('Ошибка регистрации')
-      })
-}
-
-const handleLogin = (data) => {
-  MainApi.login( data )
-    .then( (data) => {
-      const { token } = data;
-      localStorage.setItem('jwt', token)
-      setLoggedIn(true)
-      navigate('/movies')
-    })
-    .catch(() => {
-      console.log('Ошибка входа в аккаунт')
-    })
-}
-
-const handleTokenCheck = () => {
-    const jwt = localStorage.getItem('jwt')
-    console.log(loggedIn)
-    if(jwt) {
-      MainApi.checkToken(jwt)
-        .then((data) => {
-          const { name, email, _id } = data
-          setCurrentUser({
-            name, email, _id
-          })
-          setLoggedIn(true);
-        })
-        .catch((err) => console.log(err))
-    }
-}
 
 
 React.useEffect(() => {
   const jwt = localStorage.getItem("jwt");
-  if(loggedIn)
-{    MovieApi.getMoviesFromSecondApi(jwt)
+  // console.log('get movie', jwt);
+  // console.log('get movie login',loggedIn)
+  
+  if(jwt){    
+    
+    MovieApi.getMoviesFromSecondApi(jwt)
     .then((data) => {
+      
       setCards(
         data.map((item) => ({
           id: item.id,
@@ -106,17 +68,21 @@ React.useEffect(() => {
           trailerLink: item.trailerLink,
           image: item.image,
         }))
+        
       )
+      
     })
     .catch(err => console.log(err))
-}  }, [loggedIn]);
 
-const onSignOut = () => {
-  setLoggedIn(false);
-  localStorage.removeItem('jwt');
-    navigate('/');
+  }  
+}, [loggedIn]);
 
-}
+
+
+
+
+
+
 
 
 
@@ -149,6 +115,62 @@ const resetAllFormMessage = () => {
 };
 const handleEditProfile = () => {
   setProfileIsBeingEdited(true);
+}
+
+const handleRegister = (data) => {
+  console.log(data)
+    MainApi.register(data)
+      .then(() => {
+        console.log(data)
+        console.log('Регистрация выполнена')
+        handleLogin({ email: data.email,
+        password: data.password
+        })
+      })
+      .catch(() => {
+        console.log('Ошибка регистрации')
+      })
+}
+
+const handleLogin = (data) => {
+  MainApi.login( data )
+    .then( (data) => {
+      const { token } = data;
+      localStorage.setItem('jwt', token)
+      setLoggedIn(true)
+      navigate('/movies')
+    })
+    .catch(() => {
+      console.log('Ошибка входа в аккаунт')
+    })
+}
+
+
+const handleTokenCheck = () => {
+  const jwt = localStorage.getItem('jwt')
+  console.log('token', jwt);
+  console.log('login', loggedIn);
+  if(jwt) {
+    MainApi.checkToken(jwt)
+      .then((data) => {
+        const { name, email, _id } = data;
+        // console.log(data)
+        setCurrentUser({
+          name, email, _id
+        })
+        setLoggedIn(true);
+      })
+      .catch((err) => console.log(err))
+  }
+};
+
+
+
+const onSignOut = () => {
+  setLoggedIn(false);
+  localStorage.removeItem('jwt');
+    navigate('/');
+
 }
 
   return (

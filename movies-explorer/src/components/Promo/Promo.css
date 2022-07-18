@@ -44,6 +44,11 @@
     border: 1px rgba(0, 0, 0, 0.6) solid;
     max-width: fit-content;
 }
+
+.promo__link:hover {
+    opacity: 0.5;
+    transition:  .4s ease-in-out;
+}
 .promo__img {
     width: 310px;
     height: 304px;

@@ -8,6 +8,14 @@ import convertDuration from '../../utils/convertDuration';
 
 
 function MoviesCard({ card}) {
+
+    const likeStatus = true;
+
+    console.log()
+
+    const cardLikeButtonClassName = `card__like ${
+        likeStatus ? "card__like-active " : ""
+      }`;
     return(
         <li className='card'>
             <div className='card__discription'>
@@ -20,7 +28,7 @@ function MoviesCard({ card}) {
                     </p>
                 </div>
                 <button type='button' 
-                className='card__like-active'
+                className={cardLikeButtonClassName}
                 ></button>
             </div>
             <a 

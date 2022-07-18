@@ -51,6 +51,12 @@
     text-align: left;
     
 }
+
+.link__item:hover {
+    opacity: 0.5;
+  border-bottom: 2px solid black;
+  transition:  .3s ease-in-out;
+}
 .indent-right {
     margin-right: 20px;
 }

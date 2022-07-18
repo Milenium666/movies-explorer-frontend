@@ -9,20 +9,20 @@ function Footer() {
             </h6>
             <div className='footer__line'></div>
             <div className='footer__list'>
-                <p className='footer__copyright'>&#169; 2021</p>
+                <p className='footer__copyright'>&#169; 2022</p>
                 <ul className='links'>
                     <li className='links__item'>
-                        <a className='links__text' href='https://practicum.yandex.ru' target="_blank">
+                        <a className='links__text' href='https://practicum.yandex.ru' target="_blank" rel="noreferrer">
                             Яндекс.Практикум
                         </a>
                     </li>
                     <li className='links__item'>
-                        <a className='links__text' href='https://github.com' target="_blank">
+                        <a className='links__text' href='https://github.com' target="_blank" rel="noreferrer">
                             Github
                         </a>
                     </li>
                     <li className='links__item'>
-                        <a className='links__text' href='https://www.facebook.com' target="_blank">
+                        <a className='links__text' href='https://www.facebook.com' target="_blank" rel="noreferrer">
                             Facebook
                         </a>
                     </li>
