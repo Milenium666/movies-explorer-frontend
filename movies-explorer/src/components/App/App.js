@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 
 
 import Header from '../Header/Header';
@@ -35,47 +35,22 @@ const [formErrorMessage, setFormErrorMessage] = React.useState('');
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 const [openPopup, setOpenPopup] = React.useState(false);
 const [cards, setCards] = React.useState([]);
+const [token, setToken] = React.useState(null);
 
 
 
-const navigate = useNavigate()
+const navigate = useNavigate();
+const location = useLocation();
 
 
 // !!!проверки токена уже зарегистрированых пользаветелей
-React.useEffect(() => {
-  handleTokenCheck();
-}, [loggedIn]);
 
 
 
 
 
-React.useEffect(() => {
-  const jwt = localStorage.getItem("jwt");
-  // console.log('get movie', jwt);
-  // console.log('get movie login',loggedIn)
-  
-  if(jwt){    
-    
-    MovieApi.getMoviesFromSecondApi(jwt)
-    .then((data) => {
-      
-      setCards(
-        data.map((item) => ({
-          id: item.id,
-          nameRU: item.nameRU,
-          duration: item.duration,
-          trailerLink: item.trailerLink,
-          image: item.image,
-        }))
-        
-      )
-      
-    })
-    .catch(err => console.log(err))
 
-  }  
-}, [loggedIn]);
+
 
 
 
@@ -146,10 +121,8 @@ const handleLogin = (data) => {
 }
 
 
-const handleTokenCheck = () => {
+const handleTokenCheck = (path) => {
   const jwt = localStorage.getItem('jwt')
-  console.log('token', jwt);
-  console.log('login', loggedIn);
   if(jwt) {
     MainApi.checkToken(jwt)
       .then((data) => {
@@ -159,18 +132,42 @@ const handleTokenCheck = () => {
           name, email, _id
         })
         setLoggedIn(true);
+        setToken(jwt);
+        navigate(path);
       })
       .catch((err) => console.log(err))
   }
 };
 
 
+React.useEffect(() => {
+  handleTokenCheck(location.pathname);
+}, []);
+
+
+//загрузка фильмов со строннего API
+React.useEffect(() => {
+  MovieApi.getMoviesFromSecondApi()
+    .then((data) => {
+      setCards(
+        data.map((item) => ({
+          id: item.id,
+          nameRU: item.nameRU,
+          duration: item.duration,
+          trailerLink: item.trailerLink,
+          image: item.image,
+        }))
+        
+      )
+    })
+    .catch(err => console.log(err))
+}, []);
+
 
 const onSignOut = () => {
   setLoggedIn(false);
   localStorage.removeItem('jwt');
     navigate('/');
-
 }
 
   return (
