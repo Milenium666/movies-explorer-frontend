@@ -62,9 +62,7 @@ const location = useLocation();
 
 
 const handleUpdateDataUser = ({name, email}) => {
-  const token = localStorage.getItem('jwt')
-
-  MainApi.setUserInfo({name, email}, token)
+  MainApi.setUserInfo({name, email})
     .then(() => {
       handleUpdateDataProfile()
         setCurrentUser({
@@ -113,7 +111,13 @@ const handleLogin = (data) => {
       const { token } = data;
       localStorage.setItem('jwt', token)
       setLoggedIn(true)
-      navigate('/movies')
+      
+      handleTokenCheck('/movies')
+      MainApi.getUserInfo()
+        .then((data) => {
+          setCurrentUser(data)
+        })
+
     })
     .catch(() => {
       console.log('Ошибка входа в аккаунт')
@@ -125,16 +129,25 @@ const handleTokenCheck = (path) => {
   const jwt = localStorage.getItem('jwt')
   if(jwt) {
     MainApi.checkToken(jwt)
-      .then((data) => {
-        const { name, email, _id } = data;
-        // console.log(data)
-        setCurrentUser({
-          name, email, _id
-        })
-        setLoggedIn(true);
-        setToken(jwt);
-        navigate(path);
+
+      .then((res) => {
+        if(res) {
+          const { email }  = res.email;
+          setLoggedIn(true);
+          setToken(jwt);
+          navigate(path);
+        }
       })
+      // .then((data) => {
+      //   const { name, email, _id } = data;
+      //   // console.log(data)
+      //   setCurrentUser({
+      //     name, email, _id
+      //   })
+      //   setLoggedIn(true);
+      //   setToken(jwt);
+      //   navigate(path);
+      // })
       .catch((err) => console.log(err))
   }
 };
@@ -144,6 +157,17 @@ React.useEffect(() => {
   handleTokenCheck(location.pathname);
 }, []);
 
+React.useEffect(() => {
+  if(token) {
+    MainApi.getUserInfo()
+      .then((data) => {
+        setCurrentUser(data);
+        setToken(token);
+      })
+      //пока что выводим ошибки в консоль потом планируется выводить через попап
+      .catch((err) => console.log(err))
+  }
+}, [token])
 
 //загрузка фильмов со строннего API
 React.useEffect(() => {
@@ -161,7 +185,7 @@ React.useEffect(() => {
       )
     })
     .catch(err => console.log(err))
-}, []);
+}, [token]);
 
 
 const onSignOut = () => {

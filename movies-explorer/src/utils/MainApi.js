@@ -25,6 +25,11 @@ register({name, email, password}) {
 
     })
     .then(this._checkResponse)
+    //Потребуется для вывода ошибки
+    // .then((res) => {
+    //     // console.log(res)
+    //     return res;
+    //   });
     
 };
 
@@ -57,15 +62,24 @@ checkToken (token) {
     .then(this._checkResponse)
 
 }
+    getUserInfo() {
+        return fetch(`${this.address}/users/me`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          })
+          .then(this._checkResponse)
+    }
+
 
     //!!patch /users/me ({ name, email })
-    setUserInfo({ name, email }, token) {
+    setUserInfo({ name, email }) {
         return fetch(`${this.address}/users/me`, {
             // credentials: 'include',
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
             },
             body: JSON.stringify({ name, email })
         })
@@ -78,7 +92,7 @@ checkToken (token) {
             // credentials: 'include'
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
             },
         })
         .then(this._checkResponse)
@@ -92,7 +106,7 @@ checkToken (token) {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
             },
             body: JSON.stringify({  country,
                 director, duration, year, description, image, trailer, thumbnail, movieId, nameRU, nameEN})
@@ -108,7 +122,7 @@ checkToken (token) {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
               }
         })
         .then(this._checkResponse)
