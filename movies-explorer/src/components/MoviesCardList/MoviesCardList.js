@@ -4,12 +4,12 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 
-function MoviesCardList({
-    // children,
-     cards}) {
+function MoviesCardList({cards
+                            // ,filter
+}) {
+    // const movieFilter = cards.filter((card) => card.duration <= 40);
     return(
         <ul className='cards'>
-           {/* {children} */}
             {cards.map((card) => (
                 <MoviesCard 
                 card={card}

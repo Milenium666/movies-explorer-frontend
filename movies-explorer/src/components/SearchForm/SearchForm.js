@@ -4,7 +4,9 @@ import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import searchIcon from '../../images/search_icon.svg'
 
-function SearchForm() {
+function SearchForm(
+    // {filter, setFilter}
+) {
     return(
         <>
         <div className='search-form'>
@@ -15,7 +17,10 @@ function SearchForm() {
                 
             </form>
                 <div className='search-form__form-line'></div>
-                <FilterCheckbox />
+                <FilterCheckbox 
+                    // filter={filter}
+                    // setFilter={setFilter}
+                />
             </div>
             <div className='line'></div>
         </>
