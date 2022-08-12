@@ -30,35 +30,23 @@ import * as MovieApi from '../../utils/MovieApi';
 function App () {
 const [currentUser, setCurrentUser] = React.useState({});
 const [loggedIn, setLoggedIn] = React.useState(false);
-const [formErrorMessage, setFormErrorMessage] = React.useState('');
-// const [isLoading, setIsLoading] = React.useState(true);
-const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 const [openPopup, setOpenPopup] = React.useState(false);
 const [cards, setCards] = React.useState([]);
 const [token, setToken] = React.useState(null);
+
+const [isLoading, setIsLoading] = React.useState(false);
+//заходит в функции по поиску и удалению из избраного;Заходит в компоненты movies и saved-movies
+const [filter, setFilter] = React.useState();
+
+
+const [formErrorMessage, setFormErrorMessage] = React.useState('');
+const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
+
 
 
 
 const navigate = useNavigate();
 const location = useLocation();
-
-
-// !!!проверки токена уже зарегистрированых пользаветелей
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const handleUpdateDataUser = ({name, email}) => {
@@ -174,7 +162,10 @@ React.useEffect(() => {
   MovieApi.getMoviesFromSecondApi()
     .then((data) => {
       setCards(
-        data.map((item) => ({
+        data
+        .map
+        // .filter
+        ((item) => ({
           id: item.id,
           nameRU: item.nameRU,
           duration: item.duration,
@@ -199,6 +190,9 @@ const onSignOut = () => {
     <div className="App">
       {/* {isLoading ? <Preloader /> : */}
       <Routes>
+
+
+        {/* Main*/}
         <Route path='/' element={
           <>
             <Header loggedIn={loggedIn}/>
@@ -206,46 +200,55 @@ const onSignOut = () => {
             <Footer />
           </>
         }/>
+
+        {/* Movies */}
         <Route path='/movies'  element={
           <ProtectedRoute loggedIn={loggedIn}>
           <>
             <Header type="loggedIn" loggedIn={loggedIn}/>
-            <Movies cards={cards}/>
+            <Movies
+              cards={cards}
+              filter={filter}
+              setFilter={setFilter}
+              isLoading={isLoading}
+
+              />
             <Footer />
           </>
-          </ProtectedRoute>
-        }/>
+          </ProtectedRoute>}/>
+
+        {/* Saved-Movies */}
         <Route path='/saved-movies' element={
           <ProtectedRoute loggedIn={loggedIn}>
           <>
             <Header type='loggedIn' loggedIn={loggedIn} />
-            <SavedMovies />
+            <SavedMovies 
+              // filter={filter}
+              // setFilter={setFilter}
+              // isLoading={isLoading}
+            />
             <Footer />
-
           </>
-          </ProtectedRoute>
-        }
-        />
+          </ProtectedRoute>}/>
 
+          {/* Profile */}
         <Route path='/profile'  element={
           <ProtectedRoute loggedIn={loggedIn}>
-          <>
-            <Header loggedIn={loggedIn} />
-            <Profile
-            onSignOut={onSignOut}
-            // onEditProfile={handleEditProfile}
-            onUpdateProfile={handleUpdateDataUser}
-            // onBeingEdited={profileIsBeingEdited}
-            />
-          </>
-          </ProtectedRoute>
+            <>
+              <Header loggedIn={loggedIn} />
+              <Profile
+                onSignOut={onSignOut}
+                onUpdateProfile={handleUpdateDataUser}
+                onEditProfile={handleEditProfile}
+                onBeingEdited={profileIsBeingEdited}
+              />
+            </>
+          </ProtectedRoute>}/>
 
-        }/>
         <Route path='/signup'  element={<Register onRegister={handleRegister} resetFormErrorMessage={resetAllFormMessage}/>} />
         <Route path='/signin'  element={<Login onLogin={handleLogin} resetFormErrorMessage={resetAllFormMessage}/>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-       {/* } */}
         <InfoTooltip
         isOpen={openPopup}
         onClose={handleClosePopup}
