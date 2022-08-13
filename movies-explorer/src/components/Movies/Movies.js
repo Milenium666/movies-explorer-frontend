@@ -3,15 +3,10 @@ import './Movies.css';
 
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
 
-function Movies({ cards
-    ,isLoading
-           ,filter, setFilter         
-}) {
-    // const [loading, setLoading] = React.useState(false)
-    
-    // const handleLoadClick = () => setLoading(!loading);
+
+function Movies({ cards, filter, setFilter, isLoading}) {
+
     return(
         <section className='movies'>
             <SearchForm 
@@ -27,10 +22,7 @@ function Movies({ cards
             />
 
 
-            <div className='movies__container'>
-                <button className='movies__button' type='button'>Еще</button>
-            </div>
-            { isLoading && <Preloader /> }
+            
 
         </section>
     )

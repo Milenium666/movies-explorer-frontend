@@ -163,8 +163,8 @@ React.useEffect(() => {
     .then((data) => {
       setCards(
         data
-        .map
-        // .filter
+        // .map
+        .filter
         ((item) => ({
           id: item.id,
           nameRU: item.nameRU,
