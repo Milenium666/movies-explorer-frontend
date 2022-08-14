@@ -7,7 +7,7 @@ import convertDuration from '../../utils/convertDuration';
 
 
 
-function MoviesCard({ card}) {
+function MoviesCard({ item}) {
 
     const likeStatus = true;
 
@@ -21,10 +21,10 @@ function MoviesCard({ card}) {
             <div className='card__discription'>
                 <div className='card__list'>
                     <h1 className='card__title'>
-                    {card.nameRU}
+                    {item.nameRU}
                     </h1>
                     <p className='card__duration'>
-                    {convertDuration(card.duration)}
+                    {convertDuration(item.duration)}
                     </p>
                 </div>
                 <button type='button' 
@@ -33,11 +33,11 @@ function MoviesCard({ card}) {
             </div>
             <a 
             target='_blank'
-            href={card.trailerLink}
+            href={item.trailerLink}
             className="card__link-image" rel="noreferrer">
                 <img className='card__image' 
-                src={getFullImageUrl(card.image)}
-                alt={card.nameRU}
+                src={getFullImageUrl(item.image)}
+                alt={item.nameRU}
                 />
              </a>
         </li>

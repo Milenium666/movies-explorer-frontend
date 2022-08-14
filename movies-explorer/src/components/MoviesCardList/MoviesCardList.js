@@ -4,10 +4,10 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 
-function MoviesCardList({cards, filter,
+function MoviesCardList({items, filter,
 width
 }) {
-
+    // console.log(cards)
     const [index, setIndex] = React.useState(7);
 
     const fullScreen = width > 768;
@@ -28,8 +28,10 @@ width
       }, [width]);
 
 
-    const movieFilter = cards.filter((card) => card.duration <= 40);
-    const cardsToRender = filter ? movieFilter.slice(0, index) : cards.slice(0, index);
+    const movieFilter = items.filter((item) => item.duration <= 40);
+
+    
+    const cardsToRender = filter ? movieFilter.slice(0, index) : items.slice(0, index);
 
     
     const uploadingCards = () => {
@@ -43,16 +45,16 @@ width
     const isDisabled = () => {
         return index > cardsToRender.length
     }
-    console.log(cardsToRender)
+    
 return(
     <>
         <ul className='cards'>
             {
             cardsToRender.map
-            ((card) => (
+            ((item) => (
                 <MoviesCard 
-                card={card}
-                key={card.id}
+                item={item}
+                key={item.id}
                 />
             ))}
 

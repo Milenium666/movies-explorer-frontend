@@ -52,7 +52,6 @@ login({email, password}) {
 checkToken (token) {
     return fetch(`${this.address}/users/me`, {
       // credentials: 'include',
-    method: 'GET',
     headers: {
         // 'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -87,7 +86,7 @@ checkToken (token) {
     }
 
     //!!get /movies
-    getMovies(token) {
+    getMovies() {
         return fetch(`${this.address}/movies`, {
             // credentials: 'include'
             headers: {

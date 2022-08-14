@@ -13,11 +13,11 @@ function FilterCheckbox(
         setFilter((filter) => !filter);
         localStorage.setItem(location.pathname, !filter);
     }
-
+    
     React.useEffect(() =>{
         const filterStatus = JSON.parse(localStorage.getItem(location.pathname));
         setFilter(filterStatus);
-    }, []);
+    }, [filter]);
 
     return(
         <div className="checkbox">

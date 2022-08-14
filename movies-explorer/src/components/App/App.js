@@ -32,6 +32,7 @@ const [currentUser, setCurrentUser] = React.useState({});
 const [loggedIn, setLoggedIn] = React.useState(false);
 const [openPopup, setOpenPopup] = React.useState(false);
 const [cards, setCards] = React.useState([]);
+const [savedCards, setSavedCards] = React.useState([])
 const [token, setToken] = React.useState(null);
 
 const [isLoading, setIsLoading] = React.useState(false);
@@ -157,24 +158,26 @@ React.useEffect(() => {
   }
 }, [token])
 
-//загрузка фильмов со строннего API
+// загрузка фильмов со строннего API
 React.useEffect(() => {
   MovieApi.getMoviesFromSecondApi()
     .then((data) => {
-      setCards(
-        data
-        // .map
-        .filter
-        ((item) => ({
-          id: item.id,
-          nameRU: item.nameRU,
-          duration: item.duration,
-          trailerLink: item.trailerLink,
-          image: item.image,
-        }))
-        
-      )
+      setCards(data.filter((data) => (data)))
     })
+    
+    .catch(err => console.log(err))
+}, [token]);
+
+React.useEffect(() => {
+  MainApi.getMovies()
+    .then(({movie}) => {
+      // console.log(movie)
+      setSavedCards(movie.filter((data) => {
+        // console.log(data)
+        return data;
+      }))
+    })
+    
     .catch(err => console.log(err))
 }, [token]);
 
@@ -223,8 +226,9 @@ const onSignOut = () => {
           <>
             <Header type='loggedIn' loggedIn={loggedIn} />
             <SavedMovies 
-              // filter={filter}
-              // setFilter={setFilter}
+              filter={filter}
+              savedCards={savedCards}
+              setFilter={setFilter}
               // isLoading={isLoading}
             />
             <Footer />

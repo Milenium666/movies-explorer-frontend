@@ -6,6 +6,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
 function Movies({ cards, filter, setFilter, isLoading}) {
+    console.log(cards)
 
     return(
         <section className='movies'>
@@ -17,8 +18,8 @@ function Movies({ cards, filter, setFilter, isLoading}) {
 
             
             <MoviesCardList 
-            cards={cards}
-                filter={filter}
+            items={cards}
+            filter={filter}
             />
 
 
