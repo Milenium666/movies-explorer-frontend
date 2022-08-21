@@ -20,6 +20,8 @@ import MainApi from '../../utils/MainApi';
 import * as MovieApi from '../../utils/MovieApi';
 // import Preloader from '../Preloader/Preloader';
 
+import transformMovies from '../../utils/transformMovies';
+
 
 
 
@@ -80,7 +82,7 @@ const handleEditProfile = () => {
 }
 
 const handleRegister = (data) => {
-  console.log(data)
+  // console.log(data)
     MainApi.register(data)
       .then(() => {
         console.log(data)
@@ -163,6 +165,7 @@ React.useEffect(() => {
   MovieApi.getMoviesFromSecondApi()
     .then((data) => {
       setCards(data.filter((data) => (data)))
+      transformMovies(data)
     })
     
     .catch(err => console.log(err))
@@ -180,6 +183,18 @@ React.useEffect(() => {
     
     .catch(err => console.log(err))
 }, [token]);
+
+
+ const handleSaveMovie = (movie) => {
+      // console.log(movie, "app")
+      MainApi.addSavedMovies(movie)
+        .then((newMovie) => {
+          // console.log(newMovie)
+          setSavedCards([newMovie, ...savedCards])
+          // console.log(setSavedCards)
+        })
+        .catch(err => console.log(err))
+ }
 
 
 const onSignOut = () => {
@@ -214,6 +229,7 @@ const onSignOut = () => {
               filter={filter}
               setFilter={setFilter}
               isLoading={isLoading}
+              onLikeClick={handleSaveMovie}
 
               />
             <Footer />

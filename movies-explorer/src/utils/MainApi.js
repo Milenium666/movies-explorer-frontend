@@ -98,8 +98,7 @@ checkToken (token) {
     }
 
   //!!при лайке на фильм идет запрос на добавление фильма 
-    addSavedMovies(country,
-        director, duration, year, description, image, trailer, thumbnail, movieId, nameRU, nameEN, token) {
+    addSavedMovies(data) {
         return fetch(`${this.address}/movies`, {
             // credentials: 'include',
             method: 'POST',
@@ -107,8 +106,17 @@ checkToken (token) {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
             },
-            body: JSON.stringify({  country,
-                director, duration, year, description, image, trailer, thumbnail, movieId, nameRU, nameEN})
+            body: JSON.stringify({  country: data.country,
+                director: data.director,
+                duration: data.duration,
+                year: data.year,
+                description: data.description,
+                image: data.image,
+                trailerLink: data.trailerLink,
+                thumbnail: data.thumbnail,
+                movieId: data.id,
+                nameRU: data.nameRU,
+                nameEN: data.nameEN,})
 
         })
         .then(this._checkResponse)

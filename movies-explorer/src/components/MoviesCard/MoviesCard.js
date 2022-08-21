@@ -4,18 +4,25 @@ import './MoviesCard.css';
 
 import getFullImageUrl from '../../utils/getFullImageUrl';
 import convertDuration from '../../utils/convertDuration';
+// import { MOVIE_API } from '../../constants'
+import { useLocation } from 'react-router-dom';
 
 
 
-function MoviesCard({ item}) {
 
-    const likeStatus = true;
 
-    console.log()
+function MoviesCard({ item, onLikeClick}) {
+    // console.log(item, 'moviesCard')
+    const location  = useLocation();
+    const handleSaveMovie = () => {
+        onLikeClick(item)
+    }
 
-    const cardLikeButtonClassName = `card__like ${
-        likeStatus ? "card__like-active " : ""
-      }`;
+
+
+    
+
+  
     return(
         <li className='card'>
             <div className='card__discription'>
@@ -27,9 +34,22 @@ function MoviesCard({ item}) {
                     {convertDuration(item.duration)}
                     </p>
                 </div>
-                <button type='button' 
-                className={cardLikeButtonClassName}
-                ></button>
+                {location.pathname === '/movies' && (
+                    <button 
+                    type='button' 
+                    className='card__like-active'
+                    onClick={handleSaveMovie}
+                    >
+                    
+
+                    </button>
+                )}
+                {location.pathname === '/saved-movies' && (
+                    <button type='button' 
+                    className='card__delete-saved-film'
+                    ></button>
+                )}
+                
             </div>
             <a 
             target='_blank'
@@ -37,6 +57,7 @@ function MoviesCard({ item}) {
             className="card__link-image" rel="noreferrer">
                 <img className='card__image' 
                 src={getFullImageUrl(item.image)}
+                // src={`${MOVIE_API}${item.image.url}`}
                 alt={item.nameRU}
                 />
              </a>

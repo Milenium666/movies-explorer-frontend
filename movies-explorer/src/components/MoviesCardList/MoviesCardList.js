@@ -5,9 +5,11 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 
 function MoviesCardList({items, filter,
-width
+width, onLikeClick
 }) {
     // console.log(cards)
+    // console.log(onLikeClick)
+
     const [index, setIndex] = React.useState(7);
 
     const fullScreen = width > 768;
@@ -54,7 +56,8 @@ return(
             ((item) => (
                 <MoviesCard 
                 item={item}
-                key={item.id}
+                key={item.id || item._id}
+                onLikeClick={onLikeClick}
                 />
             ))}
 

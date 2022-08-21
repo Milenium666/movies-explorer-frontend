@@ -5,8 +5,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
-function Movies({ cards, filter, setFilter, isLoading}) {
-    console.log(cards)
+function Movies({ cards, filter, setFilter, isLoading, onLikeClick}) {
+    // console.log(cards)
+    // console.log(onLikeClick)
 
     return(
         <section className='movies'>
@@ -20,6 +21,7 @@ function Movies({ cards, filter, setFilter, isLoading}) {
             <MoviesCardList 
             items={cards}
             filter={filter}
+            onLikeClick={onLikeClick}
             />
 
 

@@ -8,7 +8,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
 function SavedMovies({filter, setFilter, savedCards}) {
-    console.log(savedCards)
+    // console.log(savedCards)
     return(
         <section className='saved-movies'>
             <SearchForm 
