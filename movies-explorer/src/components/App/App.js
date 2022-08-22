@@ -164,8 +164,9 @@ React.useEffect(() => {
 React.useEffect(() => {
   MovieApi.getMoviesFromSecondApi()
     .then((data) => {
-      setCards(data.filter((data) => (data)))
       transformMovies(data)
+      setCards(data.filter((data) => (data)))
+     
     })
     
     .catch(err => console.log(err))
@@ -174,24 +175,20 @@ React.useEffect(() => {
 React.useEffect(() => {
   MainApi.getMovies()
     .then(({movie}) => {
-      // console.log(movie)
       setSavedCards(movie.filter((data) => {
-        // console.log(data)
         return data;
       }))
     })
-    
     .catch(err => console.log(err))
 }, [token]);
 
 
  const handleSaveMovie = (movie) => {
-      // console.log(movie, "app")
       MainApi.addSavedMovies(movie)
         .then((newMovie) => {
-          // console.log(newMovie)
+          // transformMovies(newMovie)
           setSavedCards([newMovie, ...savedCards])
-          // console.log(setSavedCards)
+          
         })
         .catch(err => console.log(err))
  }

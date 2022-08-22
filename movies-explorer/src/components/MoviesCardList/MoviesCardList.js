@@ -48,6 +48,7 @@ width, onLikeClick
         return index > cardsToRender.length
     }
     
+    
 return(
     <>
         <ul className='cards'>
@@ -55,8 +56,8 @@ return(
             cardsToRender.map
             ((item) => (
                 <MoviesCard 
-                item={item}
                 key={item.id || item._id}
+                item={item}
                 onLikeClick={onLikeClick}
                 />
             ))}

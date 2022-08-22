@@ -2,9 +2,7 @@ import React from 'react';
 
 import './MoviesCard.css';
 
-import getFullImageUrl from '../../utils/getFullImageUrl';
 import convertDuration from '../../utils/convertDuration';
-// import { MOVIE_API } from '../../constants'
 import { useLocation } from 'react-router-dom';
 
 
@@ -56,8 +54,7 @@ function MoviesCard({ item, onLikeClick}) {
             href={item.trailerLink}
             className="card__link-image" rel="noreferrer">
                 <img className='card__image' 
-                src={getFullImageUrl(item.image)}
-                // src={`${MOVIE_API}${item.image.url}`}
+                src={item.image}
                 alt={item.nameRU}
                 />
              </a>
