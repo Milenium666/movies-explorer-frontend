@@ -5,7 +5,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
-function Movies({ cards, filter, setFilter, isLoading, onLikeClick}) {
+function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClick}) {
     // console.log(cards)
     // console.log(onLikeClick)
 
@@ -22,6 +22,7 @@ function Movies({ cards, filter, setFilter, isLoading, onLikeClick}) {
             items={cards}
             filter={filter}
             onLikeClick={onLikeClick}
+            onDeleteClick={onDeleteClick}
             />
 
 

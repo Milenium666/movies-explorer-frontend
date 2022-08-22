@@ -5,7 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 
 function MoviesCardList({items, filter,
-width, onLikeClick
+width, onLikeClick, onDeleteClick
 }) {
     // console.log(cards)
     // console.log(onLikeClick)
@@ -59,6 +59,7 @@ return(
                 key={item.id || item._id}
                 item={item}
                 onLikeClick={onLikeClick}
+                onDeleteClick={onDeleteClick}
                 />
             ))}
 

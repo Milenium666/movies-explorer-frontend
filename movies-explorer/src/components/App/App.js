@@ -194,6 +194,25 @@ React.useEffect(() => {
  }
 
 
+ const handleDeleteMovie = (movie) => {
+        const savedMovie = savedCards.find(
+          (item) => item.movieId === movie.id || item.movieId === movie.movieId
+        )
+        MainApi.deleteSavedMovies(savedMovie._id)
+          .then(() => {
+            const newSavedMoviesList = savedCards.filter((updateMovie) => {
+              if (movie.id === updateMovie.movieId || movie.movieId === updateMovie.movieId) {
+                return false;
+              } else {
+                return true;
+              }
+            })
+            setSavedCards(newSavedMoviesList)
+          })
+          .catch(err => console.log(err))
+ }
+
+
 const onSignOut = () => {
   setLoggedIn(false);
   localStorage.removeItem('jwt');
@@ -227,6 +246,7 @@ const onSignOut = () => {
               setFilter={setFilter}
               isLoading={isLoading}
               onLikeClick={handleSaveMovie}
+              onDeleteClick={handleDeleteMovie}
 
               />
             <Footer />
@@ -242,6 +262,7 @@ const onSignOut = () => {
               filter={filter}
               savedCards={savedCards}
               setFilter={setFilter}
+              onDeleteClick={handleDeleteMovie}
               // isLoading={isLoading}
             />
             <Footer />

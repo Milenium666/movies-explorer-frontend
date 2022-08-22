@@ -123,7 +123,7 @@ checkToken (token) {
     }
 
     //!!delete /movies/:movieId ({ movieId })
-    deleteSavedMovies(movieId, token) {
+    deleteSavedMovies(movieId) {
         return fetch(`${this.address}/movies/${movieId}`, {
             // credentials: 'include',
             method: 'DELETE',

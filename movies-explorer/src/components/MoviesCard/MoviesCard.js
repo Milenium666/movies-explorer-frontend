@@ -9,11 +9,15 @@ import { useLocation } from 'react-router-dom';
 
 
 
-function MoviesCard({ item, onLikeClick}) {
+function MoviesCard({ item, onLikeClick, onDeleteClick}) {
     // console.log(item, 'moviesCard')
     const location  = useLocation();
     const handleSaveMovie = () => {
         onLikeClick(item)
+    }
+
+    const handleDeleteSaveMovie = () => {
+        onDeleteClick(item)
     }
 
 
@@ -36,7 +40,7 @@ function MoviesCard({ item, onLikeClick}) {
                     <button 
                     type='button' 
                     className='card__like-active'
-                    onClick={handleSaveMovie}
+                    onClick={handleSaveMovie || handleDeleteSaveMovie}
                     >
                     
 
@@ -45,6 +49,7 @@ function MoviesCard({ item, onLikeClick}) {
                 {location.pathname === '/saved-movies' && (
                     <button type='button' 
                     className='card__delete-saved-film'
+                    onClick={handleDeleteSaveMovie}
                     ></button>
                 )}
                 

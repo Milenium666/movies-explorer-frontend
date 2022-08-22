@@ -7,7 +7,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
 
-function SavedMovies({filter, setFilter, savedCards}) {
+function SavedMovies({filter, setFilter, savedCards, onDeleteClick}) {
     // console.log(savedCards)
     return(
         <section className='saved-movies'>
@@ -19,6 +19,8 @@ function SavedMovies({filter, setFilter, savedCards}) {
                 filter={filter}
                 savedCards={savedCards}
                 items={savedCards}
+                onDeleteClick={onDeleteClick}
+
 
             />
             
