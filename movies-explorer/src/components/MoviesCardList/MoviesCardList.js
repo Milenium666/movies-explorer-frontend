@@ -3,12 +3,17 @@ import './MoviesCardList.css';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
 
+import getSavedMovieCard from '../../utils/getSavedMovieCard';
+
 
 function MoviesCardList({items, filter,
 width, onLikeClick, onDeleteClick
 }) {
     // console.log(cards)
     // console.log(onLikeClick)
+    // console.log()
+
+
 
     const [index, setIndex] = React.useState(7);
 
@@ -28,6 +33,8 @@ width, onLikeClick, onDeleteClick
           setIndex(5);
         }
       }, [width]);
+
+    
 
 
     const movieFilter = items.filter((item) => item.duration <= 40);
@@ -49,17 +56,22 @@ width, onLikeClick, onDeleteClick
     }
     
     
+     
+        // console.log(getSavedMovieCard)
 return(
     <>
         <ul className='cards'>
             {
             cardsToRender.map
             ((item) => (
+                
                 <MoviesCard 
+                
                 key={item.id || item._id}
                 item={item}
                 onLikeClick={onLikeClick}
                 onDeleteClick={onDeleteClick}
+                saved={getSavedMovieCard(items, item)}
                 />
             ))}
 

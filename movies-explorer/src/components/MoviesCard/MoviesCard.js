@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 
 
-function MoviesCard({ item, onLikeClick, onDeleteClick}) {
+function MoviesCard({ item, onLikeClick, onDeleteClick, saved}) {
     // console.log(item, 'moviesCard')
     const location  = useLocation();
     const handleSaveMovie = () => {
@@ -19,14 +19,17 @@ function MoviesCard({ item, onLikeClick, onDeleteClick}) {
     const handleDeleteSaveMovie = () => {
         onDeleteClick(item)
     }
-
-
+    
 
     
 
-  
+    // console.log(item.id, 'id')
+    // console.log(item._id, '_id')
+    // console.log(item)
+
+    
     return(
-        <li className='card'>
+        <li className='card' >
             <div className='card__discription'>
                 <div className='card__list'>
                     <h1 className='card__title'>
@@ -40,7 +43,7 @@ function MoviesCard({ item, onLikeClick, onDeleteClick}) {
                     <button 
                     type='button' 
                     className='card__like-active'
-                    onClick={handleSaveMovie || handleDeleteSaveMovie}
+                    onClick={handleSaveMovie}
                     >
                     
 

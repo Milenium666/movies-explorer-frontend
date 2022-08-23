@@ -8,7 +8,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
 function SavedMovies({filter, setFilter, savedCards, onDeleteClick}) {
-    // console.log(savedCards)
+    // console.log(filter, 'filter')
+    // console.log(setFilter, 'setFilter')
+    // console.log(savedCards, 'savedCards')
+    // console.log(onDeleteClick, 'savedCards')
+
     return(
         <section className='saved-movies'>
             <SearchForm 
@@ -16,9 +20,9 @@ function SavedMovies({filter, setFilter, savedCards, onDeleteClick}) {
                 setFilter={setFilter}
                 />
             <MoviesCardList
-                filter={filter}
-                savedCards={savedCards}
                 items={savedCards}
+                filter={filter}
+                // savedCards={savedCards}
                 onDeleteClick={onDeleteClick}
 
 

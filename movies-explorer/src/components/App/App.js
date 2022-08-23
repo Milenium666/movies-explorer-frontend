@@ -172,27 +172,29 @@ React.useEffect(() => {
     .catch(err => console.log(err))
 }, [token]);
 
-React.useEffect(() => {
+
+
+
+ const handleSaveMovie = (movie) => {
+      MainApi.addSavedMovies(movie)
+        .then((movie) => {
+          // console.log(movie)
+          setSavedCards([movie.movie, ...savedCards])
+          
+        })
+        .catch(err => console.log(err))
+ }
+
+ React.useEffect(() => {
   MainApi.getMovies()
     .then(({movie}) => {
+      
       setSavedCards(movie.filter((data) => {
         return data;
       }))
     })
     .catch(err => console.log(err))
 }, [token]);
-
-
- const handleSaveMovie = (movie) => {
-      MainApi.addSavedMovies(movie)
-        .then((newMovie) => {
-          // transformMovies(newMovie)
-          setSavedCards([newMovie, ...savedCards])
-          
-        })
-        .catch(err => console.log(err))
- }
-
 
  const handleDeleteMovie = (movie) => {
         const savedMovie = savedCards.find(

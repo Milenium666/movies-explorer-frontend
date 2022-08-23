@@ -106,7 +106,8 @@ checkToken (token) {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
             },
-            body: JSON.stringify({  country: data.country,
+            body: JSON.stringify({  
+                country: data.country,
                 director: data.director,
                 duration: data.duration,
                 year: data.year,
@@ -116,7 +117,8 @@ checkToken (token) {
                 thumbnail: data.thumbnail,
                 movieId: data.id,
                 nameRU: data.nameRU,
-                nameEN: data.nameEN,})
+                nameEN: data.nameEN,
+                })
 
         })
         .then(this._checkResponse)

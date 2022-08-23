@@ -6,8 +6,9 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
 function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClick}) {
+    // console.log( cards, filter, setFilter, onLikeClick, onDeleteClick, '1')
     // console.log(cards)
-    // console.log(onLikeClick)
+    
 
     return(
         <section className='movies'>
