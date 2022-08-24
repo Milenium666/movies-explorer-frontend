@@ -18,7 +18,7 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 
 import MainApi from '../../utils/MainApi';
 import * as MovieApi from '../../utils/MovieApi';
-// import Preloader from '../Preloader/Preloader';
+import Preloader from '../Preloader/Preloader';
 
 import transformMovies from '../../utils/transformMovies';
 
@@ -40,8 +40,8 @@ const [isInfoTooltip, setIsInfoTooltip] = React.useState({
   successful: true,
   text: ''
 });
+const [isLoader, setLoader] = React.useState(false)
 
-const [isLoading, setIsLoading] = React.useState(false);
 //заходит в функции по поиску и удалению из избраного;Заходит в компоненты movies и saved-movies
 const [filter, setFilter] = React.useState();
 
@@ -275,10 +275,7 @@ const onSignOut = () => {
   return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="App">
-      {/* {isLoading ? <Preloader /> : */}
       <Routes>
-
-
         {/* Main*/}
         <Route path='/' element={
           <>
@@ -297,9 +294,9 @@ const onSignOut = () => {
               cards={cards}
               filter={filter}
               setFilter={setFilter}
-              isLoading={isLoading}
               onLikeClick={handleSaveMovie}
               onDeleteClick={handleDeleteMovie}
+              setLoader={setLoader}
 
               />
             <Footer />
@@ -316,7 +313,6 @@ const onSignOut = () => {
               savedCards={savedCards}
               setFilter={setFilter}
               onDeleteClick={handleDeleteMovie}
-              // isLoading={isLoading}
             />
             <Footer />
           </>
@@ -344,6 +340,7 @@ const onSignOut = () => {
           status={isInfoTooltip}
           onClose={closeInfoTooltip}
         />
+        <Preloader isOpen={isLoader}/>
     </div>
     </CurrentUserContext.Provider>
   );

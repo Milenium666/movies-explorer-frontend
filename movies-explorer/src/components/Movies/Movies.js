@@ -5,7 +5,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
-function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClick}) {
+function Movies({ cards, filter, setFilter, setLoader, onLikeClick, onDeleteClick}) {
     return(
         <section className='movies'>
             <SearchForm 

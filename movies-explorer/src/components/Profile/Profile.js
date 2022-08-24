@@ -42,7 +42,11 @@ function Profile({ onSignOut, onEditProfile, onUpdateProfile, onBeingEdited }) {
             >
                 <label className='profile__label' htmlFor='name'>
                     Имя
-                    <input className='profile__input' placeholder='Имя' value={values.name || ''} id='name' required
+                    <input 
+                        className='profile__input' 
+                        placeholder='Имя' 
+                        value={values.name || ''} 
+                        id='name' required
                         onChange={handleChange}
                         type='text'
                         name='name'

@@ -29,6 +29,14 @@
     width: 100%;
     
 }
+.search-form__error {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.2;
+    color: #ee3465;
+    /* border: 1px solid red; */
+    text-align: center;
+}
 .search-form__movie-search-button {
     background-color: #000000;
     border-radius: 48px;
