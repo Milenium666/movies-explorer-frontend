@@ -32,10 +32,14 @@ import transformMovies from '../../utils/transformMovies';
 function App () {
 const [currentUser, setCurrentUser] = React.useState({});
 const [loggedIn, setLoggedIn] = React.useState(false);
-const [openPopup, setOpenPopup] = React.useState(false);
 const [cards, setCards] = React.useState([]);
 const [savedCards, setSavedCards] = React.useState([]);
 const [token, setToken] = React.useState(null);
+const [isInfoTooltip, setIsInfoTooltip] = React.useState({
+  isOpen: false,
+  successful: true,
+  text: ''
+});
 
 const [isLoading, setIsLoading] = React.useState(false);
 //заходит в функции по поиску и удалению из избраного;Заходит в компоненты movies и saved-movies
@@ -60,23 +64,31 @@ const location = useLocation();
 const handleUpdateDataUser = ({name, email}) => {
   MainApi.setUserInfo({name, email})
     .then(() => {
-      handleUpdateDataProfile()
         setCurrentUser({
           name, email
         });
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: true,
+          text: 'Ваши данные обновлены!',
+        });
     })
     .catch((err) => {
-      console.log(err)
+      setIsInfoTooltip({
+        isOpen: true,
+        successful: false,
+        text: err,
+      })
     })
 
 }
-const handleUpdateDataProfile = () => {
-  setOpenPopup(true);
+const closeInfoTooltip = () => {
+  setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
 }
 
-const handleClosePopup = () => {
-  setOpenPopup(false);
-}
+// const handleClosePopup = () => {
+//   setOpenPopup(false);
+// }
 
 
 const resetAllFormMessage = () => {
@@ -90,13 +102,21 @@ const handleRegister = (data) => {
 
     MainApi.register(data)
       .then(() => {
-        console.log('Регистрация выполнена')
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: true,
+          text: 'Регистрация выполнена',
+        });
         handleLogin({ email: data.email,
         password: data.password
         })
       })
       .catch(() => {
-        console.log('Ошибка регистрации')
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: 'Ошибка регистрации',
+        })
       })
 }
 
@@ -115,7 +135,11 @@ const handleLogin = (data) => {
 
     })
     .catch(() => {
-      console.log('Ошибка входа в аккаунт')
+      setIsInfoTooltip({
+        isOpen: true,
+        successful: false,
+        text: 'Ошибка входа в аккаунт',
+      })
     })
 }
 
@@ -133,29 +157,29 @@ const handleTokenCheck = (path) => {
           navigate(path);
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err,
+        })
+      })
   }
 };
 
 
 
-
-
-
-
-
-
-
-
-
  const handleSaveMovie = (movie) => {
-    
       MainApi.addSavedMovies(movie)
         .then((movie) => {
           setSavedCards([movie.movie, ...savedCards])
-          
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err,
+        })})
  }
 
 
@@ -175,7 +199,13 @@ const handleTokenCheck = (path) => {
             })
             setSavedCards(newSavedMoviesList)
           })
-          .catch(err => console.log(err))
+          .catch((err) => {
+            setIsInfoTooltip({
+              isOpen: true,
+              successful: false,
+              text: err,
+            })
+          })
  }
 
  React.useEffect(() => {
@@ -191,7 +221,13 @@ React.useEffect(() => {
         setToken(token);
       })
       //пока что выводим ошибки в консоль потом планируется выводить через попап
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err,
+        })
+      })
   }
 }, [token]);
 
@@ -204,7 +240,13 @@ React.useEffect(() => {
         return data;
       }))
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      setIsInfoTooltip({
+        isOpen: true,
+        successful: false,
+        text: err,
+      })
+    })
 }, [token]);
 
 // загрузка фильмов со строннего API
@@ -215,13 +257,19 @@ React.useEffect(() => {
       setCards(data.filter((data) => (data)))
      })
     
-    .catch(err => console.log(err))
+    .catch(err => {
+      setIsInfoTooltip({
+      isOpen: true,
+      successful: false,
+      text: err,
+    })})
 }, [token, savedCards]);
 
 const onSignOut = () => {
+  setCurrentUser({})
   setLoggedIn(false);
-  localStorage.removeItem('jwt');
-    navigate('/');
+  localStorage.clear()
+  navigate('/');
 }
 
   return (
@@ -293,8 +341,8 @@ const onSignOut = () => {
         <Route path='*' element={<NotFound />} />
       </Routes>
         <InfoTooltip
-        isOpen={openPopup}
-        onClose={handleClosePopup}
+          status={isInfoTooltip}
+          onClose={closeInfoTooltip}
         />
     </div>
     </CurrentUserContext.Provider>
