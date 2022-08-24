@@ -1,19 +1,11 @@
 import React from 'react';
-import './MoviesCardList.css';
 
+import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-import getSavedMovieCard from '../../utils/getSavedMovieCard';
 
 
-function MoviesCardList({items, filter,
-width, onLikeClick, onDeleteClick
-}) {
-    // console.log(cards)
-    // console.log(onLikeClick)
-    // console.log()
-
-
+function MoviesCardList({items, filter, width, onLikeClick, onDeleteClick}) {
 
     const [index, setIndex] = React.useState(7);
 
@@ -38,8 +30,6 @@ width, onLikeClick, onDeleteClick
 
 
     const movieFilter = items.filter((item) => item.duration <= 40);
-
-    
     const cardsToRender = filter ? movieFilter.slice(0, index) : items.slice(0, index);
 
     
@@ -55,9 +45,7 @@ width, onLikeClick, onDeleteClick
         return index > cardsToRender.length
     }
     
-    // console.log('items', cardsToRender)
-     
-        // console.log(getSavedMovieCard(cardsToRender, ''))
+
 return(
     <>
         <ul className='cards'>
@@ -66,24 +54,22 @@ return(
             ((item) => (
                 
                 <MoviesCard 
-                
-                key={item.id || item._id}
-                item={item}
-                onLikeClick={onLikeClick}
-                onDeleteClick={onDeleteClick}
-                saved={item.saved}
+                    key={item.id || item._id}
+                    item={item}
+                    onLikeClick={onLikeClick}
+                    onDeleteClick={onDeleteClick}
+                    saved={item.saved}
                 />
             ))}
 
         </ul>
-
         <div className='movies__container'>
                 <button className={`movies__button 
-                ${index > cardsToRender.length ? 'movies__button_hidden' : ''}
-                `}
-                 type='button'
-                 onClick={uploadingCards}
-                 disabled={isDisabled()}
+                    ${index > cardsToRender.length ? 'movies__button_hidden' : ''}
+                    `}
+                    type='button'
+                    onClick={uploadingCards}
+                    disabled={isDisabled()}
                  >Еще</button>
         </div>
     </>

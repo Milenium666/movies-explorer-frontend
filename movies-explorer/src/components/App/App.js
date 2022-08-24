@@ -87,10 +87,9 @@ const handleEditProfile = () => {
 }
 
 const handleRegister = (data) => {
-  // console.log(data)
+
     MainApi.register(data)
       .then(() => {
-        console.log(data)
         console.log('Регистрация выполнена')
         handleLogin({ email: data.email,
         password: data.password
@@ -134,16 +133,6 @@ const handleTokenCheck = (path) => {
           navigate(path);
         }
       })
-      // .then((data) => {
-      //   const { name, email, _id } = data;
-      //   // console.log(data)
-      //   setCurrentUser({
-      //     name, email, _id
-      //   })
-      //   setLoggedIn(true);
-      //   setToken(jwt);
-      //   navigate(path);
-      // })
       .catch((err) => console.log(err))
   }
 };
@@ -212,9 +201,7 @@ React.useEffect(() => {
   MainApi.getMovies()
     .then(({movie}) => {
       setSavedCards(movie.filter((data) => {
-        // console.log(data)
         return data;
-        
       }))
     })
     .catch(err => console.log(err))
@@ -225,10 +212,8 @@ React.useEffect(() => {
   MovieApi.getMoviesFromSecondApi()
     .then((data) => {
       transformMovies(data, savedCards)
-      // console.log(data)
       setCards(data.filter((data) => (data)))
-     
-    })
+     })
     
     .catch(err => console.log(err))
 }, [token, savedCards]);

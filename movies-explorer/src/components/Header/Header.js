@@ -2,14 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './Header.css';
-import logo from '../../images/logo.svg';
 import Navigation from '../Navigation/Navigation';
+
+import logo from '../../images/logo.svg';
 
 
 
 function Header ({ type, loggedIn}) {
-    // console.log(loggedIn)
+
     const headerModificator = loggedIn ?  'header header_type_loggedIn'  :   'header';
+    
     return (
         <header className={`header header_type_${headerModificator}`}>
             <nav className={`header__content header__content_type_${type}`}>
