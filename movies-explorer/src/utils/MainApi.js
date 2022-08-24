@@ -118,6 +118,8 @@ checkToken (token) {
                 movieId: data.id,
                 nameRU: data.nameRU,
                 nameEN: data.nameEN,
+                owner: data.user
+
                 })
 
         })

@@ -55,9 +55,9 @@ width, onLikeClick, onDeleteClick
         return index > cardsToRender.length
     }
     
-    
+    // console.log('items', cardsToRender)
      
-        // console.log(getSavedMovieCard)
+        // console.log(getSavedMovieCard(cardsToRender, ''))
 return(
     <>
         <ul className='cards'>
@@ -71,7 +71,7 @@ return(
                 item={item}
                 onLikeClick={onLikeClick}
                 onDeleteClick={onDeleteClick}
-                saved={getSavedMovieCard(items, item)}
+                saved={item.saved}
                 />
             ))}
 

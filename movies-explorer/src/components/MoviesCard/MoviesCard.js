@@ -4,12 +4,15 @@ import './MoviesCard.css';
 
 import convertDuration from '../../utils/convertDuration';
 import { useLocation } from 'react-router-dom';
+import CurrentUserContext from '../../context/CurrentUserContext';
 
 
 
 
 
 function MoviesCard({ item, onLikeClick, onDeleteClick, saved}) {
+    const currentUser = React.useContext(CurrentUserContext);
+
     // console.log(item, 'moviesCard')
     const location  = useLocation();
     const handleSaveMovie = () => {
@@ -21,11 +24,14 @@ function MoviesCard({ item, onLikeClick, onDeleteClick, saved}) {
     }
     
 
-    
+    // const isOwn = item.owner === currentUser._id;
+
+    // console.log(isOwn);
 
     // console.log(item.id, 'id')
-    // console.log(item._id, '_id')
-    // console.log(item)
+    // console.log(saved? 'card__like-active' : 'card__like')
+    // console.log(saved ? handleDeleteSaveMovie :  handleSaveMovie)
+
 
     
     return(
@@ -42,8 +48,8 @@ function MoviesCard({ item, onLikeClick, onDeleteClick, saved}) {
                 {location.pathname === '/movies' && (
                     <button 
                     type='button' 
-                    className='card__like-active'
-                    onClick={handleSaveMovie}
+                    className={ saved? 'card__like-active' : 'card__like'}
+                    onClick={saved ? handleDeleteSaveMovie :  handleSaveMovie}
                     >
                     
 

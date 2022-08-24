@@ -34,7 +34,7 @@ const [currentUser, setCurrentUser] = React.useState({});
 const [loggedIn, setLoggedIn] = React.useState(false);
 const [openPopup, setOpenPopup] = React.useState(false);
 const [cards, setCards] = React.useState([]);
-const [savedCards, setSavedCards] = React.useState([])
+const [savedCards, setSavedCards] = React.useState([]);
 const [token, setToken] = React.useState(null);
 
 const [isLoading, setIsLoading] = React.useState(false);
@@ -50,6 +50,11 @@ const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 
 const navigate = useNavigate();
 const location = useLocation();
+
+
+
+
+
 
 
 const handleUpdateDataUser = ({name, email}) => {
@@ -144,57 +149,27 @@ const handleTokenCheck = (path) => {
 };
 
 
-React.useEffect(() => {
-  handleTokenCheck(location.pathname);
-}, []);
 
-React.useEffect(() => {
-  if(token) {
-    MainApi.getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-        setToken(token);
-      })
-      //пока что выводим ошибки в консоль потом планируется выводить через попап
-      .catch((err) => console.log(err))
-  }
-}, [token])
 
-// загрузка фильмов со строннего API
-React.useEffect(() => {
-  MovieApi.getMoviesFromSecondApi()
-    .then((data) => {
-      transformMovies(data)
-      setCards(data.filter((data) => (data)))
-     
-    })
-    
-    .catch(err => console.log(err))
-}, [token]);
+
+
+
+
 
 
 
 
  const handleSaveMovie = (movie) => {
+    
       MainApi.addSavedMovies(movie)
         .then((movie) => {
-          // console.log(movie)
           setSavedCards([movie.movie, ...savedCards])
           
         })
         .catch(err => console.log(err))
  }
 
- React.useEffect(() => {
-  MainApi.getMovies()
-    .then(({movie}) => {
-      
-      setSavedCards(movie.filter((data) => {
-        return data;
-      }))
-    })
-    .catch(err => console.log(err))
-}, [token]);
+
 
  const handleDeleteMovie = (movie) => {
         const savedMovie = savedCards.find(
@@ -214,6 +189,49 @@ React.useEffect(() => {
           .catch(err => console.log(err))
  }
 
+ React.useEffect(() => {
+  handleTokenCheck(location.pathname);
+}, []);
+
+
+React.useEffect(() => {
+  if(token) {
+    MainApi.getUserInfo()
+      .then((data) => {
+        setCurrentUser(data);
+        setToken(token);
+      })
+      //пока что выводим ошибки в консоль потом планируется выводить через попап
+      .catch((err) => console.log(err))
+  }
+}, [token]);
+
+
+
+React.useEffect(() => {
+  MainApi.getMovies()
+    .then(({movie}) => {
+      setSavedCards(movie.filter((data) => {
+        // console.log(data)
+        return data;
+        
+      }))
+    })
+    .catch(err => console.log(err))
+}, [token]);
+
+// загрузка фильмов со строннего API
+React.useEffect(() => {
+  MovieApi.getMoviesFromSecondApi()
+    .then((data) => {
+      transformMovies(data, savedCards)
+      // console.log(data)
+      setCards(data.filter((data) => (data)))
+     
+    })
+    
+    .catch(err => console.log(err))
+}, [token, savedCards]);
 
 const onSignOut = () => {
   setLoggedIn(false);
