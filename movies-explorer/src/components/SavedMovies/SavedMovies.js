@@ -7,7 +7,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
 
-function SavedMovies({filter, setFilter, savedCards, onDeleteClick}) {
+function SavedMovies({filter, setFilter, savedCards, onDeleteClick, width}) {
     return(
         <section 
             className='saved-movies'
@@ -20,6 +20,7 @@ function SavedMovies({filter, setFilter, savedCards, onDeleteClick}) {
                 items={savedCards}
                 filter={filter}
                 onDeleteClick={onDeleteClick}
+                width={width}
             />
         </section>
     )

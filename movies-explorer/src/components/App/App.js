@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation, Navigate } from 'react-router-dom';
 
 
 import Header from '../Header/Header';
@@ -21,6 +21,7 @@ import * as MovieApi from '../../utils/MovieApi';
 import Preloader from '../Preloader/Preloader';
 
 import transformMovies from '../../utils/transformMovies';
+import useWindowSize from '../../hooks/useWindowSize';
 
 
 
@@ -42,24 +43,20 @@ const [isInfoTooltip, setIsInfoTooltip] = React.useState({
 });
 const [isLoader, setLoader] = React.useState(false)
 
+
 //заходит в функции по поиску и удалению из избраного;Заходит в компоненты movies и saved-movies
 const [filter, setFilter] = React.useState();
-
+const [searchTag, setSearchTag] = React.useState('');
 
 const [formErrorMessage, setFormErrorMessage] = React.useState('');
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
-
-
 
 
 const navigate = useNavigate();
 const location = useLocation();
 
 
-
-
-
-
+const width = useWindowSize();
 
 const handleUpdateDataUser = ({name, email}) => {
   MainApi.setUserInfo({name, email})
@@ -169,7 +166,7 @@ const handleTokenCheck = (path) => {
 
 
 
- const handleSaveMovie = (movie) => {
+const handleSaveMovie = (movie) => {
       MainApi.addSavedMovies(movie)
         .then((movie) => {
           setSavedCards([movie.movie, ...savedCards])
@@ -180,11 +177,11 @@ const handleTokenCheck = (path) => {
           successful: false,
           text: err,
         })})
- }
+}
 
 
 
- const handleDeleteMovie = (movie) => {
+const handleDeleteMovie = (movie) => {
         const savedMovie = savedCards.find(
           (item) => item.movieId === movie.id || item.movieId === movie.movieId
         )
@@ -206,9 +203,9 @@ const handleTokenCheck = (path) => {
               text: err,
             })
           })
- }
+}
 
- React.useEffect(() => {
+React.useEffect(() => {
   handleTokenCheck(location.pathname);
 }, []);
 
@@ -249,13 +246,13 @@ React.useEffect(() => {
     })
 }, [token]);
 
-// загрузка фильмов со строннего API
+//загрузка фильмов со строннего API
 React.useEffect(() => {
   MovieApi.getMoviesFromSecondApi()
     .then((data) => {
       transformMovies(data, savedCards)
       setCards(data.filter((data) => (data)))
-     })
+    })
     
     .catch(err => {
       setIsInfoTooltip({
@@ -264,6 +261,54 @@ React.useEffect(() => {
       text: err,
     })})
 }, [token, savedCards]);
+
+// const handleSearchSubmit = () => {
+//   if (searchTag === 0) {
+//     setCards([]);
+//   } else {
+//     MovieApi.getMoviesFromSecondApi()
+//       .then((data) => {
+//         console.log(data)
+//         const searchResult = data.filter((data) => {
+//           localStorage.setItem('searchTag', searchTag);
+//           console.log(searchResult)
+
+//           // transformMovies(data, savedCards)
+//           return data.nameRU.toLowerCase().includes(searchTag.toLowerCase());
+//         })
+//         return searchResult;
+//       })
+//       .then((searchResult) => {
+//         //Preloader крутиться
+//         setCards([]);
+//         setTimeout(() => {
+//           if(searchResult.length < 1 ) {
+//             setCards(searchResult)
+//             localStorage.setItem("searchResult", JSON.stringify(searchResult))
+//             //Preloader перестает крутиться
+//             setIsInfoTooltip({
+//               isOpen: true,
+//               successful: false,
+//               text: 'Ничего не найдено',
+//             })
+//             //Preloader перестает крутиться
+//           } else {
+//             setCards(searchResult)
+//             localStorage.setItem("searchResult", JSON.stringify(searchResult));
+//             //Preloader перестает крутиться
+//           }
+//         }, 2000)
+//       })
+//       .catch(err => {
+//         setIsInfoTooltip({
+//         isOpen: true,
+//         successful: false,
+//         text: err,
+//         //text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+//       })})
+//   }
+// }
+
 
 const onSignOut = () => {
   setCurrentUser({})
@@ -297,6 +342,9 @@ const onSignOut = () => {
               onLikeClick={handleSaveMovie}
               onDeleteClick={handleDeleteMovie}
               setLoader={setLoader}
+              // handleSearchSubmit={handleSearchSubmit}
+              searchTag={searchTag}
+              width={width}
 
               />
             <Footer />
@@ -313,6 +361,7 @@ const onSignOut = () => {
               savedCards={savedCards}
               setFilter={setFilter}
               onDeleteClick={handleDeleteMovie}
+              width={width}
             />
             <Footer />
           </>
@@ -331,10 +380,11 @@ const onSignOut = () => {
               />
             </>
           </ProtectedRoute>}/>
-
-        <Route path='/signup'  element={<Register onRegister={handleRegister} resetFormErrorMessage={resetAllFormMessage}/>} />
-        <Route path='/signin'  element={<Login onLogin={handleLogin} resetFormErrorMessage={resetAllFormMessage}/>} />
-        <Route path='*' element={<NotFound />} />
+        {loggedIn ?  <Route path='*' element={<NotFound />} /> : <Route path='/signup'  element={<Register onRegister={handleRegister} resetFormErrorMessage={resetAllFormMessage}/>} />}
+        {loggedIn ? <Route path='*' element={<NotFound />} /> : <Route path='/signin'  element={<Login onLogin={handleLogin} resetFormErrorMessage={resetAllFormMessage}/>} />}
+        
+        
+       
       </Routes>
         <InfoTooltip
           status={isInfoTooltip}

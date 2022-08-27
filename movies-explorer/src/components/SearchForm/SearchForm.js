@@ -9,9 +9,10 @@ import FormValidation from '../../utils/FormValidation';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 
-function SearchForm({filter, setFilter, handleSearchSubmit}) {
+function SearchForm({filter, setFilter, handleSearchSubmit, searchTag}) {
     const currentUser = React.useContext(CurrentUserContext);
     const { values, handleChange, isValid, setIsValid } = FormValidation();
+ 
     const location = useLocation();
 
     const [errorQuery, setErrorQuery] = React.useState('');
@@ -19,15 +20,15 @@ function SearchForm({filter, setFilter, handleSearchSubmit}) {
     function handleSubmit(e) {
         e.preventDefault();
         isValid ? handleSearchSubmit(values.search) : setErrorQuery('Нужно ввести ключевое слово.');
-      };
-
-      React.useEffect(() => {
-        setErrorQuery('')
-      }, [isValid]);
+    };
 
     React.useEffect(() => {
-        if (location.pathname === '/movies' && localStorage.getItem(`${currentUser.email} - movieSearch`)) {
-          const searchValue = localStorage.getItem(`${currentUser.email} - movieSearch`);
+        setErrorQuery('')
+    }, [isValid]);
+
+    React.useEffect(() => {
+        if (location.pathname === '/movies' && localStorage.getItem(`${currentUser.email} - searchTag`)) {
+          const searchValue = localStorage.getItem(`${currentUser.email} - searchTag`);
           values.search = searchValue;
           setIsValid(true);
         }
@@ -36,16 +37,19 @@ function SearchForm({filter, setFilter, handleSearchSubmit}) {
     return(
         <>
         <section className='search-form'>
-            <form className='search-form__form' name='search' noValidate onSubmit={handleSubmit}>
+            <form className='search-form__form' name='search' noValidate 
+                                    onSubmit={handleSubmit}
+                                    >
                 <img src={searchIcon} alt='иконка поиска фильма' className='search-form__icon'/>
                 <input 
                     placeholder='Фильм' 
                     className='search-form__field-input-movie' 
-                    id='fieldInputMovie' 
+                    id='search'
+                    name='search'
                     required
                     type='text'
                     autoComplete='off'
-                    value={values.search || ''}
+                    value={values.search  || ''}
                     onChange={handleChange}
 
                 />
@@ -55,7 +59,7 @@ function SearchForm({filter, setFilter, handleSearchSubmit}) {
                 <button 
                     className='search-form__movie-search-button' 
                     id='movieSearchButton'
-                    // disabled={}
+                     //disabled={!isValid}
                     type='submit'
                 >Найти
                 </button>

@@ -24,16 +24,13 @@ function Profile({ onSignOut, onEditProfile, onUpdateProfile, onBeingEdited }) {
     React.useEffect(() => {
         setIsSubmitDisabled(checkStatusSubmit());
     }, [checkStatusSubmit]);
-
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
         onUpdateProfile(values);
         checkStatusSubmit();
     }
-
-
-
     return (
         <section className='profile'>
             <h1 className='profile__welcome'>Привет, {currentUserName}!</h1>
@@ -52,10 +49,8 @@ function Profile({ onSignOut, onEditProfile, onUpdateProfile, onBeingEdited }) {
                         name='name'
                         pattern={PATTERN_NAME}
                     />
-
                 </label>
                 <span className='error'>
-
                     {errors.name || ''}
                 </span>
                 <label htmlFor='email' className='profile__label profile__label_not-line'>
@@ -66,10 +61,8 @@ function Profile({ onSignOut, onEditProfile, onUpdateProfile, onBeingEdited }) {
                         name='email'
                         pattern={PATTERN_EMAIL}
                     />
-
                 </label>
                 <span className='error'>
-
                     {errors.email || ''}
                 </span>
                 <button className='profile__submit' disabled={isSubmitDisabled}>Редактировать</button>
