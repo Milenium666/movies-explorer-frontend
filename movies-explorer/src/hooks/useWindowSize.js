@@ -8,10 +8,12 @@ export function useWindowSize () {
 
     React.useEffect(() => {
         function handleResize() {
-            setWindowSize(getWindowSize())
+            setWindowSize(getWindowSize())         
+            
         }
 
         window.addEventListener('resize', handleResize());
+        
         return () => window.removeEventListener('resize', handleResize())
     }, []);
 

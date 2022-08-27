@@ -46,7 +46,7 @@ const [isLoader, setLoader] = React.useState(false)
 
 //заходит в функции по поиску и удалению из избраного;Заходит в компоненты movies и saved-movies
 const [filter, setFilter] = React.useState();
-const [searchTag, setSearchTag] = React.useState('');
+// const [searchTag, setSearchTag] = React.useState('');
 
 const [formErrorMessage, setFormErrorMessage] = React.useState('');
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
@@ -57,6 +57,8 @@ const location = useLocation();
 
 
 const width = useWindowSize();
+
+
 
 const handleUpdateDataUser = ({name, email}) => {
   MainApi.setUserInfo({name, email})
@@ -169,6 +171,7 @@ const handleTokenCheck = (path) => {
 const handleSaveMovie = (movie) => {
       MainApi.addSavedMovies(movie)
         .then((movie) => {
+          console.log(movie)
           setSavedCards([movie.movie, ...savedCards])
         })
         .catch(err => {
@@ -246,68 +249,70 @@ React.useEffect(() => {
     })
 }, [token]);
 
-//загрузка фильмов со строннего API
-React.useEffect(() => {
-  MovieApi.getMoviesFromSecondApi()
+// загрузка фильмов со строннего API
+// React.useEffect(() => {
+//   MovieApi.getMoviesFromSecondApi()
+//     .then((data) => {
+//       transformMovies(data, savedCards)
+//       setCards(data.filter((data) => (data)))
+//     })
+    
+//     .catch(err => {
+//       setIsInfoTooltip({
+//       isOpen: true,
+//       successful: false,
+//       text: err,
+//     })})
+// }, [token, savedCards]);
+
+
+function handleSearchSubmit (inpulValue) {
+  if (inpulValue === '') {
+    setCards([])
+  } else {
+    MovieApi
+    .getMoviesFromSecondApi()
     .then((data) => {
       transformMovies(data, savedCards)
-      setCards(data.filter((data) => (data)))
-    })
-    
+      console.log(savedCards)
+        const searchResult = data.filter((data) => {
+          localStorage.setItem("searchTag", inpulValue);
+          return data.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
+
+        });
+        return searchResult;
+      })
+  
+    .then((searchResult => {
+      // setIsLoading(true)
+      setCards([])
+      setTimeout(() => {
+        if (searchResult.length < 1 ) {
+          // setInfo('Ничего не найдено')
+          setCards(searchResult);
+          localStorage.setItem("searchResult", JSON.stringify(searchResult))
+          // setIsLoading(false)
+        } 
+        else {
+          setCards(searchResult);
+          //    console.log(searchResult);
+            localStorage.setItem("searchResult", JSON.stringify(searchResult));
+          //   // console.log(localStorage);
+          // setIsLoading(false)
+        }
+      }, 2000)
+    }))
     .catch(err => {
       setIsInfoTooltip({
-      isOpen: true,
-      successful: false,
-      text: err,
-    })})
-}, [token, savedCards]);
+        isOpen: true,
+        successful: false,
+        text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+      })
+    })
+  }
+  
+}
 
-// const handleSearchSubmit = () => {
-//   if (searchTag === 0) {
-//     setCards([]);
-//   } else {
-//     MovieApi.getMoviesFromSecondApi()
-//       .then((data) => {
-//         console.log(data)
-//         const searchResult = data.filter((data) => {
-//           localStorage.setItem('searchTag', searchTag);
-//           console.log(searchResult)
-
-//           // transformMovies(data, savedCards)
-//           return data.nameRU.toLowerCase().includes(searchTag.toLowerCase());
-//         })
-//         return searchResult;
-//       })
-//       .then((searchResult) => {
-//         //Preloader крутиться
-//         setCards([]);
-//         setTimeout(() => {
-//           if(searchResult.length < 1 ) {
-//             setCards(searchResult)
-//             localStorage.setItem("searchResult", JSON.stringify(searchResult))
-//             //Preloader перестает крутиться
-//             setIsInfoTooltip({
-//               isOpen: true,
-//               successful: false,
-//               text: 'Ничего не найдено',
-//             })
-//             //Preloader перестает крутиться
-//           } else {
-//             setCards(searchResult)
-//             localStorage.setItem("searchResult", JSON.stringify(searchResult));
-//             //Preloader перестает крутиться
-//           }
-//         }, 2000)
-//       })
-//       .catch(err => {
-//         setIsInfoTooltip({
-//         isOpen: true,
-//         successful: false,
-//         text: err,
-//         //text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-//       })})
-//   }
-// }
 
 
 const onSignOut = () => {
@@ -342,8 +347,8 @@ const onSignOut = () => {
               onLikeClick={handleSaveMovie}
               onDeleteClick={handleDeleteMovie}
               setLoader={setLoader}
-              // handleSearchSubmit={handleSearchSubmit}
-              searchTag={searchTag}
+              handleSearchSubmit={handleSearchSubmit}
+              // searchTag={searchTag}
               width={width}
 
               />
@@ -384,7 +389,6 @@ const onSignOut = () => {
         {loggedIn ? <Route path='*' element={<NotFound />} /> : <Route path='/signin'  element={<Login onLogin={handleLogin} resetFormErrorMessage={resetAllFormMessage}/>} />}
         
         
-       
       </Routes>
         <InfoTooltip
           status={isInfoTooltip}

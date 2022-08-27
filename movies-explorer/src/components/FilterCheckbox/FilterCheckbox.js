@@ -6,6 +6,8 @@ import './FilterCheckbox.css';
 function FilterCheckbox({filter, setFilter}) {
     const location = useLocation();
 
+    
+
     const handleFilterClick = () => {
         setFilter((filter) => !filter);
         localStorage.setItem(location.pathname, !filter);

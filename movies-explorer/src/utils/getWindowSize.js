@@ -1,6 +1,6 @@
 const getWindowSize = () => {
-    const { innerWidth: width, innerHeight: height } = window;
-    return(width, height);
+    const { innerHeight: height, innerWidth: width} = window;
+    return(height,width);
 }
 
 

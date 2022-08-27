@@ -9,17 +9,23 @@ import FormValidation from '../../utils/FormValidation';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 
-function SearchForm({filter, setFilter, handleSearchSubmit, searchTag}) {
+function SearchForm({filter, setFilter, handleSearchSubmit, 
+    // searchTag
+}) {
     const currentUser = React.useContext(CurrentUserContext);
     const { values, handleChange, isValid, setIsValid } = FormValidation();
  
     const location = useLocation();
 
     const [errorQuery, setErrorQuery] = React.useState('');
+    const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
+
 
     function handleSubmit(e) {
         e.preventDefault();
+        
         isValid ? handleSearchSubmit(values.search) : setErrorQuery('Нужно ввести ключевое слово.');
+        // setIsSubmitDisabled(true);
     };
 
     React.useEffect(() => {
@@ -59,7 +65,7 @@ function SearchForm({filter, setFilter, handleSearchSubmit, searchTag}) {
                 <button 
                     className='search-form__movie-search-button' 
                     id='movieSearchButton'
-                     //disabled={!isValid}
+                    // disabled={isSubmitDisabled}
                     type='submit'
                 >Найти
                 </button>

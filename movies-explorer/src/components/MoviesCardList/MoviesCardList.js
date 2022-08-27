@@ -6,7 +6,6 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 
 function MoviesCardList({items, filter, width, onLikeClick, onDeleteClick}) {
-
     const [index, setIndex] = React.useState(7);
 
     const fullScreen = width > 768;

@@ -5,14 +5,16 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
-function Movies({ cards, filter, setFilter, setLoader, onLikeClick, onDeleteClick, handleSearchSubmit, searchTag, width}) {
+function Movies({ cards, filter, setFilter, setLoader, onLikeClick, onDeleteClick, handleSearchSubmit, 
+    // searchTag, 
+    width}) {
     return(
         <section className='movies'>
             <SearchForm 
                 filter={filter}
                 setFilter={setFilter}
                 handleSearchSubmit={handleSearchSubmit}
-                searchTag={searchTag}
+                // searchTag={searchTag}
             />
             <MoviesCardList 
                 items={cards}
