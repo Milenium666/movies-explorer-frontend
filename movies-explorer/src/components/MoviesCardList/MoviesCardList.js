@@ -3,6 +3,8 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
+import getSavedMovieCard from '../../utils/getSavedMovieCard';
+
 
 
 function MoviesCardList({items, filter, width, onLikeClick, onDeleteClick}) {
@@ -15,22 +17,18 @@ function MoviesCardList({items, filter, width, onLikeClick, onDeleteClick}) {
 
     React.useEffect(() => {
         if (fullScreen) {
-          setIndex(7);
+        setIndex(7);
         }
         if (mediumScreen) {
-          setIndex(7);
+        setIndex(7);
         }
         if (smallScreen) {
-          setIndex(5);
+        setIndex(5);
         }
-      }, [width]);
-
+    }, [width]);
     
-
-
     const movieFilter = items.filter((item) => item.duration <= 40);
     const cardsToRender = filter ? movieFilter.slice(0, index) : items.slice(0, index);
-
     
     const uploadingCards = () => {
         if (smallScreen) {
@@ -39,11 +37,12 @@ function MoviesCardList({items, filter, width, onLikeClick, onDeleteClick}) {
             setIndex(index + 7)
         }
     }
-
     const isDisabled = () => {
         return index > cardsToRender.length
     }
     
+
+    console.log(items);
 
 return(
     <>
@@ -57,10 +56,10 @@ return(
                     item={item}
                     onLikeClick={onLikeClick}
                     onDeleteClick={onDeleteClick}
-                    saved={item.saved}
+                    // saved={item.saved}
+                    saved={getSavedMovieCard(items, item)}
                 />
             ))}
-
         </ul>
         <div className='movies__container'>
                 <button className={`movies__button 
@@ -69,10 +68,9 @@ return(
                     type='button'
                     onClick={uploadingCards}
                     disabled={isDisabled()}
-                 >Еще</button>
+                >Еще</button>
         </div>
     </>
-
     )
 }
 

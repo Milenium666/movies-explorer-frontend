@@ -274,7 +274,7 @@ function handleSearchSubmit (inpulValue) {
     .getMoviesFromSecondApi()
     .then((data) => {
       transformMovies(data, savedCards)
-      console.log(savedCards)
+      // console.log(savedCards)
         const searchResult = data.filter((data) => {
           localStorage.setItem("searchTag", inpulValue);
           return data.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
@@ -292,6 +292,11 @@ function handleSearchSubmit (inpulValue) {
           setCards(searchResult);
           localStorage.setItem("searchResult", JSON.stringify(searchResult))
           // setIsLoading(false)
+          setIsInfoTooltip({
+            isOpen: true,
+            successful: false,
+            text: 'Ничего не найдено',
+          })
         } 
         else {
           setCards(searchResult);
@@ -312,6 +317,22 @@ function handleSearchSubmit (inpulValue) {
   }
   
 }
+function isExist(name) {
+  return !!localStorage[name];
+}
+
+console.log(isExist)
+
+React.useEffect(() => {
+  if (isExist("searchResult") && token) {
+    const a = localStorage.getItem("searchResult");
+    const actualMovies = JSON.parse(a);
+    setCards(actualMovies);
+    // const actualSearchTag = 
+    localStorage.getItem("searchTag");
+    // setSearchTag(actualSearchTag);
+  }
+}, [token]);
 
 
 
