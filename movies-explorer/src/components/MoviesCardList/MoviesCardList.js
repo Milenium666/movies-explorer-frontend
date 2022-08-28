@@ -1,4 +1,6 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+
 
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
@@ -7,43 +9,19 @@ import getSavedMovieCard from '../../utils/getSavedMovieCard';
 
 
 
-function MoviesCardList({items, filter, width, onLikeClick, onDeleteClick}) {
-    const [index, setIndex] = React.useState(7);
+function MoviesCardList({items, filter, width, onLikeClick, onDeleteClick,  index, uploadingCards}) {
+ 
+    const location  = useLocation();
 
-    const fullScreen = width > 768;
-    const mediumScreen = width <= 768 && width >= 480;
-    const smallScreen = width < 480;
-
-
-    React.useEffect(() => {
-        if (fullScreen) {
-        setIndex(7);
-        }
-        if (mediumScreen) {
-        setIndex(7);
-        }
-        if (smallScreen) {
-        setIndex(5);
-        }
-    }, [width]);
     
     const movieFilter = items.filter((item) => item.duration <= 40);
     const cardsToRender = filter ? movieFilter.slice(0, index) : items.slice(0, index);
-    
-    const uploadingCards = () => {
-        if (smallScreen) {
-            setIndex(index + 5)
-        } else {
-            setIndex(index + 7)
-        }
-    }
+ 
     const isDisabled = () => {
         return index > cardsToRender.length
     }
-    
 
-    // console.log(items);
-
+console.log(cardsToRender.length)
 return(
     <>
         <ul className='cards'>
@@ -56,19 +34,28 @@ return(
                     item={item}
                     onLikeClick={onLikeClick}
                     onDeleteClick={onDeleteClick}
-                    // saved={item.saved}
-                    saved={getSavedMovieCard(items, item)}
+                    saved={item.saved}
+                    // saved={getSavedMovieCard(items, item)}
                 />
             ))}
         </ul>
         <div className='movies__container'>
+
+            {location.pathname === '/saved-movies' &&  (
+                <button className='movies__button_hidden'
+                type='button'
+            >Еще</button>
+            )}
+            {location.pathname === '/movies' && ( 
                 <button className={`movies__button 
-                    ${index > cardsToRender.length ? 'movies__button_hidden' : ''}
-                    `}
-                    type='button'
-                    onClick={uploadingCards}
-                    disabled={isDisabled()}
-                >Еще</button>
+                ${index > cardsToRender.length ? 'movies__button_hidden' : ''}
+                `}
+                type='button'
+                onClick={uploadingCards}
+                disabled={isDisabled()}
+            >Еще</button>
+            )}
+                
         </div>
     </>
     )

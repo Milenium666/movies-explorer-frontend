@@ -171,7 +171,7 @@ const handleSaveMovie = (movie) => {
       MainApi.addSavedMovies(movie)
         .then((movie) => {
           console.log(movie)
-          setSavedCards([movie.movie, ...savedCards])
+          setSavedCards([movie, ...savedCards])
         })
         .catch(err => {
           setIsInfoTooltip({
@@ -234,7 +234,7 @@ React.useEffect(() => {
 
 React.useEffect(() => {
   MainApi.getMovies()
-    .then(({movie}) => {
+    .then((movie) => {
       setSavedCards(movie.filter((data) => {
         return data;
       }))
