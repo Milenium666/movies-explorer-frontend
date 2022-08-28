@@ -51,7 +51,7 @@ function MoviesCard({ item, onLikeClick, onDeleteClick, saved}) {
                     src={item.image}
                     alt={item.nameRU}
                 />
-             </a>
+            </a>
         </li>
     )
 }

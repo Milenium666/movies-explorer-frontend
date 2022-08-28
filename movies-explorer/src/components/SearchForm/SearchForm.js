@@ -32,13 +32,13 @@ function SearchForm({filter, setFilter, handleSearchSubmit,
         setErrorQuery('')
     }, [isValid]);
 
-    React.useEffect(() => {
-        if (location.pathname === '/movies' && localStorage.getItem(`${currentUser.email} - searchTag`)) {
-          const searchValue = localStorage.getItem(`${currentUser.email} - searchTag`);
-          values.search = searchValue;
-          setIsValid(true);
-        }
-      }, [currentUser]);
+    // React.useEffect(() => {
+    //     if (location.pathname === '/movies' && localStorage.getItem(`${currentUser.email} - searchTag`)) {
+    //       const searchValue = localStorage.getItem(`${currentUser.email} - searchTag`);
+    //       values.search = searchValue;
+    //       setIsValid(true);
+    //     }
+    //   }, [currentUser]);
 
     return(
         <>

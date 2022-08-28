@@ -3,9 +3,10 @@ import './Movies.css';
 
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Preloader from '../Preloader/Preloader';
 
 
-function Movies({ cards, filter, setFilter, setLoader, onLikeClick, onDeleteClick, handleSearchSubmit, 
+function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClick, handleSearchSubmit, 
     // searchTag, 
     width}) {
     return(
@@ -16,6 +17,7 @@ function Movies({ cards, filter, setFilter, setLoader, onLikeClick, onDeleteClic
                 handleSearchSubmit={handleSearchSubmit}
                 // searchTag={searchTag}
             />
+            {isLoading && <Preloader></Preloader>}
             <MoviesCardList 
                 items={cards}
                 filter={filter}

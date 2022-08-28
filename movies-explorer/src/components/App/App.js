@@ -41,21 +41,17 @@ const [isInfoTooltip, setIsInfoTooltip] = React.useState({
   successful: true,
   text: ''
 });
-const [isLoader, setLoader] = React.useState(false)
+const [isLoading, setIsLoading] = React.useState(false);
 
 
 //заходит в функции по поиску и удалению из избраного;Заходит в компоненты movies и saved-movies
 const [filter, setFilter] = React.useState();
-// const [searchTag, setSearchTag] = React.useState('');
-
 const [formErrorMessage, setFormErrorMessage] = React.useState('');
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 
 
 const navigate = useNavigate();
 const location = useLocation();
-
-
 const width = useWindowSize();
 
 
@@ -274,7 +270,6 @@ function handleSearchSubmit (inpulValue) {
     .getMoviesFromSecondApi()
     .then((data) => {
       transformMovies(data, savedCards)
-      // console.log(savedCards)
         const searchResult = data.filter((data) => {
           localStorage.setItem("searchTag", inpulValue);
           return data.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
@@ -284,14 +279,14 @@ function handleSearchSubmit (inpulValue) {
       })
   
     .then((searchResult => {
-      // setIsLoading(true)
-      setCards([])
+      setIsLoading(true)
       setTimeout(() => {
         if (searchResult.length < 1 ) {
           // setInfo('Ничего не найдено')
           setCards(searchResult);
+
           localStorage.setItem("searchResult", JSON.stringify(searchResult))
-          // setIsLoading(false)
+          setIsLoading(false)
           setIsInfoTooltip({
             isOpen: true,
             successful: false,
@@ -303,7 +298,7 @@ function handleSearchSubmit (inpulValue) {
           //    console.log(searchResult);
             localStorage.setItem("searchResult", JSON.stringify(searchResult));
           //   // console.log(localStorage);
-          // setIsLoading(false)
+          setIsLoading(false)
         }
       }, 2000)
     }))
@@ -321,7 +316,6 @@ function isExist(name) {
   return !!localStorage[name];
 }
 
-console.log(isExist)
 
 React.useEffect(() => {
   if (isExist("searchResult") && token) {
@@ -367,10 +361,9 @@ const onSignOut = () => {
               setFilter={setFilter}
               onLikeClick={handleSaveMovie}
               onDeleteClick={handleDeleteMovie}
-              setLoader={setLoader}
               handleSearchSubmit={handleSearchSubmit}
-              // searchTag={searchTag}
               width={width}
+              isLoading={isLoading}
 
               />
             <Footer />
@@ -415,7 +408,6 @@ const onSignOut = () => {
           status={isInfoTooltip}
           onClose={closeInfoTooltip}
         />
-        <Preloader isOpen={isLoader}/>
     </div>
     </CurrentUserContext.Provider>
   );

@@ -42,7 +42,7 @@ function MoviesCardList({items, filter, width, onLikeClick, onDeleteClick}) {
     }
     
 
-    console.log(items);
+    // console.log(items);
 
 return(
     <>

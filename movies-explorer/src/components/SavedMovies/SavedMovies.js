@@ -21,6 +21,7 @@ function SavedMovies({filter, setFilter, savedCards, onDeleteClick, width}) {
                 filter={filter}
                 onDeleteClick={onDeleteClick}
                 width={width}
+                
             />
         </section>
     )
