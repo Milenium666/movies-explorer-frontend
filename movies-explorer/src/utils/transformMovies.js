@@ -1,5 +1,5 @@
 const transformMovies = (movies,
-   savedMovies
+  //  savedMovies
   ) => {
     movies.forEach(movie => {
         if (!movie.image) {
@@ -18,13 +18,13 @@ const transformMovies = (movies,
         // if(!movie.director) {
         //   movie.director = 'Елена';
         // }
-        movie.saved = false;
-        savedMovies.forEach( savedMovie => {
-          // console.log('CHECKING', movie.id, movie.movieId, savedMovie.movieId);
-          if(savedMovie.movieId ===(movie.id || movie.movieId)){
-            movie.saved = true;
-          }
-        })
+        // movie.saved = false;
+        // savedMovies.forEach( savedMovie => {
+        //   // console.log('CHECKING', movie.id, movie.movieId, savedMovie.movieId);
+        //   if(savedMovie.movieId ===(movie.id || movie.movieId)){
+        //     movie.saved = true;
+        //   }
+        // })
       });
       return movies
 }

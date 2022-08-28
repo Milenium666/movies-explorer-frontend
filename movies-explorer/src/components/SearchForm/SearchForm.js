@@ -9,16 +9,14 @@ import FormValidation from '../../utils/FormValidation';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 
-function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies
-    // searchTag
+function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies,
+    searchTag
 }) {
     const currentUser = React.useContext(CurrentUserContext);
     const { values, handleChange, isValid, setIsValid } = FormValidation();
- 
     const location = useLocation();
 
     const [errorQuery, setErrorQuery] = React.useState('');
-    const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
 
 
     function handleSubmit(e) {
@@ -28,9 +26,6 @@ function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies
         } else {
             isValid ? searchSavedMovies(values.search) : setErrorQuery('Нужно ввести ключевое слово.');
         }
-
-        
-        // setIsSubmitDisabled(true);
     };
 
     React.useEffect(() => {
@@ -38,12 +33,8 @@ function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies
     }, [isValid]);
 
     React.useEffect(() => {
-        if (location.pathname === '/movies' && localStorage.getItem(`${currentUser.email} - searchResult`)) {
-            const searchValue = localStorage.getItem(`${currentUser.email} - searchResult`);
-            values.search = searchValue;
-            setIsValid(true);
-        }
-    }, [currentUser]);
+        values.search = localStorage.getItem("searchTag");
+    }, [currentUser])
 
     return(
         <>
@@ -60,7 +51,7 @@ function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies
                     required
                     type='text'
                     autoComplete='off'
-                    value={values.search  || ''}
+                    value={values.search || ''}
                     onChange={handleChange}
 
                 />

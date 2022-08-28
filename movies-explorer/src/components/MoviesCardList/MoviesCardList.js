@@ -9,14 +9,12 @@ import getSavedMovieCard from '../../utils/getSavedMovieCard';
 
 
 
-function MoviesCardList({items, filter, width, onLikeClick, onDeleteClick,  index, uploadingCards}) {
- 
+function MoviesCardList({items, filter, onLikeClick, onDeleteClick,  index, uploadingCards}) {
     const location  = useLocation();
 
     
     const movieFilter = items.filter((item) => item.duration <= 40);
     const cardsToRender = filter ? movieFilter.slice(0, index) : items.slice(0, index);
- 
     const isDisabled = () => {
         return index > cardsToRender.length
     }
@@ -34,8 +32,8 @@ return(
                     item={item}
                     onLikeClick={onLikeClick}
                     onDeleteClick={onDeleteClick}
-                    saved={item.saved}
-                    // saved={getSavedMovieCard(items, item)}
+                    // saved={item.saved}
+                    saved={getSavedMovieCard(items, item)}
                 />
             ))}
         </ul>

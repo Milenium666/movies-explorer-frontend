@@ -11,7 +11,7 @@ function MoviesCard({ item, onLikeClick, onDeleteClick, saved}) {
 
     const handleSaveMovie = () => {
         onLikeClick(item)
-        // onLikeClick(item.saved)
+        
     }
     const handleDeleteSaveMovie = () => {
         onDeleteClick(item)

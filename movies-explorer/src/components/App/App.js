@@ -18,8 +18,6 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 
 import MainApi from '../../utils/MainApi';
 import * as MovieApi from '../../utils/MovieApi';
-import Preloader from '../Preloader/Preloader';
-
 import transformMovies from '../../utils/transformMovies';
 import useWindowSize from '../../hooks/useWindowSize';
 
@@ -50,7 +48,8 @@ const [formErrorMessage, setFormErrorMessage] = React.useState('');
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 
 const [ searchSaveResult, setSearchSaveResult ] = React.useState([])
-const [ onSearch, setOnSearch ] = React.useState()
+const [ onSearch, setOnSearch ] = React.useState();
+ const [searchTag, setSearchTag] = React.useState('');
 
 
 const navigate = useNavigate();
@@ -83,10 +82,6 @@ const handleUpdateDataUser = ({name, email}) => {
 const closeInfoTooltip = () => {
   setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
 }
-
-// const handleClosePopup = () => {
-//   setOpenPopup(false);
-// }
 
 
 const resetAllFormMessage = () => {
@@ -246,23 +241,8 @@ React.useEffect(() => {
         text: err,
       })
     })
-}, [token]);
+}, [loggedIn]);
 
-// загрузка фильмов со строннего API
-// React.useEffect(() => {
-//   MovieApi.getMoviesFromSecondApi()
-//     .then((data) => {
-//       transformMovies(data, savedCards)
-//       setCards(data.filter((data) => (data)))
-//     })
-    
-//     .catch(err => {
-//       setIsInfoTooltip({
-//       isOpen: true,
-//       successful: false,
-//       text: err,
-//     })})
-// }, [token, savedCards]);
 
 
 function handleSearchSubmit (inpulValue) {
@@ -327,7 +307,7 @@ React.useEffect(() => {
     const actualMovies = JSON.parse(a);
     setCards(actualMovies);
     // const actualSearchTag = 
-    localStorage.getItem("searchTag");
+    // localStorage.getItem("searchTag");
     // setSearchTag(actualSearchTag);
   }
 }, [token]);
@@ -395,6 +375,7 @@ const onSignOut = () => {
               handleSearchSubmit={handleSearchSubmit}
               width={width}
               isLoading={isLoading}
+              searchTag={searchTag}
 
               />
             <Footer />
