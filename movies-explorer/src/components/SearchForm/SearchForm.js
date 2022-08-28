@@ -9,7 +9,7 @@ import FormValidation from '../../utils/FormValidation';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 
-function SearchForm({filter, setFilter, handleSearchSubmit, 
+function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies
     // searchTag
 }) {
     const currentUser = React.useContext(CurrentUserContext);
@@ -23,8 +23,13 @@ function SearchForm({filter, setFilter, handleSearchSubmit,
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (location.pathname === '/movies') {
+            isValid ? handleSearchSubmit(values.search) : setErrorQuery('Нужно ввести ключевое слово.');
+        } else {
+            isValid ? searchSavedMovies(values.search) : setErrorQuery('Нужно ввести ключевое слово.');
+        }
+
         
-        isValid ? handleSearchSubmit(values.search) : setErrorQuery('Нужно ввести ключевое слово.');
         // setIsSubmitDisabled(true);
     };
 

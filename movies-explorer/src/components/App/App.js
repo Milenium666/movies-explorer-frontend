@@ -49,6 +49,9 @@ const [filter, setFilter] = React.useState();
 const [formErrorMessage, setFormErrorMessage] = React.useState('');
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 
+const [ searchSaveResult, setSearchSaveResult ] = React.useState([])
+const [ onSearch, setOnSearch ] = React.useState()
+
 
 const navigate = useNavigate();
 const location = useLocation();
@@ -280,6 +283,7 @@ function handleSearchSubmit (inpulValue) {
   
     .then((searchResult => {
       setIsLoading(true)
+      setCards([])
       setTimeout(() => {
         if (searchResult.length < 1 ) {
           // setInfo('Ничего не найдено')
@@ -328,6 +332,33 @@ React.useEffect(() => {
   }
 }, [token]);
 
+
+function searchSavedMovies(inpulValue) {
+  if (inpulValue === '') {
+    setSavedCards([]);
+  } else {
+    setOnSearch(!onSearch)
+    setIsLoading(true)
+    setSavedCards([])
+    setTimeout(() => {
+      const filterSavedMovies = savedCards.filter((movie) => {
+        return movie.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
+      });
+      if (filterSavedMovies.length < 1) {
+        setIsLoading(false)
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: 'Ничего не найдено',
+        })
+          setSearchSaveResult(savedCards);
+      } else {
+        setIsLoading(false)
+        return setSearchSaveResult(filterSavedMovies)
+      }
+    }, 2000)
+  }  
+}
 
 
 const onSignOut = () => {
@@ -381,6 +412,11 @@ const onSignOut = () => {
               setFilter={setFilter}
               onDeleteClick={handleDeleteMovie}
               width={width}
+              isLoading={isLoading}
+              searchSavedMovies={searchSavedMovies}
+
+              searchSaveResult={searchSaveResult}
+              onSearch={onSearch}
             />
             <Footer />
           </>
