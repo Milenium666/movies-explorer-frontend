@@ -58,27 +58,8 @@ const width = useWindowSize();
 
 
 
-const handleUpdateDataUser = ({name, email}) => {
-  MainApi.setUserInfo({name, email})
-    .then(() => {
-        setCurrentUser({
-          name, email
-        });
-        setIsInfoTooltip({
-          isOpen: true,
-          successful: true,
-          text: 'Ваши данные обновлены!',
-        });
-    })
-    .catch((err) => {
-      setIsInfoTooltip({
-        isOpen: true,
-        successful: false,
-        text: err,
-      })
-    })
 
-}
+
 const closeInfoTooltip = () => {
   setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
 }
@@ -137,6 +118,7 @@ const handleLogin = (data) => {
 }
 
 
+
 const handleTokenCheck = (path) => {
   const jwt = localStorage.getItem('jwt')
   if(jwt) {
@@ -160,7 +142,27 @@ const handleTokenCheck = (path) => {
   }
 };
 
+const handleUpdateDataUser = ({name, email}) => {
+  MainApi.setUserInfo({name, email})
+    .then(() => {
+        setCurrentUser({
+          name, email
+        });
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: true,
+          text: 'Ваши данные обновлены!',
+        });
+    })
+    .catch((err) => {
+      setIsInfoTooltip({
+        isOpen: true,
+        successful: false,
+        text: err,
+      })
+    })
 
+}
 
 const handleSaveMovie = (movie) => {
       MainApi.addSavedMovies(movie)
