@@ -59,11 +59,53 @@ const width = useWindowSize();
 
 
 
+const handleTokenCheck = (path) => {
+  const jwt = localStorage.getItem('jwt')
+  if(jwt) {
+    MainApi.checkToken(jwt)
+
+      .then((res) => {
+        if(res) {
+          const { email }  = res.email;
+          setLoggedIn(true);
+          setToken(jwt);
+          navigate(path);
+        }
+      })
+      .catch((err) => {
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err,
+        })
+      })
+  }
+};
+React.useEffect(() => {
+  handleTokenCheck(location.pathname);
+}, []);
+
+React.useEffect(() => {
+  if(token) {
+    MainApi.getUserInfo()
+      .then((data) => {
+        setCurrentUser(data);
+        setToken(token);
+      })
+      //пока что выводим ошибки в консоль потом планируется выводить через попап
+      .catch((err) => {
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err,
+        })
+      })
+  }
+}, [token]);
 
 const closeInfoTooltip = () => {
   setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
 }
-
 
 const resetAllFormMessage = () => {
   setFormErrorMessage('');
@@ -119,28 +161,7 @@ const handleLogin = (data) => {
 
 
 
-const handleTokenCheck = (path) => {
-  const jwt = localStorage.getItem('jwt')
-  if(jwt) {
-    MainApi.checkToken(jwt)
 
-      .then((res) => {
-        if(res) {
-          const { email }  = res.email;
-          setLoggedIn(true);
-          setToken(jwt);
-          navigate(path);
-        }
-      })
-      .catch((err) => {
-        setIsInfoTooltip({
-          isOpen: true,
-          successful: false,
-          text: err,
-        })
-      })
-  }
-};
 
 const handleUpdateDataUser = ({name, email}) => {
   MainApi.setUserInfo({name, email})
@@ -204,28 +225,9 @@ const handleDeleteMovie = (movie) => {
           })
 }
 
-React.useEffect(() => {
-  handleTokenCheck(location.pathname);
-}, []);
 
 
-React.useEffect(() => {
-  if(token) {
-    MainApi.getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-        setToken(token);
-      })
-      //пока что выводим ошибки в консоль потом планируется выводить через попап
-      .catch((err) => {
-        setIsInfoTooltip({
-          isOpen: true,
-          successful: false,
-          text: err,
-        })
-      })
-  }
-}, [token]);
+
 
 
 
