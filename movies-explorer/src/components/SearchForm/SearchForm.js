@@ -9,8 +9,7 @@ import FormValidation from '../../utils/FormValidation';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 
-function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies,
-}) {
+function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies}) {
     const currentUser = React.useContext(CurrentUserContext);
     const { values, handleChange, isValid, setIsValid } = FormValidation();
     const location = useLocation();
@@ -38,9 +37,7 @@ function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies,
     return(
         <>
         <section className='search-form'>
-            <form className='search-form__form' name='search' noValidate 
-                                    onSubmit={handleSubmit}
-                                    >
+            <form className='search-form__form' name='search' noValidate onSubmit={handleSubmit}>
                 <img src={searchIcon} alt='иконка поиска фильма' className='search-form__icon'/>
                 <input 
                     placeholder='Фильм' 
@@ -60,7 +57,6 @@ function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies,
                 <button 
                     className='search-form__movie-search-button' 
                     id='movieSearchButton'
-                    // disabled={isSubmitDisabled}
                     type='submit'
                 >Найти
                 </button>

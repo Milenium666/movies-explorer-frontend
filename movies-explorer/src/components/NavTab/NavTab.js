@@ -5,7 +5,7 @@ function NavTab() {
     return(
         <div>
             NavTab — компонент с навигацией по странице «О проекте».
-            </div>
+        </div>
     )
 }
 

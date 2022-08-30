@@ -5,9 +5,6 @@ import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-import getSavedMovieCard from '../../utils/getSavedMovieCard';
-
-
 
 function MoviesCardList({items, filter, onLikeClick, onDeleteClick,  index, uploadingCards}) {
     const location  = useLocation();
@@ -30,7 +27,6 @@ return(
                     onLikeClick={onLikeClick}
                     onDeleteClick={onDeleteClick}
                     saved={item.saved}
-                    // saved={getSavedMovieCard(items, item)}
                 />
             ))}
         </ul>

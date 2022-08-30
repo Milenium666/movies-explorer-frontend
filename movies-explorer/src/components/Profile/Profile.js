@@ -6,7 +6,7 @@ import FormValidation from '../../utils/FormValidation';
 import { PATTERN_NAME, PATTERN_EMAIL} from '../../constants';
 
 
-function Profile({ onSignOut, onEditProfile, onUpdateProfile, onBeingEdited }) {
+function Profile({ onSignOut, onUpdateProfile }) {
     const currentUser = React.useContext(CurrentUserContext);
     const currentUserName = currentUser.name
     const { values, setValues, handleChange, errors, isValid } = FormValidation();

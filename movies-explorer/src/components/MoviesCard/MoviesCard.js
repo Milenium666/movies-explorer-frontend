@@ -5,7 +5,7 @@ import './MoviesCard.css';
 
 import convertDuration from '../../utils/convertDuration';
 
-function MoviesCard({ item, onLikeClick, onDeleteClick, saved}) {
+function MoviesCard({ item, onLikeClick, onDeleteClick}) {
 
     const location  = useLocation();
 
