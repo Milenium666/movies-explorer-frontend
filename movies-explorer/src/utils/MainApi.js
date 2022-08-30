@@ -79,12 +79,13 @@ checkToken (token) {
     }
 
     //!!get /movies
-    getMovies() {
+    getMovies(token) {
         return fetch(`${this.address}/movies`, {
             // credentials: 'include'
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem("jwt")}`
+
             },
         })
         .then(this._checkResponse)

@@ -97,9 +97,7 @@ const handleRegister = (data) => {
           successful: true,
           text: 'Регистрация выполнена',
         });
-        handleLogin({ email: data.email,
-        password: data.password
-        })
+        handleLogin(data)
       })
       .catch(() => {
         setIsInfoTooltip({
@@ -111,13 +109,18 @@ const handleRegister = (data) => {
 }
 
 const handleLogin = (data) => {
+  console.log(data)
   MainApi.login(data)
     .then((data) => {
+      console.log(data)
       setToken(data.token);
-      localStorage.setItem('jwt', token)
+      console.log(data)
+      localStorage.setItem('jwt', data.token)
+      console.log(data)
+      console.log(localStorage)
       setLoggedIn(true);
       navigate('/movies')
-      MainApi.getMovies()
+      MainApi.getMovies(token)
         .then((data)=> {
           console.log(data)
           setSavedCards(data);
@@ -130,7 +133,7 @@ const handleLogin = (data) => {
             text: 'Ошибка при загрузке сохранненых фильмов',
           })
         })
-      MainApi.checkToken(token)
+      MainApi.checkToken(data.token)
         .then((data) => {
           setCurrentUser(data);
         })
@@ -150,6 +153,19 @@ const handleLogin = (data) => {
         text: 'Ошибка входа в аккаунт',
       })
     })
+    if (loggedIn) {
+      MainApi.checkToken(loggedIn)
+          .then((user) => {
+              setCurrentUser(user);
+          })
+          .catch(() => {
+            setIsInfoTooltip({
+              isOpen: true,
+              successful: false,
+              text: 'Не удалось загрузить данные',
+            })
+          })
+  }
 }
 
 
@@ -213,24 +229,6 @@ const handleDeleteMovie = (movie) => {
             })
           })
 }
-
-
-
-// React.useEffect(() => {
-//   MainApi.getMovies()
-//     .then((movie) => {
-//       setSavedCards(movie.filter((data) => {
-//         return data;
-//       }))
-//     })
-//     .catch(err => {
-//       setIsInfoTooltip({
-//         isOpen: true,
-//         successful: false,
-//         text: err,
-//       })
-//     })
-// }, [loggedIn]);
 
 
 
