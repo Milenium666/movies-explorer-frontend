@@ -41,6 +41,8 @@ const [isInfoTooltip, setIsInfoTooltip] = React.useState({
 });
 const [isLoading, setIsLoading] = React.useState(false);
 const [filter, setFilter] = React.useState();
+const [formErrorMessage, setFormErrorMessage] = React.useState('');
+const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 const [ searchSaveResult, setSearchSaveResult ] = React.useState([])
 const [ onSearch, setOnSearch ] = React.useState();
 
@@ -335,6 +337,12 @@ const closeInfoTooltip = () => {
   setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
 }
 
+const resetAllFormMessage = () => {
+  setFormErrorMessage('');
+};
+const handleEditProfile = () => {
+  setProfileIsBeingEdited(true);
+}
 
 const onSignOut = () => {
   setCurrentUser({})
@@ -405,11 +413,13 @@ const onSignOut = () => {
               <Profile
                 onSignOut={onSignOut}
                 onUpdateProfile={handleUpdateDataUser}
+                onEditProfile={handleEditProfile}
+                onBeingEdited={profileIsBeingEdited}
               />
             </>
           </ProtectedRoute>}/>
-        {loggedIn ?  <Route path='*' element={<NotFound />} /> : <Route path='/signup'  element={<Register onRegister={handleRegister} />} />}
-        {loggedIn ? <Route path='*' element={<NotFound />} /> : <Route path='/signin'  element={<Login onLogin={handleLogin} />} />}
+        {loggedIn ?  <Route path='*' element={<NotFound />} /> : <Route path='/signup'  element={<Register onRegister={handleRegister} resetFormErrorMessage={resetAllFormMessage}/>} />}
+        {loggedIn ? <Route path='*' element={<NotFound />} /> : <Route path='/signin'  element={<Login onLogin={handleLogin} resetFormErrorMessage={resetAllFormMessage}/>} />}
         
         
       </Routes>
