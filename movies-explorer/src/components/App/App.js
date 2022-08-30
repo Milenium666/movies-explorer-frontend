@@ -52,74 +52,41 @@ const location = useLocation();
 const width = useWindowSize();
 
 
-
-const handleTokenCheck = (path) => {
-  const jwt = localStorage.getItem('jwt')
-  if(jwt) {
-    MainApi.checkToken(jwt)
-      .then((res) => {
-        console.log(res, 'res1')
-
-        if(res) {
-          console.log(res, 'res2')
-
-          const { email }  = res.email;
-          setToken(jwt);
-          setLoggedIn(true);
-          navigate(path);
-          setCurrentUser(res);
-        }
-      })
-      .catch((err) => {
-        setIsInfoTooltip({
-          isOpen: true,
-          successful: false,
-          text: err,
-        })
-      })
+function tokenCheck() {
+  const jwt = localStorage.getItem('jwt');
+  // const movies = localStorage.getItem('movies');
+  // const savedMovies = localStorage.getItem('savedMovies');
+  if (jwt) {
+      setToken(jwt);
+      // if (movies) {
+      //     const result = JSON.parse(movies);
+      //     setMoviesCollection(result);
+      // }
+      // if (savedMovies) {
+      //     const resultSave = JSON.parse(savedMovies);
+      //     setSavedMoviesCollection(resultSave);
+      //     setFilterSavedMoviesCollection(resultSave);
+      // }
+      MainApi.checkToken(jwt)
+          .then((user) => {
+              setCurrentUser(user);
+              setLoggedIn(true);
+              navigate(location.pathname);
+          })
+          .catch((err) => {
+              setIsInfoTooltip({
+                isOpen: true,
+                successful: false,
+                text: err,
+              })
+          })
   }
-};
+}
+
 React.useEffect(() => {
-  handleTokenCheck(location.pathname);
+  tokenCheck();
 }, []);
 
-
-
-
-//!!
-
-// function tokenCheck() {
-//   const jwt = localStorage.getItem('jwt');
-//   const movies = localStorage.getItem('movies');
-//   const savedMovies = localStorage.getItem('savedMovies');
-//   if (jwt) {
-//       setToken(jwt);
-//       if (movies) {
-//           const result = JSON.parse(movies);
-//           setMoviesCollection(result);
-//       }
-//       if (savedMovies) {
-//           const resultSave = JSON.parse(savedMovies);
-//           setSavedMoviesCollection(resultSave);
-//           setFilterSavedMoviesCollection(resultSave);
-//       }
-//       MoviesApi.getContent(jwt)
-//           .then((user) => {
-//               setCurrentUser(user);
-//               setIsLogged(true);
-//               history.push(pathname.pathname);
-//           })
-//           .catch((err) => {
-//               setServerError(true);
-//           })
-//   }
-// }
-
-// React.useEffect(() => {
-//   tokenCheck();
-// }, []);
-
-//!!!
 
 
 
