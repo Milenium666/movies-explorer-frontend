@@ -54,14 +54,14 @@ const width = useWindowSize();
 
 function tokenCheck() {
   const jwt = localStorage.getItem('jwt');
-  // const movies = localStorage.getItem('movies');
+  const searchResult = localStorage.getItem('searchResult');
   const savedMovies = localStorage.getItem('savedMovies');
+  const searchTag = localStorage.getItem('searchTag');
   if (jwt) {
       setToken(jwt);
-      // if (movies) {
-      //     const result = JSON.parse(movies);
-      //     setMoviesCollection(result);
-      // }
+      if (searchResult) {
+          setCards(JSON.parse(searchResult))
+      }
       if (savedMovies) {
           setSavedCards(JSON.parse(savedMovies));
       }
@@ -273,7 +273,7 @@ function handleSearchSubmit (inpulValue) {
         }
       }, 2000)
     }))
-    .catch(err => {
+    .catch(() => {
       setIsInfoTooltip({
         isOpen: true,
         successful: false,
