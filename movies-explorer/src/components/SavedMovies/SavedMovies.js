@@ -8,12 +8,12 @@ import Preloader from '../Preloader/Preloader';
 
 
 
-function SavedMovies({filter, setFilter, savedCards, onDeleteClick, width, searchSaveResult, onSearch, searchSavedMovies, isLoading}) {
-    return(
-        <section 
+function SavedMovies({ filter, setFilter, savedCards, onDeleteClick, width, searchSaveResult, onSearch, searchSavedMovies, isLoading }) {
+    return (
+        <section
             className='saved-movies'
         >
-            <SearchForm 
+            <SearchForm
                 filter={filter}
                 setFilter={setFilter}
                 searchSavedMovies={searchSavedMovies}
@@ -24,7 +24,6 @@ function SavedMovies({filter, setFilter, savedCards, onDeleteClick, width, searc
                 filter={filter}
                 onDeleteClick={onDeleteClick}
                 width={width}
-                
             />
         </section>
     )

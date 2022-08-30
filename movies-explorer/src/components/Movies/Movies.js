@@ -6,26 +6,26 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
 
-function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClick, handleSearchSubmit, 
-    width}) {
-        const [index, setIndex] = React.useState(7);
+function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClick, handleSearchSubmit,
+    width }) {
+    const [index, setIndex] = React.useState(7);
 
-    
-        const fullScreen = width > 768;
-        const mediumScreen = width <= 768 && width >= 480;
-        const smallScreen = width < 480;
 
-        React.useEffect(() => {
-            if (fullScreen) {
+    const fullScreen = width > 768;
+    const mediumScreen = width <= 768 && width >= 480;
+    const smallScreen = width < 480;
+
+    React.useEffect(() => {
+        if (fullScreen) {
             setIndex(7);
-            }
-            if (mediumScreen) {
+        }
+        if (mediumScreen) {
             setIndex(7);
-            }
-            if (smallScreen) {
+        }
+        if (smallScreen) {
             setIndex(5);
-            }
-        }, [width, cards]);
+        }
+    }, [width, cards]);
 
     const uploadingCards = () => {
         if (smallScreen) {
@@ -35,15 +35,15 @@ function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClic
         }
     }
 
-    return(
+    return (
         <section className='movies'>
-            <SearchForm 
+            <SearchForm
                 filter={filter}
                 setFilter={setFilter}
                 handleSearchSubmit={handleSearchSubmit}
             />
             {isLoading && <Preloader></Preloader>}
-            <MoviesCardList 
+            <MoviesCardList
                 items={cards}
                 filter={filter}
                 onLikeClick={onLikeClick}

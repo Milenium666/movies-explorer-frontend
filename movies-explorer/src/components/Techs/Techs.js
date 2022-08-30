@@ -3,7 +3,7 @@ import './Techs.css';
 import TitleLine from '../TitleLine/TitleLine'
 
 function Techs() {
-    return(
+    return (
         <section className='techs'>
             <TitleLine
                 title='Технологии'

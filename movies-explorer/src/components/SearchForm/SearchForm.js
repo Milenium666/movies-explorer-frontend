@@ -9,7 +9,7 @@ import FormValidation from '../../utils/FormValidation';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 
-function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies}) {
+function SearchForm({ filter, setFilter, handleSearchSubmit, searchSavedMovies }) {
     const currentUser = React.useContext(CurrentUserContext);
     const { values, handleChange, isValid, setIsValid } = FormValidation();
     const location = useLocation();
@@ -34,36 +34,34 @@ function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies}) 
         values.search = localStorage.getItem("searchTag");
     }, [currentUser])
 
-    return(
+    return (
         <>
-        <section className='search-form'>
-            <form className='search-form__form' name='search' noValidate onSubmit={handleSubmit}>
-                <img src={searchIcon} alt='иконка поиска фильма' className='search-form__icon'/>
-                <input 
-                    placeholder='Фильм' 
-                    className='search-form__field-input-movie' 
-                    id='search'
-                    name='search'
-                    required
-                    type='text'
-                    autoComplete='off'
-                    value={values.search || ''}
-                    onChange={handleChange}
-
-                />
-                <span className='search-form__error'>
-                    {errorQuery}
-                </span>
-                <button 
-                    className='search-form__movie-search-button' 
-                    id='movieSearchButton'
-                    type='submit'
-                >Найти
-                </button>
-                
-            </form>
+            <section className='search-form'>
+                <form className='search-form__form' name='search' noValidate onSubmit={handleSubmit}>
+                    <img src={searchIcon} alt='иконка поиска фильма' className='search-form__icon' />
+                    <input
+                        placeholder='Фильм'
+                        className='search-form__field-input-movie'
+                        id='search'
+                        name='search'
+                        required
+                        type='text'
+                        autoComplete='off'
+                        value={values.search || ''}
+                        onChange={handleChange}
+                    />
+                    <span className='search-form__error'>
+                        {errorQuery}
+                    </span>
+                    <button
+                        className='search-form__movie-search-button'
+                        id='movieSearchButton'
+                        type='submit'
+                    >Найти
+                    </button>
+                </form>
                 <div className='search-form__form-line'></div>
-                <FilterCheckbox 
+                <FilterCheckbox
                     filter={filter}
                     setFilter={setFilter}
                 />

@@ -1,6 +1,6 @@
 //!! Запросы к сторонему api с базой данных о фильмах
 
-import {MOVIE_API} from '../constants';
+import { MOVIE_API } from '../constants';
 
 
 const checkResponse = (response) => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`)
@@ -12,9 +12,9 @@ export const getMoviesFromSecondApi = () => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            
+
         },
     })
-    .then(checkResponse);
+        .then(checkResponse);
 };
 

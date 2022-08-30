@@ -5,7 +5,7 @@ import photo from '../../images/photo1.png';
 import TitleLine from '../TitleLine/TitleLine';
 
 function AboutMe() {
-    return(
+    return (
         <section className='about-me'>
             <TitleLine
                 title='Студент'
@@ -19,7 +19,7 @@ function AboutMe() {
                         Фронтенд-разработчик, 27 лет
                     </h6>
                     <p className='student__descrition'>
-                    Я родилась в Саратове, в 2015 году переехала в Москву. У меня есть собака. Я люблю слушать музыку, а ещё увлекаюсь фитнесом. Недавно начала кодить. Поняла, что хочу чтобы разработка стала моей профессией.
+                        Я родилась в Саратове, в 2015 году переехала в Москву. У меня есть собака. Я люблю слушать музыку, а ещё увлекаюсь фитнесом. Недавно начала кодить. Поняла, что хочу чтобы разработка стала моей профессией.
                     </p>
                     <ul className='link'>
                         <li >
@@ -33,9 +33,9 @@ function AboutMe() {
                             </a>
                         </li>
                     </ul>
-                    
+
                 </div>
-                <img className='about-me__photo' alt='фото студента' src={photo}/>
+                <img className='about-me__photo' alt='фото студента' src={photo} />
             </div>
             <Portfolio />
         </section>

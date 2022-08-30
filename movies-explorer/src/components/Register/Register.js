@@ -10,7 +10,7 @@ import {
 
 
 
-function Register({onRegister, resetFormErrorMessage}) {
+function Register({ onRegister, resetFormErrorMessage }) {
     const { values, handleChange, errors, isValid } = FormValidation();
     const isDisabled = values.email === '' || values.password === '' || !isValid || values.name === '';
     const registerButton = !isDisabled ? '' : ' button-disabled';
@@ -24,7 +24,7 @@ function Register({onRegister, resetFormErrorMessage}) {
         !isDisabled && onRegister(values);
     }
 
-    return(
+    return (
         <>
             <Auth
                 title='Добро пожаловать!'
@@ -36,44 +36,44 @@ function Register({onRegister, resetFormErrorMessage}) {
                 onChange={handleChange}
                 classNameButton={registerButton}
             >
-            <Input 
-                labelFor='name' 
-                labelName='Имя' 
-                idInput='name' 
-                inputName='name'
-                typeInput='text'
-                onChange={handleChange}
-                autoComplete='name'
-                value={values.name || ''}
-                spanText={errors.name}
-                minLength={2}
-                maxLength={30}
-                pattern={PATTERN_NAME}
-            />
-            <Input 
-                labelFor='email' 
-                labelName='Email' 
-                idInput='email' 
-                inputName='email'
-                typeInput='email'
-                onChange={handleChange}
-                autoComplete='email'
-                value={values.email || ''}
-                spanText={errors.email}
-                pattern={PATTERN_EMAIL}
-            />
-            <Input 
-                labelFor='password' 
-                labelName='Пароль' 
-                idInput='password' 
-                inputName='password'
-                typeInput='password'
-                onChange={handleChange}
-                autoComplete='current-password'
-                value={values.password || ''}
-                spanText={errors.password}
-                minLength={8}
-            />
+                <Input
+                    labelFor='name'
+                    labelName='Имя'
+                    idInput='name'
+                    inputName='name'
+                    typeInput='text'
+                    onChange={handleChange}
+                    autoComplete='name'
+                    value={values.name || ''}
+                    spanText={errors.name}
+                    minLength={2}
+                    maxLength={30}
+                    pattern={PATTERN_NAME}
+                />
+                <Input
+                    labelFor='email'
+                    labelName='Email'
+                    idInput='email'
+                    inputName='email'
+                    typeInput='email'
+                    onChange={handleChange}
+                    autoComplete='email'
+                    value={values.email || ''}
+                    spanText={errors.email}
+                    pattern={PATTERN_EMAIL}
+                />
+                <Input
+                    labelFor='password'
+                    labelName='Пароль'
+                    idInput='password'
+                    inputName='password'
+                    typeInput='password'
+                    onChange={handleChange}
+                    autoComplete='current-password'
+                    value={values.password || ''}
+                    spanText={errors.password}
+                    minLength={8}
+                />
             </Auth>
         </>
     )

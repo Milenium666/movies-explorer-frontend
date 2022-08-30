@@ -3,7 +3,7 @@ import './Profile.css';
 
 import CurrentUserContext from '../../context/CurrentUserContext';
 import FormValidation from '../../utils/FormValidation';
-import { PATTERN_NAME, PATTERN_EMAIL} from '../../constants';
+import { PATTERN_NAME, PATTERN_EMAIL } from '../../constants';
 
 
 function Profile({ onSignOut, onUpdateProfile }) {
@@ -24,7 +24,7 @@ function Profile({ onSignOut, onUpdateProfile }) {
     React.useEffect(() => {
         setIsSubmitDisabled(checkStatusSubmit());
     }, [checkStatusSubmit]);
-    
+
     const handleSubmit = (event) => {
         event.preventDefault();
         setIsSubmitDisabled(true);
@@ -39,10 +39,10 @@ function Profile({ onSignOut, onUpdateProfile }) {
             >
                 <label className='profile__label' htmlFor='name'>
                     Имя
-                    <input 
-                        className='profile__input' 
-                        placeholder='Имя' 
-                        value={values.name || ''} 
+                    <input
+                        className='profile__input'
+                        placeholder='Имя'
+                        value={values.name || ''}
                         id='name' required
                         onChange={handleChange}
                         type='text'

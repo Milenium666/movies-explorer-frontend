@@ -3,7 +3,7 @@ import './Portfolio.css';
 
 
 function Portfolio() {
-    return(
+    return (
         <section className='portfolio'>
             <h6 className='portfolio__title'>
                 Портфолио
@@ -13,7 +13,6 @@ function Portfolio() {
                     Статичный сайт
                     <a className='list-site__link' href='https://milenium666.github.io/how-to-learn/index.html' target='_blank' rel="noreferrer">&#8599;</a>
                 </li>
-                
                 <li className='list-site__title'>
                     Адаптивный сайт
                     <a className='list-site__link' href='https://milenium666.github.io/russian-travel/index.html' target='_blank' rel="noreferrer">&#8599;</a>
@@ -24,7 +23,6 @@ function Portfolio() {
                 </li>
             </ul>
         </section>
-
     )
 }
 

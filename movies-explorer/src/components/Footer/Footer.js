@@ -2,7 +2,7 @@ import React from 'react';
 import './Footer.css';
 
 function Footer() {
-    return(
+    return (
         <footer className='footer'>
             <h6 className='footer__title'>
                 Учебный проект Яндекс.Практикум х BeatFilm.
