@@ -54,6 +54,7 @@ const width = useWindowSize();
 
 function tokenCheck() {
   const jwt = localStorage.getItem('jwt');
+  const user = localStorage.getItem('data');
   // const movies = localStorage.getItem('movies');
   // const savedMovies = localStorage.getItem('savedMovies');
   if (jwt) {
@@ -80,6 +81,7 @@ function tokenCheck() {
                 text: err,
               })
           })
+
   }
 }
 
@@ -112,22 +114,17 @@ const handleRegister = (data) => {
 }
 
 const handleLogin = (data) => {
-  // приходит email и password 
   MainApi.login(data)
     .then((data) => {
-      // приходит токен 
       setToken(data.token);
-      // const { token } = data;
       localStorage.setItem('jwt', token)
-      console.log(localStorage);
-      // разрещаем вход
       setLoggedIn(true);
       navigate('/movies')
-      // handleTokenCheck('/movies')
-      // MainApi.getUserInfo()
-      //   .then((data) => {
-      //     setCurrentUser(data)
-      //   })
+      MainApi.checkToken(token)
+        .then((data) => {
+          setCurrentUser(data)
+
+        })
     })
     .catch(() => {
       setIsInfoTooltip({
