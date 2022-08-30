@@ -20,7 +20,7 @@ import MainApi from '../../utils/MainApi';
 import * as MovieApi from '../../utils/MovieApi';
 import transformMovies from '../../utils/transformMovies';
 import useWindowSize from '../../hooks/useWindowSize';
-
+import checkSavedMovies from '../../utils/checkSavedMovies'
 
 
 
@@ -53,13 +53,14 @@ const width = useWindowSize();
 
 function tokenCheck() {
   const jwt = localStorage.getItem('jwt');
-  // const searchResult = localStorage.getItem('searchResult');
+  const searchResult = localStorage.getItem('searchResult');
   const savedMovies = localStorage.getItem('savedMovies');
   if (jwt) {
       setToken(jwt);
-      // if (searchResult) {
-      //     setCards(JSON.parse(searchResult))
-      // }
+      if (searchResult) {
+          setCards(JSON.parse(searchResult))
+          
+      }
       if (savedMovies) {
           setSavedCards(JSON.parse(savedMovies));
       }
@@ -189,45 +190,9 @@ const handleUpdateDataUser = ({name, email}) => {
 
 }
 
-const handleSaveMovie = (movie) => {
-      MainApi.addSavedMovies(movie)
-        .then((movie) => {
-          console.log(movie)
-          setSavedCards([movie, ...savedCards])
-        })
-        .catch(err => {
-          setIsInfoTooltip({
-          isOpen: true,
-          successful: false,
-          text: err,
-        })})
-}
 
 
-const handleDeleteMovie = (movie) => {
-        const savedMovie = savedCards.find(
-          (item) => item.movieId === movie.id || item.movieId === movie.movieId
-        )
-        MainApi.deleteSavedMovies(savedMovie._id)
-          .then(() => {
-            const newSavedMoviesList = savedCards.filter((updateMovie) => {
-              if (movie.id === updateMovie.movieId || movie.movieId === updateMovie.movieId) {
-                return false;
-              } else {
-                return true;
-              }
-            })
-            setSavedCards(newSavedMoviesList)
-            localStorage.setItem('savedMovies', JSON.stringify(newSavedMoviesList));
-          })
-          .catch((err) => {
-            setIsInfoTooltip({
-              isOpen: true,
-              successful: false,
-              text: err,
-            })
-          })
-}
+
 
 
 
@@ -238,7 +203,9 @@ function handleSearchSubmit (inpulValue) {
     MovieApi
     .getMoviesFromSecondApi()
     .then((data) => {
-      transformMovies(data, savedCards)
+      transformMovies(data)
+      checkSavedMovies(data, savedCards)
+      console.log(data)
         const searchResult = data.filter((data) => {
           localStorage.setItem("searchTag", inpulValue);
           return data.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
@@ -253,6 +220,7 @@ function handleSearchSubmit (inpulValue) {
       setTimeout(() => {
         if (searchResult.length < 1 ) {
           setCards(searchResult);
+          console.log(searchResult)
           localStorage.setItem("searchResult", JSON.stringify(searchResult))
           setIsLoading(false)
           setIsInfoTooltip({
@@ -263,7 +231,7 @@ function handleSearchSubmit (inpulValue) {
         } 
         else {
           setCards(searchResult);
-          //    console.log(searchResult);
+            console.log(searchResult);
             localStorage.setItem("searchResult", JSON.stringify(searchResult));
           //   // console.log(localStorage);
           setIsLoading(false)
@@ -280,6 +248,22 @@ function handleSearchSubmit (inpulValue) {
   }
   
 }
+
+const handleSaveMovie = (movie) => {
+  MainApi.addSavedMovies(movie)
+    .then((movie) => {
+      console.log(movie)
+      setSavedCards([movie, ...savedCards])
+      console.log(movie)
+      localStorage.setItem('savedMovies', JSON.stringify(savedCards))
+    })
+    .catch(err => {
+      setIsInfoTooltip({
+      isOpen: true,
+      successful: false,
+      text: err,
+    })})
+}
 function isExist(name) {
   return !!localStorage[name];
 }
@@ -289,18 +273,45 @@ React.useEffect(() => {
   if (isExist("searchResult") && token) {
     const a = localStorage.getItem("searchResult");
     const actualMovies = JSON.parse(a);
+    checkSavedMovies(actualMovies, savedCards)
     setCards(actualMovies);
   }
-}, [token]);
+}, [token, savedCards]);
 
+
+
+const handleDeleteMovie = (movie) => {
+  const savedMovie = savedCards.find(
+    (item) => item.movieId === movie.id || item.movieId === movie.movieId
+  )
+  MainApi.deleteSavedMovies(savedMovie._id)
+    .then(() => {
+      const newSavedMoviesList = savedCards.filter((updateMovie) => {
+        if (movie.id === updateMovie.movieId || movie.movieId === updateMovie.movieId) {
+          return false;
+        } else {
+          return true;
+        }
+      })
+      setSavedCards(newSavedMoviesList)
+      localStorage.setItem('savedMovies', JSON.stringify(newSavedMoviesList));
+    })
+    .catch((err) => {
+      setIsInfoTooltip({
+        isOpen: true,
+        successful: false,
+        text: err,
+      })
+    })
+}
 
 function searchSavedMovies(inpulValue) {
   if (inpulValue === '') {
-    setSavedCards([]);
+    // setSavedCards([]);
   } else {
     setOnSearch(!onSearch)
     setIsLoading(true)
-    setSavedCards([])
+    // setSavedCards([])
     setTimeout(() => {
       const filterSavedMovies = savedCards.filter((movie) => {
         return movie.nameRU.toLowerCase().includes(inpulValue.toLowerCase());

@@ -31,8 +31,8 @@ function MoviesCard({ item, onLikeClick, onDeleteClick, saved}) {
                 {location.pathname === '/movies' && (
                     <button 
                         type='button' 
-                        className={ saved? 'card__like-active' : 'card__like'}
-                        onClick={saved ? handleDeleteSaveMovie :  handleSaveMovie}
+                        className={ item.saved? 'card__like-active' : 'card__like'}
+                        onClick={ item.saved ? handleDeleteSaveMovie :  handleSaveMovie}
                     ></button>
                 )}
                 {location.pathname === '/saved-movies' && (

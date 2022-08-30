@@ -29,8 +29,8 @@ return(
                     item={item}
                     onLikeClick={onLikeClick}
                     onDeleteClick={onDeleteClick}
-                    // saved={item.saved}
-                    saved={getSavedMovieCard(items, item)}
+                    saved={item.saved}
+                    // saved={getSavedMovieCard(items, item)}
                 />
             ))}
         </ul>
