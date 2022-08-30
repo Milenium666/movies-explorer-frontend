@@ -25,11 +25,7 @@ class Api {
 
         })
             .then(this._checkResponse)
-        //Потребуется для вывода ошибки
-        // .then((res) => {
-        //     // console.log(res)
-        //     return res;
-        //   });
+        
 
     };
 

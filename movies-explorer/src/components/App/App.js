@@ -108,17 +108,14 @@ function App() {
   }
 
   const handleLogin = (data) => {
-    console.log(data)
     MainApi.login(data)
       .then((data) => {
         setToken(data.token);
         localStorage.setItem('jwt', data.token)
-        console.log(localStorage)
         setLoggedIn(true);
         navigate('/movies')
         MainApi.getMovies(token)
           .then((data) => {
-            console.log(data)
             setSavedCards(data);
             localStorage.setItem('savedMovies', JSON.stringify(data))
           })
@@ -202,7 +199,6 @@ function App() {
         .then((data) => {
           transformMovies(data)
           checkSavedMovies(data, savedCards)
-          console.log(data)
           const searchResult = data.filter((data) => {
             localStorage.setItem("searchTag", inpulValue);
             return data.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
@@ -217,7 +213,6 @@ function App() {
           setTimeout(() => {
             if (searchResult.length < 1) {
               setCards(searchResult);
-              console.log(searchResult)
               localStorage.setItem("searchResult", JSON.stringify(searchResult))
               setIsLoading(false)
               setIsInfoTooltip({
@@ -228,9 +223,7 @@ function App() {
             }
             else {
               setCards(searchResult);
-              console.log(searchResult);
               localStorage.setItem("searchResult", JSON.stringify(searchResult));
-              //   // console.log(localStorage);
               setIsLoading(false)
             }
           }, 2000)
@@ -249,9 +242,7 @@ function App() {
   const handleSaveMovie = (movie) => {
     MainApi.addSavedMovies(movie)
       .then((movie) => {
-        console.log(movie)
         setSavedCards([movie, ...savedCards])
-        console.log(movie)
         localStorage.setItem('savedMovies', JSON.stringify(savedCards))
       })
       .catch(err => {
