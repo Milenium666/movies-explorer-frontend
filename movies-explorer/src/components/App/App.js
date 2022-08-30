@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 
 
 import Header from '../Header/Header';
@@ -54,20 +54,17 @@ const width = useWindowSize();
 
 function tokenCheck() {
   const jwt = localStorage.getItem('jwt');
-  const user = localStorage.getItem('data');
   // const movies = localStorage.getItem('movies');
-  // const savedMovies = localStorage.getItem('savedMovies');
+  const savedMovies = localStorage.getItem('savedMovies');
   if (jwt) {
       setToken(jwt);
       // if (movies) {
       //     const result = JSON.parse(movies);
       //     setMoviesCollection(result);
       // }
-      // if (savedMovies) {
-      //     const resultSave = JSON.parse(savedMovies);
-      //     setSavedMoviesCollection(resultSave);
-      //     setFilterSavedMoviesCollection(resultSave);
-      // }
+      if (savedMovies) {
+          setSavedCards(JSON.parse(savedMovies));
+      }
       MainApi.checkToken(jwt)
           .then((user) => {
               setCurrentUser(user);
@@ -120,11 +117,31 @@ const handleLogin = (data) => {
       localStorage.setItem('jwt', token)
       setLoggedIn(true);
       navigate('/movies')
+      MainApi.getMovies()
+        .then((data)=> {
+          console.log(data)
+          setSavedCards(data);
+          localStorage.setItem('savedMovies', JSON.stringify(data))
+        })
+        .catch(()  => {
+          setIsInfoTooltip({
+            isOpen: true,
+            successful: false,
+            text: 'Ошибка при загрузке сохранненых фильмов',
+          })
+        })
       MainApi.checkToken(token)
         .then((data) => {
-          setCurrentUser(data)
-
+          setCurrentUser(data);
         })
+        .catch(() => {
+          setIsInfoTooltip({
+            isOpen: true,
+            successful: false,
+            text: 'Ошибка в проверке токена',
+          })
+        })
+
     })
     .catch(() => {
       setIsInfoTooltip({
@@ -134,9 +151,6 @@ const handleLogin = (data) => {
       })
     })
 }
-
-
-
 
 
 const handleUpdateDataUser = ({name, email}) => {
@@ -202,21 +216,21 @@ const handleDeleteMovie = (movie) => {
 
 
 
-React.useEffect(() => {
-  MainApi.getMovies()
-    .then((movie) => {
-      setSavedCards(movie.filter((data) => {
-        return data;
-      }))
-    })
-    .catch(err => {
-      setIsInfoTooltip({
-        isOpen: true,
-        successful: false,
-        text: err,
-      })
-    })
-}, [loggedIn]);
+// React.useEffect(() => {
+//   MainApi.getMovies()
+//     .then((movie) => {
+//       setSavedCards(movie.filter((data) => {
+//         return data;
+//       }))
+//     })
+//     .catch(err => {
+//       setIsInfoTooltip({
+//         isOpen: true,
+//         successful: false,
+//         text: err,
+//       })
+//     })
+// }, [loggedIn]);
 
 
 
