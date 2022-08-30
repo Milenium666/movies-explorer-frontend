@@ -83,7 +83,7 @@ function tokenCheck() {
 
 React.useEffect(() => {
   tokenCheck();
-}, []);
+}, [loggedIn]);
 
 
 
