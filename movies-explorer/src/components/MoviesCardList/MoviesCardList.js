@@ -11,15 +11,12 @@ import getSavedMovieCard from '../../utils/getSavedMovieCard';
 
 function MoviesCardList({items, filter, onLikeClick, onDeleteClick,  index, uploadingCards}) {
     const location  = useLocation();
-
     
     const movieFilter = items.filter((item) => item.duration <= 40);
     const cardsToRender = filter ? movieFilter.slice(0, index) : items.slice(0, index);
     const isDisabled = () => {
         return index > cardsToRender.length
     }
-
-console.log(cardsToRender.length)
 return(
     <>
         <ul className='cards'>

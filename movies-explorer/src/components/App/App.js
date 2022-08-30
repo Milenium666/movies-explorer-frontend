@@ -40,17 +40,12 @@ const [isInfoTooltip, setIsInfoTooltip] = React.useState({
   text: ''
 });
 const [isLoading, setIsLoading] = React.useState(false);
-
-
-//заходит в функции по поиску и удалению из избраного;Заходит в компоненты movies и saved-movies
 const [filter, setFilter] = React.useState();
 const [formErrorMessage, setFormErrorMessage] = React.useState('');
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
-
 const [ searchSaveResult, setSearchSaveResult ] = React.useState([])
 const [ onSearch, setOnSearch ] = React.useState();
- const [searchTag, setSearchTag] = React.useState('');
-
+const [searchTag, setSearchTag] = React.useState('');
 
 const navigate = useNavigate();
 const location = useLocation();
@@ -58,12 +53,10 @@ const width = useWindowSize();
 
 
 
-
 const handleTokenCheck = (path) => {
   const jwt = localStorage.getItem('jwt')
   if(jwt) {
     MainApi.checkToken(jwt)
-
       .then((res) => {
         if(res) {
           const { email }  = res.email;
@@ -103,19 +96,9 @@ React.useEffect(() => {
   }
 }, [token]);
 
-const closeInfoTooltip = () => {
-  setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
-}
 
-const resetAllFormMessage = () => {
-  setFormErrorMessage('');
-};
-const handleEditProfile = () => {
-  setProfileIsBeingEdited(true);
-}
 
 const handleRegister = (data) => {
-
     MainApi.register(data)
       .then(() => {
         setIsInfoTooltip({
@@ -148,7 +131,6 @@ const handleLogin = (data) => {
         .then((data) => {
           setCurrentUser(data)
         })
-
     })
     .catch(() => {
       setIsInfoTooltip({
@@ -200,7 +182,6 @@ const handleSaveMovie = (movie) => {
 }
 
 
-
 const handleDeleteMovie = (movie) => {
         const savedMovie = savedCards.find(
           (item) => item.movieId === movie.id || item.movieId === movie.movieId
@@ -224,10 +205,6 @@ const handleDeleteMovie = (movie) => {
             })
           })
 }
-
-
-
-
 
 
 
@@ -310,9 +287,6 @@ React.useEffect(() => {
     const a = localStorage.getItem("searchResult");
     const actualMovies = JSON.parse(a);
     setCards(actualMovies);
-    // const actualSearchTag = 
-    // localStorage.getItem("searchTag");
-    // setSearchTag(actualSearchTag);
   }
 }, [token]);
 
@@ -344,6 +318,17 @@ function searchSavedMovies(inpulValue) {
   }  
 }
 
+
+const closeInfoTooltip = () => {
+  setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
+}
+
+const resetAllFormMessage = () => {
+  setFormErrorMessage('');
+};
+const handleEditProfile = () => {
+  setProfileIsBeingEdited(true);
+}
 
 const onSignOut = () => {
   setCurrentUser({})
