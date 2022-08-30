@@ -4,6 +4,6 @@
 
 [Ссылка на домен](https://searchfilms.nomoredomains.rocks)  
 
-[Ссылка на Pull request]()
+[Ссылка на Pull request](https://github.com/Milenium666/movies-explorer-frontend/pull/2)
 
 Публичный IP: 51.250.15.51;  
