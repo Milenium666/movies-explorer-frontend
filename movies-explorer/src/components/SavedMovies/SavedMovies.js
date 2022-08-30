@@ -20,7 +20,6 @@ function SavedMovies({filter, setFilter, savedCards, onDeleteClick, width, searc
             />
             {isLoading && <Preloader></Preloader>}
             <MoviesCardList
-                // items={savedCards}
                 items={onSearch === undefined ? savedCards : searchSaveResult}
                 filter={filter}
                 onDeleteClick={onDeleteClick}

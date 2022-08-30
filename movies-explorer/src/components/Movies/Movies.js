@@ -7,7 +7,6 @@ import Preloader from '../Preloader/Preloader';
 
 
 function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClick, handleSearchSubmit, 
-    searchTag, 
     width}) {
         const [index, setIndex] = React.useState(7);
 
@@ -42,7 +41,6 @@ function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClic
                 filter={filter}
                 setFilter={setFilter}
                 handleSearchSubmit={handleSearchSubmit}
-                searchTag={searchTag}
             />
             {isLoading && <Preloader></Preloader>}
             <MoviesCardList 

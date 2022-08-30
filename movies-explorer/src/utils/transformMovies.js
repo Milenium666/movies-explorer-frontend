@@ -1,5 +1,5 @@
 const transformMovies = (movies,
-  //  savedMovies
+   savedMovies
   ) => {
     movies.forEach(movie => {
         if (!movie.image) {

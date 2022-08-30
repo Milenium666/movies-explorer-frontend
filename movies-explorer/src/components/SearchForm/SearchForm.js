@@ -10,7 +10,6 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 
 
 function SearchForm({filter, setFilter, handleSearchSubmit, searchSavedMovies,
-    searchTag
 }) {
     const currentUser = React.useContext(CurrentUserContext);
     const { values, handleChange, isValid, setIsValid } = FormValidation();

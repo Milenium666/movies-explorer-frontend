@@ -20,7 +20,6 @@ function Header ({ type, loggedIn}) {
                 </Link>
                 {  loggedIn  && <Navigation type='loggedIn' /> }
                 {  !loggedIn && <Navigation />}
-               
             </nav>
         </header>
     )

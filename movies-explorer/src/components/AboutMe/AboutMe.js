@@ -7,9 +7,9 @@ import TitleLine from '../TitleLine/TitleLine';
 function AboutMe() {
     return(
         <section className='about-me'>
-           <TitleLine
-           title='Студент'
-           />
+            <TitleLine
+                title='Студент'
+            />
             <div className='about-me__discription'>
                 <div className='student'>
                     <h6 className='student__name'>
@@ -23,12 +23,12 @@ function AboutMe() {
                     </p>
                     <ul className='link'>
                         <li >
-                            <a className='link__item indent-right' href='https://www.facebook.com' target="_blank">
+                            <a className='link__item indent-right' href='https://www.facebook.com' target="_blank" rel="noreferrer">
                                 Facebook
                             </a>
                         </li>
                         <li>
-                            <a className='link__item' href='https://github.com/Milenium666' target="_blank">
+                            <a className='link__item' href='https://github.com/Milenium666' target="_blank" rel="noreferrer">
                                 Github
                             </a>
                         </li>

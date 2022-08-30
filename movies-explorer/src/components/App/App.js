@@ -45,7 +45,6 @@ const [formErrorMessage, setFormErrorMessage] = React.useState('');
 const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
 const [ searchSaveResult, setSearchSaveResult ] = React.useState([])
 const [ onSearch, setOnSearch ] = React.useState();
-const [searchTag, setSearchTag] = React.useState('');
 
 const navigate = useNavigate();
 const location = useLocation();
@@ -54,14 +53,13 @@ const width = useWindowSize();
 
 function tokenCheck() {
   const jwt = localStorage.getItem('jwt');
-  const searchResult = localStorage.getItem('searchResult');
+  // const searchResult = localStorage.getItem('searchResult');
   const savedMovies = localStorage.getItem('savedMovies');
-  const searchTag = localStorage.getItem('searchTag');
   if (jwt) {
       setToken(jwt);
-      if (searchResult) {
-          setCards(JSON.parse(searchResult))
-      }
+      // if (searchResult) {
+      //     setCards(JSON.parse(searchResult))
+      // }
       if (savedMovies) {
           setSavedCards(JSON.parse(savedMovies));
       }
@@ -220,6 +218,7 @@ const handleDeleteMovie = (movie) => {
               }
             })
             setSavedCards(newSavedMoviesList)
+            localStorage.setItem('savedMovies', JSON.stringify(newSavedMoviesList));
           })
           .catch((err) => {
             setIsInfoTooltip({
@@ -253,9 +252,7 @@ function handleSearchSubmit (inpulValue) {
       setCards([])
       setTimeout(() => {
         if (searchResult.length < 1 ) {
-          // setInfo('Ничего не найдено')
           setCards(searchResult);
-
           localStorage.setItem("searchResult", JSON.stringify(searchResult))
           setIsLoading(false)
           setIsInfoTooltip({
@@ -370,7 +367,6 @@ const onSignOut = () => {
               handleSearchSubmit={handleSearchSubmit}
               width={width}
               isLoading={isLoading}
-              searchTag={searchTag}
 
               />
             <Footer />
