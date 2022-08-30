@@ -61,14 +61,7 @@ checkToken (token) {
     .then(this._checkResponse)
 
 }
-    getUserInfo() {
-        return fetch(`${this.address}/users/me`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-            },
-          })
-          .then(this._checkResponse)
-    }
+
 
 
     //!!patch /users/me ({ name, email })

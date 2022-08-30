@@ -58,11 +58,16 @@ const handleTokenCheck = (path) => {
   if(jwt) {
     MainApi.checkToken(jwt)
       .then((res) => {
+        console.log(res, 'res1')
+
         if(res) {
+          console.log(res, 'res2')
+
           const { email }  = res.email;
-          setLoggedIn(true);
           setToken(jwt);
+          setLoggedIn(true);
           navigate(path);
+          setCurrentUser(res);
         }
       })
       .catch((err) => {
@@ -78,23 +83,43 @@ React.useEffect(() => {
   handleTokenCheck(location.pathname);
 }, []);
 
-React.useEffect(() => {
-  if(token) {
-    MainApi.getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-        setToken(token);
-      })
-      //пока что выводим ошибки в консоль потом планируется выводить через попап
-      .catch((err) => {
-        setIsInfoTooltip({
-          isOpen: true,
-          successful: false,
-          text: err,
-        })
-      })
-  }
-}, [token]);
+
+
+
+//!!
+
+// function tokenCheck() {
+//   const jwt = localStorage.getItem('jwt');
+//   const movies = localStorage.getItem('movies');
+//   const savedMovies = localStorage.getItem('savedMovies');
+//   if (jwt) {
+//       setToken(jwt);
+//       if (movies) {
+//           const result = JSON.parse(movies);
+//           setMoviesCollection(result);
+//       }
+//       if (savedMovies) {
+//           const resultSave = JSON.parse(savedMovies);
+//           setSavedMoviesCollection(resultSave);
+//           setFilterSavedMoviesCollection(resultSave);
+//       }
+//       MoviesApi.getContent(jwt)
+//           .then((user) => {
+//               setCurrentUser(user);
+//               setIsLogged(true);
+//               history.push(pathname.pathname);
+//           })
+//           .catch((err) => {
+//               setServerError(true);
+//           })
+//   }
+// }
+
+// React.useEffect(() => {
+//   tokenCheck();
+// }, []);
+
+//!!!
 
 
 
@@ -120,17 +145,22 @@ const handleRegister = (data) => {
 }
 
 const handleLogin = (data) => {
-  MainApi.login( data )
-    .then( (data) => {
-      const { token } = data;
+  // приходит email и password 
+  MainApi.login(data)
+    .then((data) => {
+      // приходит токен 
+      setToken(data.token);
+      // const { token } = data;
       localStorage.setItem('jwt', token)
-      setLoggedIn(true)
-      
-      handleTokenCheck('/movies')
-      MainApi.getUserInfo()
-        .then((data) => {
-          setCurrentUser(data)
-        })
+      console.log(localStorage);
+      // разрещаем вход
+      setLoggedIn(true);
+      navigate('/movies')
+      // handleTokenCheck('/movies')
+      // MainApi.getUserInfo()
+      //   .then((data) => {
+      //     setCurrentUser(data)
+      //   })
     })
     .catch(() => {
       setIsInfoTooltip({
