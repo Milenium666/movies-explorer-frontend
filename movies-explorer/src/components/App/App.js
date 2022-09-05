@@ -409,7 +409,7 @@ function App() {
             </ProtectedRoute>} />
           {loggedIn ? <Route path='*' element={<NotFound />} /> : <Route path='/signup' element={<Register onRegister={handleRegister} resetFormErrorMessage={resetAllFormMessage} />} />}
           {loggedIn ? <Route path='*' element={<NotFound />} /> : <Route path='/signin' element={<Login onLogin={handleLogin} resetFormErrorMessage={resetAllFormMessage} />} />}
-
+          <Route path='*' element={<NotFound />} />
 
         </Routes>
         <InfoTooltip
