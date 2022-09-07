@@ -25,7 +25,7 @@ function Movies({ cards, filter, setFilter, isLoading, onLikeClick, onDeleteClic
         if (smallScreen) {
             setIndex(5);
         }
-    }, [width, cards]);
+    }, [width]);
 
     const uploadingCards = () => {
         if (smallScreen) {

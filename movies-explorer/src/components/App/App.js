@@ -242,8 +242,9 @@ function App() {
   const handleSaveMovie = (movie) => {
     MainApi.addSavedMovies(movie)
       .then((movie) => {
-        setSavedCards([movie, ...savedCards])
         localStorage.setItem('savedMovies', JSON.stringify(savedCards))
+        setSavedCards([movie, ...savedCards])
+        
       })
       .catch(err => {
         setIsInfoTooltip({
@@ -300,8 +301,8 @@ function App() {
     } else {
       setOnSearch(!onSearch)
       setIsLoading(true)
-      setSavedCards([])
-      setTimeout(() => {
+       setSavedCards([])
+     setTimeout(() => {
         const filterSavedMovies = savedCards.filter((movie) => {
           return movie.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
         });
@@ -317,7 +318,7 @@ function App() {
           setIsLoading(false)
           return setSearchSaveResult(filterSavedMovies)
         }
-      }, 2000)
+     }, 2000)
     }
   }
 
