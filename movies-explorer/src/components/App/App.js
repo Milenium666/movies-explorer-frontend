@@ -263,7 +263,10 @@ function App() {
     if (isExist("searchResult") && token) {
       const a = localStorage.getItem("searchResult");
       const actualMovies = JSON.parse(a);
-      checkSavedMovies(actualMovies, savedCards)
+      console.log(actualMovies);
+      console.log(savedCards);
+
+      checkSavedMovies(actualMovies, savedCards);  
       setCards(actualMovies);
     }
   }, [token, savedCards]);
@@ -296,12 +299,8 @@ function App() {
   }
 
   function searchSavedMovies(inpulValue) {
-    if (inpulValue === '') {
-      setSavedCards([]);
-    } else {
       setOnSearch(!onSearch)
       setIsLoading(true)
-       setSavedCards([])
      setTimeout(() => {
         const filterSavedMovies = savedCards.filter((movie) => {
           return movie.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
@@ -319,7 +318,7 @@ function App() {
           return setSearchSaveResult(filterSavedMovies)
         }
      }, 2000)
-    }
+
   }
 
 

@@ -7,7 +7,7 @@ const checkSavedMovies = (movies, savedMovies) => {
             }
         })
     });
-    return movies
+    return movies;
 }
 
 export default checkSavedMovies;
