@@ -204,6 +204,7 @@ function App() {
             return data.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
 
           });
+          console.log(searchResult)
           return searchResult;
         })
 
