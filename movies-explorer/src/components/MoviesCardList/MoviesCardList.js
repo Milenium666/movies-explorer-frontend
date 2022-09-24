@@ -4,10 +4,18 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 
-function MoviesCardList({ items, filter, onLikeClick, onDeleteClick, index, uploadingCards }) {
+function MoviesCardList({ items, savedItems, filter, onLikeClick, onDeleteClick, index, uploadingCards }) {
     const location = useLocation();
     const movieFilter = items.filter((item) => item.duration <= 40);
-    const cardsToRender = filter ? movieFilter.slice(0, index) : items.slice(0, index);
+    let cardsToRender = filter ? movieFilter.slice(0, index) : items.slice(0, index);
+    cardsToRender.map((movie) => {
+        movie.saved = false
+        savedItems.forEach(savedMovie => {
+            if (savedMovie.movieId === (movie.id || movie.movieId)) {
+                movie.saved = true;
+            }
+        })
+    })
     const isDisabled = () => {
         return index > cardsToRender.length
     }
@@ -20,9 +28,9 @@ function MoviesCardList({ items, filter, onLikeClick, onDeleteClick, index, uplo
                             <MoviesCard
                                 key={item.id || item._id}
                                 item={item}
+                                saved={item.saved}
                                 onLikeClick={onLikeClick}
                                 onDeleteClick={onDeleteClick}
-                                saved={item.saved}
                             />
                         ))}
             </ul>

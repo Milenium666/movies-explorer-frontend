@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
 import './SearchForm.css';
 
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
@@ -9,9 +9,10 @@ import FormValidation from '../../utils/FormValidation';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 
-function SearchForm({ filter, setFilter, handleSearchSubmit, searchSavedMovies }) {
+function SearchForm({ filter, setFilter, handleSearchSubmit, searchSavedMovies,searchTag }) {
     const currentUser = React.useContext(CurrentUserContext);
     const { values, handleChange, isValid, setIsValid } = FormValidation();
+ 
     const location = useLocation();
 
     const [errorQuery, setErrorQuery] = React.useState('');
@@ -31,7 +32,10 @@ function SearchForm({ filter, setFilter, handleSearchSubmit, searchSavedMovies }
     }, [isValid]);
 
     React.useEffect(() => {
-        values.search = localStorage.getItem("searchTag");
+        // values.search = localStorage.getItem('searchTag');
+        values.search = searchTag;
+
+
     }, [currentUser])
 
     return (
@@ -57,6 +61,7 @@ function SearchForm({ filter, setFilter, handleSearchSubmit, searchSavedMovies }
                         className='search-form__movie-search-button'
                         id='movieSearchButton'
                         type='submit'
+                        
                     >Найти
                     </button>
                 </form>

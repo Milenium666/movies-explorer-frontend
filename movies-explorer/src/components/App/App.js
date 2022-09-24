@@ -20,7 +20,6 @@ import MainApi from '../../utils/MainApi';
 import * as MovieApi from '../../utils/MovieApi';
 import transformMovies from '../../utils/transformMovies';
 import useWindowSize from '../../hooks/useWindowSize';
-import checkSavedMovies from '../../utils/checkSavedMovies'
 
 
 
@@ -31,15 +30,20 @@ import checkSavedMovies from '../../utils/checkSavedMovies'
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [cards, setCards] = React.useState([]);
-  const [savedCards, setSavedCards] = React.useState([]);
+
   const [token, setToken] = React.useState(null);
+  const [searchResult, setSearchResult] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [searchTag, setSearchTag] = React.useState('');
+  const [allMovies, setAllMovies] = React.useState([]);
+
   const [isInfoTooltip, setIsInfoTooltip] = React.useState({
     isOpen: false,
     successful: true,
     text: ''
   });
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isAppReady, setIsAppReady] = React.useState(false);
   const [filter, setFilter] = React.useState();
   const [formErrorMessage, setFormErrorMessage] = React.useState('');
   const [profileIsBeingEdited, setProfileIsBeingEdited] = React.useState(false);
@@ -53,16 +57,24 @@ function App() {
 
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
-    const searchResult = localStorage.getItem('searchResult');
-    const savedMovies = localStorage.getItem('savedMovies');
+    const searchResultLS = localStorage.getItem('searchResult');
+    const savedMoviesLS = localStorage.getItem('savedMovies');
+    const allMoviesLS = localStorage.getItem('searchMovies');
+    const searchTagSL = localStorage.getItem('searchTag');
+    
     if (jwt) {
       setToken(jwt);
-      if (searchResult) {
-        setCards(JSON.parse(searchResult))
-
+      if (searchResultLS) {
+        setSearchResult(JSON.parse(searchResultLS))
       }
-      if (savedMovies) {
-        setSavedCards(JSON.parse(savedMovies));
+      if (savedMoviesLS) {
+        setSavedMovies(JSON.parse(savedMoviesLS));
+      }
+      if (allMoviesLS) {
+        setAllMovies(JSON.parse(allMoviesLS))
+      }
+      if (searchTagSL) {
+        setSearchTag(searchTagSL)
       }
       MainApi.checkToken(jwt)
         .then((user) => {
@@ -78,12 +90,43 @@ function App() {
           })
         })
 
+  
+
+    }
+    else {
+      localStorage.removeItem('savedMovies');
+      localStorage.removeItem('searchTag');
+      localStorage.removeItem('searchResult');
+      localStorage.removeItem('allMovies');
     }
   }
 
+
   React.useEffect(() => {
     tokenCheck();
+    setIsAppReady(true)
   }, []);
+
+  React.useEffect(() => {
+    if (token) localStorage.setItem('jwt', token);
+  }, [token]);
+
+  React.useEffect(() => {
+    if (isAppReady) localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  }, [savedMovies]);
+
+  React.useEffect(() => {
+    if (isAppReady) localStorage.setItem('searchTag', searchTag);
+
+  }, [searchTag]);
+
+  React.useEffect(() => {
+    if (isAppReady) localStorage.setItem('searchResult', JSON.stringify(searchResult));
+  }, [searchResult]);
+
+  React.useEffect(() => {
+    if (isAppReady) localStorage.setItem('allMovies', JSON.stringify(allMovies));
+  }, [allMovies]);
 
 
 
@@ -111,13 +154,11 @@ function App() {
     MainApi.login(data)
       .then((data) => {
         setToken(data.token);
-        localStorage.setItem('jwt', data.token)
         setLoggedIn(true);
         navigate('/movies')
         MainApi.getMovies(token)
           .then((data) => {
-            setSavedCards(data);
-            localStorage.setItem('savedMovies', JSON.stringify(data))
+            setSavedMovies(data);
           })
           .catch(() => {
             setIsInfoTooltip({
@@ -184,52 +225,36 @@ function App() {
 
   }
 
+  React.useEffect(() => {
+    if (isAppReady && token && allMovies.length > 0) {
+      const allMoviesFiltered = allMovies.filter((data) => {
 
-
-
-
-
-
-  function handleSearchSubmit(inpulValue) {
-    if (inpulValue === '') {
-      setCards([])
-    } else {
-      MovieApi
-        .getMoviesFromSecondApi()
-        .then((data) => {
-          transformMovies(data)
-          checkSavedMovies(data, savedCards)
-          const searchResult = data.filter((data) => {
-            localStorage.setItem("searchTag", inpulValue);
-            return data.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
-
-          });
-          console.log(searchResult)
-          return searchResult;
+        return data.nameRU.toLowerCase().includes(searchTag.toLowerCase());
+      });
+      setSearchResult(allMoviesFiltered);
+      if (allMoviesFiltered.length < 1) {
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: 'Ничего не найдено',
         })
+      }
+      setIsLoading(false)
+    }
+  }, [allMovies, searchTag]);
 
-        .then((searchResult => {
-          setIsLoading(true)
-          setCards([])
-          setTimeout(() => {
-            if (searchResult.length < 1) {
-              setCards(searchResult);
-              localStorage.setItem("searchResult", JSON.stringify(searchResult))
-              setIsLoading(false)
-              setIsInfoTooltip({
-                isOpen: true,
-                successful: false,
-                text: 'Ничего не найдено',
-              })
-            }
-            else {
-              setCards(searchResult);
-              localStorage.setItem("searchResult", JSON.stringify(searchResult));
-              setIsLoading(false)
-            }
-          }, 2000)
-        }))
-        .catch(() => {
+  function handleSearchSubmit(searchTagValue) {
+   
+    setSearchTag(searchTagValue);
+    if (allMovies.length === 0) {
+      setIsLoading(true)
+      MovieApi.getMoviesFromSecondApi()
+        .then((data) => {
+          data = transformMovies(data)
+          setAllMovies(data);
+        })
+        .catch((e) => {
+          setIsLoading(false)
           setIsInfoTooltip({
             isOpen: true,
             successful: false,
@@ -237,15 +262,13 @@ function App() {
           })
         })
     }
-
   }
+
 
   const handleSaveMovie = (movie) => {
     MainApi.addSavedMovies(movie)
       .then((movie) => {
-        localStorage.setItem('savedMovies', JSON.stringify(savedCards))
-        setSavedCards([movie, ...savedCards])
-        
+        setSavedMovies([movie, ...savedMovies])
       })
       .catch(err => {
         setIsInfoTooltip({
@@ -255,40 +278,21 @@ function App() {
         })
       })
   }
-  function isExist(name) {
-    return !!localStorage[name];
-  }
-
-
-  React.useEffect(() => {
-    if (isExist("searchResult") && token) {
-      const a = localStorage.getItem("searchResult");
-      const actualMovies = JSON.parse(a);
-      console.log(actualMovies);
-      console.log(savedCards);
-
-      checkSavedMovies(actualMovies, savedCards);  
-      setCards(actualMovies);
-    }
-  }, [token, savedCards]);
-
-
 
   const handleDeleteMovie = (movie) => {
-    const savedMovie = savedCards.find(
+    const savedMovie = savedMovies.find(
       (item) => item.movieId === movie.id || item.movieId === movie.movieId
     )
     MainApi.deleteSavedMovies(savedMovie._id)
       .then(() => {
-        const newSavedMoviesList = savedCards.filter((updateMovie) => {
+        const newSavedMoviesList = savedMovies.filter((updateMovie) => {
           if (movie.id === updateMovie.movieId || movie.movieId === updateMovie.movieId) {
             return false;
           } else {
             return true;
           }
         })
-        setSavedCards(newSavedMoviesList)
-        localStorage.setItem('savedMovies', JSON.stringify(newSavedMoviesList));
+        setSavedMovies(newSavedMoviesList)
       })
       .catch((err) => {
         setIsInfoTooltip({
@@ -300,25 +304,25 @@ function App() {
   }
 
   function searchSavedMovies(inpulValue) {
-      setOnSearch(!onSearch)
-      setIsLoading(true)
-     setTimeout(() => {
-        const filterSavedMovies = savedCards.filter((movie) => {
-          return movie.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
-        });
-        if (filterSavedMovies.length < 1) {
-          setIsLoading(false)
-          setIsInfoTooltip({
-            isOpen: true,
-            successful: false,
-            text: 'Ничего не найдено',
-          })
-          setSearchSaveResult(savedCards);
-        } else {
-          setIsLoading(false)
-          return setSearchSaveResult(filterSavedMovies)
-        }
-     }, 2000)
+    setOnSearch(!onSearch)
+    setIsLoading(true)
+    setTimeout(() => {
+      const filterSavedMovies = savedMovies.filter((movie) => {
+        return movie.nameRU.toLowerCase().includes(inpulValue.toLowerCase());
+      });
+      if (filterSavedMovies.length < 1) {
+        setIsLoading(false)
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: 'Ничего не найдено',
+        })
+        setSearchSaveResult(savedMovies);
+      } else {
+        setIsLoading(false)
+        return setSearchSaveResult(filterSavedMovies)
+      }
+    }, 2000)
 
   }
 
@@ -335,10 +339,12 @@ function App() {
   }
 
   const onSignOut = () => {
-    setCurrentUser({})
     setLoggedIn(false);
     localStorage.clear()
-    navigate('/');
+    setSearchTag('');
+    setAllMovies([]);
+    setSearchResult([]);
+  navigate('/');
   }
 
   return (
@@ -360,7 +366,8 @@ function App() {
               <>
                 <Header type="loggedIn" loggedIn={loggedIn} />
                 <Movies
-                  cards={cards}
+                  cards={searchResult}
+                  savedCards={savedMovies}
                   filter={filter}
                   setFilter={setFilter}
                   onLikeClick={handleSaveMovie}
@@ -368,6 +375,7 @@ function App() {
                   handleSearchSubmit={handleSearchSubmit}
                   width={width}
                   isLoading={isLoading}
+                  searchTag={searchTag}
 
                 />
                 <Footer />
@@ -381,13 +389,12 @@ function App() {
                 <Header type='loggedIn' loggedIn={loggedIn} />
                 <SavedMovies
                   filter={filter}
-                  savedCards={savedCards}
+                  savedMovies={savedMovies}
                   setFilter={setFilter}
                   onDeleteClick={handleDeleteMovie}
                   width={width}
                   isLoading={isLoading}
                   searchSavedMovies={searchSavedMovies}
-
                   searchSaveResult={searchSaveResult}
                   onSearch={onSearch}
                 />

@@ -1,3 +1,4 @@
+
 const transformMovies = (movies) => {
   movies.forEach(movie => {
     if (!movie.image) {
@@ -13,6 +14,7 @@ const transformMovies = (movies) => {
     if (!movie.nameEN) {
       movie.nameEN = movie.nameRU;
     }
+   
   });
   return movies
 }

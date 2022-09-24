@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader';
 
 
 
-function SavedMovies({ filter, setFilter, savedCards, onDeleteClick, width, searchSaveResult, onSearch, searchSavedMovies, isLoading }) {
+function SavedMovies({ filter, setFilter, savedMovies, onDeleteClick, width, searchSaveResult, onSearch, searchSavedMovies, isLoading }) {
     return (
         <section
             className='saved-movies'
@@ -20,7 +20,8 @@ function SavedMovies({ filter, setFilter, savedCards, onDeleteClick, width, sear
             />
             {isLoading && <Preloader></Preloader>}
             <MoviesCardList
-                items={onSearch === undefined ? savedCards : searchSaveResult}
+                items={onSearch === undefined ? savedMovies : searchSaveResult}
+                savedItems = {savedMovies}
                 filter={filter}
                 onDeleteClick={onDeleteClick}
                 width={width}
