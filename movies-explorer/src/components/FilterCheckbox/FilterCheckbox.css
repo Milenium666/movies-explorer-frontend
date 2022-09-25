@@ -16,6 +16,7 @@
     border-radius: 20px;
     transition: .5s;
     position: relative;
+    cursor: pointer;
   }
   
   .checkbox__image:checked {

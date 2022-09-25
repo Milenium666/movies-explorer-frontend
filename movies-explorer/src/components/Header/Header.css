@@ -12,9 +12,9 @@
     justify-content: space-between;
     align-items: center;
 }
-.header__content_type_loggedIn {
+/* .header__content_type_loggedIn {
     
-}
+} */
 .header__logo-link {
     width: 38px;
     height: 38px;
@@ -22,6 +22,11 @@
 .header__logo {
     object-fit: cover;
     width: 100%;
+}
+
+.header__logo:hover {
+    opacity: 0.5;
+    transition:  .4s ease-in-out;
 }
 
 @media screen and (max-width: 768px){

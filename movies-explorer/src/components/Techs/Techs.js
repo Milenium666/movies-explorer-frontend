@@ -3,10 +3,10 @@ import './Techs.css';
 import TitleLine from '../TitleLine/TitleLine'
 
 function Techs() {
-    return(
+    return (
         <section className='techs'>
-           <TitleLine
-           title='Технологии'
+            <TitleLine
+                title='Технологии'
             />
             <div className='decription'>
                 <h4 className='decription__title'>

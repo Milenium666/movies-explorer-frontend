@@ -3,10 +3,10 @@ import './AboutProject.css';
 import TitleLine from '../TitleLine/TitleLine';
 
 function AboutProject() {
-    return(
+    return (
         <section className='about-project' id='about-project'>
             <TitleLine
-            title='О проекте'
+                title='О проекте'
             />
             <div className='about-project__description-project'>
                 <div className='diplom'>

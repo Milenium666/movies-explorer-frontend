@@ -4,7 +4,7 @@ import './Promo.css';
 import promo from '../../images/promo.svg';
 
 function Promo() {
-    return(
+    return (
         <section className='promo'>
             <div className='promo__text-container'>
                 <h1 className='promo__title'>
@@ -17,7 +17,7 @@ function Promo() {
                     Узнать больше
                 </a>
             </div>
-            <img className='promo__img' alt='Промо логотип' src={promo}/>
+            <img className='promo__img' alt='Промо логотип' src={promo} />
         </section>
     )
 }

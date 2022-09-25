@@ -37,7 +37,6 @@
     border-bottom: none;
     margin-top: 17px;
     padding-bottom: 0;
-    margin-bottom: 220px;
 }
 .profile__input {
     font-weight: 400;
@@ -57,16 +56,27 @@
     text-align: center;
     background: none;
     cursor: pointer;
+    margin-top: 220px;
+
+}
+
+.profile__submit:disabled{
+    cursor: not-allowed;
 }
 .profile__link-signin {
-    text-decoration: none;
+    /* text-decoration: none; */
     color: #FF4062;
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
     text-align: center;
     margin-top: 16px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: white;
 }
+
 
 @media screen and (max-width: 768px) {
     .profile {

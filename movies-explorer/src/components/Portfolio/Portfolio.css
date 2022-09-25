@@ -40,6 +40,14 @@
     max-width: 29px;
     margin: 0 0 9px 0;
 }
+
+.list-site__link:hover{
+    opacity: 0.5;
+    transition:  .4s ease-in-out;
+}
+
+
+
 .list-site__link:last-of-type{
     margin: 0;
 }

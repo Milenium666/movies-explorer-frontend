@@ -1,8 +1,8 @@
 import React from "react";
 import './TitleLine.css';
 
-function TitleLine ({title}) {
-    return(
+function TitleLine({ title }) {
+    return (
         <div className="title-line">
             <h2 className='title-line__title'>
                 {title}
