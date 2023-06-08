@@ -11,7 +11,7 @@ function Portfolio() {
             <ul className='list-site'>
                 <li className='list-site__title'>
                     Статичный сайт
-                    <a className='list-site__link' href='https://mesto.milenium666.nomoredomains.monster' target='_blank' rel="noreferrer">&#8599;</a>
+                    <a className='list-site__link' href='https://milenium666.github.io/how-to-learn/index.html' target='_blank' rel="noreferrer">&#8599;</a>
                 </li>
                 <li className='list-site__title'>
                     Адаптивный сайт
@@ -19,7 +19,7 @@ function Portfolio() {
                 </li>
                 <li className='list-site__title list-site__title_not-line'>
                     Одностраничное приложение
-                    <a className='list-site__link' href='http://milenium666.nomoredomains.monster' target='_blank' rel="noreferrer">&#8599;</a>
+                    <a className='list-site__link' href='https://mesto.milenium666.nomoredomains.monster' target='_blank' rel="noreferrer">&#8599;</a>
                 </li>
             </ul>
         </section>
