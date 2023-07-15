@@ -30,7 +30,7 @@
   2. Установить зависимости `npm install`<br>
   3. Запустить проект `npm start`<br>
   4. Сборка локально `npm run build`<br>
-##Ссылки
+## Ссылки
 [Ссылка на сгенерированный макет](https://www.figma.com/file/t8tVilRDwkqAQRQtsisd70/?node-id=891%3A3857)  
 [Ссылка на домен](https://searchfilms.nomoredomains.rocks)<br>
 Публичный IP: 130.193.51.12;
