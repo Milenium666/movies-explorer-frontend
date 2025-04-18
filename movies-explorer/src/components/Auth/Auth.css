@@ -70,6 +70,7 @@
     border: none;
     padding: 0;
     border-radius: 3px;
+    cursor: pointer;
 }
 .button-disabled {
     background-color: grey;
@@ -123,6 +124,7 @@
         width: 100%;
         font-size: 12px;
         line-height: 15px;
+        cursor: pointer;
     }
     .auth__text {
         font-size: 12px;
