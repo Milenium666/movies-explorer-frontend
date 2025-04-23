@@ -9,7 +9,7 @@ function Footer() {
             </h6>
             <div className='footer__line'></div>
             <div className='footer__list'>
-                <p className='footer__copyright'>&#169; 2022</p>
+                <p className='footer__copyright'>&#169; 2022 - 2025</p>
                 <ul className='links'>
                     <li className='links__item'>
                         <a className='links__text' href='https://practicum.yandex.ru' target="_blank" rel="noreferrer">
