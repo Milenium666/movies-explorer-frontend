@@ -19,7 +19,7 @@ function Portfolio() {
                 </li>
                 <li className='list-site__title list-site__title_not-line'>
                     Одностраничное приложение
-                    <a className='list-site__link' href='https://mesto.milenium666.nomoredomains.monster' target='_blank' rel="noreferrer">&#8599;</a>
+                    <a className='list-site__link' href='https://milenium666-mesto.ru' target='_blank' rel="noreferrer">&#8599;</a>
                 </li>
             </ul>
         </section>
